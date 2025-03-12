@@ -1,51 +1,46 @@
 export const vertex = `
 varying vec2 vUv;
-uniform float uScrollY;
-
+uniform float uProgress;
+varying vec3 vPosition;
 float PI = 3.141592;
 
-// Fonction de rotation autour de l'axe X
 vec3 rotateX(vec3 pos, float angle){
     float c = cos(angle);
     float s = sin(angle);
-    return vec3(pos.x, pos.y * c - pos.z * s, pos.y * s + pos.z * c);
+    return vec3(pos.x, pos.y*c - pos.z*s, pos.y*s + pos.z*c);
 }
 
 void main() {
     vUv = uv;
-    vec3 newPosition = position;
-    float rotationAngle;
+ 
+    // Position de base ajustée par le défilement
+    vec3 pos = position;
+    pos.y += uProgress;
     
-    if (uScrollY > 0.0) {
-        // Si scrollY est positif, on applique une rotation dans un sens
-        rotationAngle = -1.0 * sin((newPosition.y + 1.0) * (0.5 - 0.5 * PI)) * uScrollY * 0.8;
-    } else {
-        // Si scrollY est négatif ou zéro, on applique une rotation dans l'autre sens
-        rotationAngle = sin((newPosition.y - 1.0) * (0.5 - 0.5 * PI)) * uScrollY * 0.8;
-    }
+    // Obtenir la position dans l'espace monde
+    vec3 vWorldPosition = (modelMatrix * vec4(pos, 1.0)).xyz;
+    vPosition = vWorldPosition;
     
-  
+    // Calculer l'angle de rotation basé sur la position Y
+    float rotationAngle = cos(smoothstep(-14.0, 14.0, vWorldPosition.y) * 3.8);
     
+    // Appliquer la rotation sur l'axe X à la position mondiale
+    vWorldPosition = rotateX(vWorldPosition, rotationAngle);
     
-    // Appliquer la rotation sur l'axe X
-    newPosition = rotateX(newPosition, rotationAngle);
-    
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    // Rendre avec la position mondiale transformée
+    gl_Position = projectionMatrix * viewMatrix * vec4(vWorldPosition, 1.0);
 }
 `;
 
 // Fragment shader conservé pour la distortion
 export const fragment = `
 uniform sampler2D uTexture;
-
+varying vec3 vPosition;
 varying vec2 vUv;
-
-
 
 void main() {
     vec2 uv = vUv;
-    
-  
+
     vec4 color = texture2D(uTexture, uv);
     gl_FragColor = color;
 }

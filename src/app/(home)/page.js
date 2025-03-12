@@ -13,6 +13,7 @@ const Scene = dynamic(
 const page = () => {
   const [isHover, setIsHover] = useState(false);
   const backgroundRef = useRef(null);
+  const container = useRef(null);
   const arrow1 = useRef(null);
   const framer = useRef(null);
   const arrow2 = useRef(null);
@@ -119,7 +120,11 @@ const page = () => {
       </div>
       <Folio />
       <Tech></Tech>
-      <Slogan></Slogan>
+      <div ref={container} className="h-[500svh] relative w-full">
+        {" "}
+        <Slogan container={container}></Slogan>
+      </div>
+      <div className="w-full h-[70svh] "></div>
     </main>
   );
 };

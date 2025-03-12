@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import ImageWithDeformation from "./shaders/ImageWithDeformationHover";
+
 import { useModal } from "../Context/ModalContext";
 const ProjectFolio = ({
   title,
   date,
   type,
-  src,
+
   project,
   number,
   lastpProject,
@@ -15,7 +15,7 @@ const ProjectFolio = ({
   const background1 = useRef(null);
   const background2 = useRef(null);
   const background3 = useRef(null);
-  const imgclip = useRef(null);
+
   const { setIsHoverLink } = useModal();
   useEffect(() => {
     if (project > lastpProject) {
@@ -128,12 +128,7 @@ const ProjectFolio = ({
         <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
           <div>{date}</div> <div className="opacity-0">x</div>
         </div>
-        <div
-          // style={{
-          //   clipPath: project === 0 ? "inset(0% 0% 0% 0%)" : "inset(7% 7% 7% 7%)", // État initial du clip-path
-          // }}
-          className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative"
-        >
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
@@ -154,12 +149,7 @@ const ProjectFolio = ({
         <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
           <div>{date}</div> <div className="text-[2vw]"></div>
         </div>
-        <div
-          // style={{
-          //   clipPath: project === 0 ? "inset(0% 0% 0% 0%)" : "inset(7% 7% 7% 7%)", // État initial du clip-path
-          // }}
-          className="w-1/6 Med text-[3vw] flex items-center text-nowrap  duration-[400ms] ease-in-out [transform-origin:center]  relative"
-        >
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  duration-[400ms] ease-in-out [transform-origin:center]  relative">
           {" "}
           {title}
         </div>
@@ -180,12 +170,7 @@ const ProjectFolio = ({
         <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
           <div>{date}</div> <div className="opacity-0">x</div>
         </div>
-        <div
-          // style={{
-          //   clipPath: project === 0 ? "inset(0% 0% 0% 0%)" : "inset(7% 7% 7% 7%)", // État initial du clip-path
-          // }}
-          className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative"
-        >
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>

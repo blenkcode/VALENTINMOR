@@ -8,11 +8,11 @@ const CombinedScene = dynamic(() => import("./SliderScene"), {
   ssr: false,
 });
 
-const SliderSceneSSR = ({ container, src, scrollY }) => {
+const SliderSceneSSR = ({ container }) => {
   return (
     <div className="relative w-full h-full pointer-events-none z-20 ">
       <Canvas>
-        <CombinedScene container={container} src={src} scrollY={scrollY} />
+        <CombinedScene container={container} />
       </Canvas>
     </div>
   );
