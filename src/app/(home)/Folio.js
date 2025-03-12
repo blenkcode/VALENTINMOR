@@ -124,7 +124,7 @@ const Folio = () => {
       <div
         onMouseEnter={handleMouseIn2}
         onMouseLeave={handleMouseOut2}
-        className="w-full h-[10vw]"
+        className="w-full h-[2vw]"
       ></div>
     </div>
   );

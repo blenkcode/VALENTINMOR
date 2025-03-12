@@ -55,7 +55,7 @@ const HEADER = () => {
   }, [hover]);
   return (
     <nav className="w-screen absolute flex justify-between top-[2vw] px-[2vw]   text-[0.7vw] Med z-[100] left-0">
-      <div className=" w-1/4 relative fixed">
+      <div className=" w-1/4 relative ">
         <p>VA/ MOR</p>
         {/* <p>FOLIO 2025</p> */}
       </div>
@@ -73,7 +73,7 @@ const HEADER = () => {
             <div className="w-[0.3vw] aspect-square rounded-full bg-black duration-500 ease-in-out group-hover:translate-x-[1.4vw] will-change-transform"></div>
           </div>{" "}
           <div>
-            <Button text="SEND ME AN EMAIL" />
+            <Button text="LET'S CONNECT" />
           </div>
           <div
             ref={mega}
@@ -108,12 +108,12 @@ const HEADER = () => {
       <div className=" w-1/6 flex flex-col gap-[0.2vw]">
         <div className="flex">
           {" "}
-          <div className="pr-[1vw] opacity-70">SOCIALS </div>
+          <div className="pr-[2vw] opacity-70">SOCIALS </div>
           <Button text="INSTAGRAM" />
         </div>
         <div className="flex">
           {" "}
-          <div className="opacity-0 pr-[1vw]">SOCIALS </div>{" "}
+          <div className="opacity-0 pr-[2vw]">SOCIALS </div>{" "}
           <Button text="MALT" />
         </div>
       </div>

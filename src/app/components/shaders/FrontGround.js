@@ -287,7 +287,7 @@ const ShaderEffect = () => {
   return (
     <div
       ref={containerRef}
-      className="w-[120vw] h-[200vh] left-[-10vw] top-0  fixed z-[1000] opacity-[12%] pointer-events-none "
+      className="w-[120vw] h-[200vh] left-[-10vw] top-0  fixed z-[1000] opacity-[7%] pointer-events-none "
     ></div>
   );
 };

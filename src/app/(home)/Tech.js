@@ -2,8 +2,9 @@ import React from "react";
 
 const Tech = () => {
   return (
-    <div className="w-full flex px-[2vw] pb-[20vw] relative">
-      <div className="h-[64.5svh] w-[1px] absolute left-1/2 -top-58vw] bg-black"></div>
+    <div className="w-full flex px-[2vw] pb-[8.2vw] relative mt-[4vw]">
+      <div className="h-[29vw] w-[1px] absolute left-1/2  bg-black"></div>
+
       <div className="h-[1px] w-[95vw]  absolute left-[2vw] top-[13.2vw] bg-black"></div>
       <div className="w-[3vw] absolute left-1/2 aspect-square top-[11.6vw] -translate-x-[46%] bg-white z-50 flex items-center justify-center">
         {/* <div className="w-[1vw] aspect-square bg-black"></div> */}
@@ -21,21 +22,17 @@ const Tech = () => {
       <div className=" w-2/8 flex flex-col gap-[0.2vw] "> </div>
       <div className="1/6"></div>
 
-      <div className=" w-2/6 flex flex-col  text-[1.2vw] Med pl-[2vw] ">
+      <div className=" w-2/6 flex flex-col  text-[1vw] Med pl-[2vw] ">
         <p className="mt-[15.4vw]">
-          I believe in designs that gently guide users through the process of
-          discovering your brand's unique story. Every pixel has purpose, every
-          animation adds meaning.
+          I BELIEVE IN DESIGNS THAT GENTLY GUIDE USERS THROUGH THE PROCESS OF
+          DISCOVERING YOUR BRAND'S UNIQUE STORY. EVERY PIXEL HAS PURPOSE, EVERY
+          ANIMATION ADDS MEANING.
         </p>
 
         <p className="mt-[2vw]">
-          My approach blends cutting-edge frontend expertise with a deep
-          understanding of user psychology, crafting interfaces that feel
-          intuitive yet surprising, familiar yet{" "}
-          <span className="underline">innovative</span>.
-        </p>
-        <p className="mt-[2vw]">
-          How you move is just as important as how you look.
+          MY APPROACH BLENDS CUTTING-EDGE FRONTEND EXPERTISE WHERE EACH
+          ANIMATIONS & EASING ARE FINELY TUNED TO THE MILISECOND TO PROVIDE THE
+          SMOOTHEST FEELING POSSIBLE.
         </p>
       </div>
     </div>

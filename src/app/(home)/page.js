@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import gsap from "gsap";
 import Tech from "./Tech";
 import Slogan from "./Slogan";
+import Gallery from "./Gallery";
 const Scene = dynamic(
   () => import("../components/shaders/ImageWithDeformation"),
   { ssr: false }
