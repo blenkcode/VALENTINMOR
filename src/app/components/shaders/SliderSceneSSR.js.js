@@ -10,7 +10,7 @@ const CombinedScene = dynamic(() => import("./SliderScene"), {
 
 const SliderSceneSSR = ({ container }) => {
   return (
-    <div className="relative w-full h-full pointer-events-none z-20 ">
+    <div className="relative w-full h-full pointer-events-none z-20 top-[3vw] ">
       <Canvas>
         <CombinedScene container={container} />
       </Canvas>

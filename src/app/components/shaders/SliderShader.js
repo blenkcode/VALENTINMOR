@@ -2,6 +2,7 @@ export const vertex = `
 varying vec2 vUv;
 uniform float uProgress;
 varying vec3 vPosition;
+
 float PI = 3.141592;
 
 vec3 rotateX(vec3 pos, float angle){
@@ -18,11 +19,11 @@ void main() {
     pos.y += uProgress;
     
     // Obtenir la position dans l'espace monde
-    vec3 vWorldPosition = (modelMatrix * vec4(pos, 1.0)).xyz;
+    vec3 vWorldPosition = (modelMatrix * vec4(pos, 1.8)).xyz;
     vPosition = vWorldPosition;
     
     // Calculer l'angle de rotation basé sur la position Y
-    float rotationAngle = cos(smoothstep(-14.0, 14.0, vWorldPosition.y) * 3.8);
+    float rotationAngle = cos(smoothstep(-14.0, 14.0, vWorldPosition.y) * PI);
     
     // Appliquer la rotation sur l'axe X à la position mondiale
     vWorldPosition = rotateX(vWorldPosition, rotationAngle);
@@ -40,8 +41,13 @@ varying vec2 vUv;
 
 void main() {
     vec2 uv = vUv;
+    gl_FragColor = vec4(vUv,0.0,1.0);
+    vec3 color = texture2D( uTexture,vUv).rgb;
 
-    vec4 color = texture2D(uTexture, uv);
-    gl_FragColor = color;
+    float a = smoothstep(-0.7,0.0,vPosition.z);
+
+   
+
+    gl_FragColor = vec4(color,a);
 }
 `;

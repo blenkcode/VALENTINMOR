@@ -120,7 +120,10 @@ const page = () => {
       </div>
       <Folio />
       <Tech></Tech>
-      <div ref={container} className="h-[500svh] relative w-full">
+      <div
+        ref={container}
+        className="h-[500svh] bg-neutral-950 relative w-full"
+      >
         {" "}
         <Slogan container={container}></Slogan>
       </div>

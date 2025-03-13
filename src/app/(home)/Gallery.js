@@ -4,15 +4,10 @@ import SliderSceneSSR from "../components/shaders/SliderSceneSSR.js";
 
 const Gallery = ({ container }) => {
   return (
-    <div
-      className={`bg-neutral-950 w-full h-[500svh] flex justify-start flex-col items-center `}
-    >
-      <div className="relative w-full h-full top-[-25vw]">
+    <div className={`w-full h-full flex justify-start flex-col items-center `}>
+      <div className="relative w-full h-full top-0">
         {" "}
-        <div className="absolute w-full h-lvh top-0">
-          {" "}
-          <SliderSceneSSR container={container} />
-        </div>
+        <SliderSceneSSR container={container} />
       </div>
     </div>
   );
