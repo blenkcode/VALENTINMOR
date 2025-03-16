@@ -6,7 +6,7 @@ const ProjectFolio = ({
   title,
   date,
   type,
-
+  src,
   project,
   number,
   lastpProject,
@@ -53,7 +53,7 @@ const ProjectFolio = ({
 
           {
             y: "103%",
-            rotateX: 70,
+            rotateX: 90,
             duration: 0.85,
             ease: "expo.out",
           }
@@ -71,7 +71,7 @@ const ProjectFolio = ({
         tl.to(
           background3.current,
 
-          { rotateX: -70, y: "-103%", duration: 0.85, ease: "expo.out" }
+          { rotateX: -90, y: "-103%", duration: 0.85, ease: "expo.out" }
         ).to(
           background2.current,
 
@@ -88,7 +88,7 @@ const ProjectFolio = ({
         tl.to(
           background2.current,
 
-          { rotateX: -70, y: "-103%", duration: 0.85, ease: "expo.out" }
+          { rotateX: -90, y: "-103%", duration: 0.85, ease: "expo.out" }
         ).to(
           background1.current,
 
@@ -110,7 +110,7 @@ const ProjectFolio = ({
         perspectiveOrigin: "center bottom",
       }}
       onMouseEnter={handleMouseIn}
-      className={`w-full flex relative overflow-hidden border-t-[1px] h-[9vw] transition-colors ${
+      className={`w-full flex relative overflow-hidden border-t-[1px] h-[8vw] transition-colors ${
         projectIndex === project ||
         (projectIndex > project && projectIndex === lastpProject)
           ? "border-white "
@@ -128,7 +128,7 @@ const ProjectFolio = ({
         <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
           <div>{date}</div> <div className="opacity-0">x</div>
         </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
@@ -138,7 +138,7 @@ const ProjectFolio = ({
       <div
         ref={background2}
         style={{
-          transform: "rotateX(-70deg)",
+          transform: "rotateX(-90deg)",
         }}
         className={`flex w-full h-full absolute top-0 bg-neutral-950 text-white  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
       >
@@ -146,10 +146,13 @@ const ProjectFolio = ({
         <div className="w-1/4 text-[0.8vw] Med flex  items-center gap-[5vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
-        <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
-          <div>{date}</div> <div className="text-[2vw]"></div>
+        <div className="w-2/8  h-full flex items-center justify-between Med pr-[4vw] ">
+          {/* <div>{date}</div>{" "} */}
+          <div className="w-[8vw]">
+            <img src={src}></img>
+          </div>
         </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  duration-[400ms] ease-in-out [transform-origin:center]  relative">
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  duration-[400ms] translate-x-[0.2vw]  ease-in-out [transform-origin:center]  relative">
           {" "}
           {title}
         </div>
@@ -159,7 +162,7 @@ const ProjectFolio = ({
       <div
         ref={background3}
         style={{
-          transform: "rotateX(-70deg)",
+          transform: "rotateX(-90deg)",
         }}
         className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] [backface-visibility:hidden] will-change-transform `}
       >
@@ -170,7 +173,7 @@ const ProjectFolio = ({
         <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
           <div>{date}</div> <div className="opacity-0">x</div>
         </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw]  [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>

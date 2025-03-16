@@ -9,8 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Enregistrer le plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-const CombinedScene = ({ container }) => {
-  const [scrollY, setScrollY] = useState(200);
+const CombinedScene = ({ scrollY }) => {
   const groupRef = useRef();
   const textures = useTexture([
     "/mockup1.webp",
@@ -45,11 +44,11 @@ const CombinedScene = ({ container }) => {
       // Calculer le ratio pour maintenir les proportions
       return useAspect(width, height); // Augmenté la valeur de base pour agrandir proportionnellement
     }
-    return [0.5, 0.5, 1]; // Valeur par défaut plus grande
+    return [0.4, 0.4, 0.8]; // Valeur par défaut plus grande
   });
 
   // Configuration cohérente de l'espacement vertical
-  const verticalSpacing = 2.5; // Utiliser la même valeur qu'initialement
+  const verticalSpacing = 2.25; // Utiliser la même valeur qu'initialement
 
   // Hauteur totale du "canvas virtuel" cohérente avec l'espacement
   const viewportHeight = textures.length * verticalSpacing;
@@ -83,26 +82,8 @@ const CombinedScene = ({ container }) => {
     return [0, startY - index * verticalSpacing, 0];
   };
 
-  useEffect(() => {
-    if (!container || !container.current) return;
-
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: container.current,
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => {
-        const newY = -0.8 + self.progress * 4;
-        setScrollY(newY);
-      },
-    });
-
-    return () => {
-      scrollTrigger.kill();
-    };
-  }, [container]);
-
   return (
-    <group ref={groupRef}>
+    <>
       {textures.map((texture, index) => (
         <mesh
           key={index}
@@ -110,7 +91,7 @@ const CombinedScene = ({ container }) => {
           scale={scales[index]}
           position={calculatePosition(index, textures.length)}
         >
-          <planeGeometry args={[0.5, 0.5, 20, 20]} />{" "}
+          <planeGeometry args={[0.4, 0.4, 20, 20]} />{" "}
           {/* Taille plus normale */}
           <shaderMaterial
             vertexShader={vertex}
@@ -120,7 +101,7 @@ const CombinedScene = ({ container }) => {
           />
         </mesh>
       ))}
-    </group>
+    </>
   );
 };
 

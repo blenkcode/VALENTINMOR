@@ -23,7 +23,7 @@ void main() {
     vPosition = vWorldPosition;
     
     // Calculer l'angle de rotation basé sur la position Y
-    float rotationAngle = cos(smoothstep(-14.0, 14.0, vWorldPosition.y) * PI);
+    float rotationAngle = cos(smoothstep(-19.0, 19.0, vWorldPosition.y) * PI);
     
     // Appliquer la rotation sur l'axe X à la position mondiale
     vWorldPosition = rotateX(vWorldPosition, rotationAngle);

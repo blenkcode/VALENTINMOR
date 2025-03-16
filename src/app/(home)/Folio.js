@@ -25,11 +25,11 @@ const Folio = () => {
   };
 
   return (
-    <div className=" h-auto w-full mt-[2vw]   ">
-      <div className="w-full flex">
+    <div className=" h-auto w-full mt-[2vw] z-10   ">
+      <div className="w-full flex items-center">
         {" "}
-        <div className="w-1/2"></div>
-        <div className="w-1/6 flex">
+        <div className="w-1/2 text-[2vw] pl-[2vw] Med pt-[1vw]">作品</div>
+        <div className="w-1/6 flex translate-x-[0.9vw]">
           <h3 className="Med text-[4vw]">Works</h3>
           <div className="text-[0.8vw]">(05)</div>
         </div>
@@ -39,7 +39,7 @@ const Folio = () => {
       <div
         onMouseEnter={handleMouseIn}
         onMouseLeave={handleMouseOut}
-        className="w-full h-[8vw]"
+        className="w-full h-[5vw]"
       ></div>
       <div
         onMouseEnter={() => setProject("1")}
@@ -79,7 +79,7 @@ const Folio = () => {
         className="w-full flex overflow-hidden"
       >
         <ProjectFolio
-          title="MARINE BENABOU MASTERING"
+          title="MARINE BENABOU "
           date="JAN 25"
           type="AUDIO ENGENIEER"
           src="/music1.webp"
@@ -124,7 +124,7 @@ const Folio = () => {
       <div
         onMouseEnter={handleMouseIn2}
         onMouseLeave={handleMouseOut2}
-        className="w-full h-[2vw]"
+        className="w-full h-[2vw] border-t-[1px]"
       ></div>
     </div>
   );

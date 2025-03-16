@@ -15,7 +15,7 @@ const CombinedScene = ({ src, isHovering, onTextureLoaded }) => {
   const uniforms = useRef({
     uTexture: { value: texture },
     uTime: { value: 0 },
-    uDistortion: { value: 4.2 },
+    uDistortion: { value: 2.2 },
   });
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const CombinedScene = ({ src, isHovering, onTextureLoaded }) => {
   useEffect(() => {
     // Reculer le mesh sur l'axe Z quand aucun artiste n'est sélectionné
     gsap.to(controls.current, {
-      distortion: 9.2,
+      distortion: 5.2,
       duration: 0.5,
       ease: "cubic-bezier(0.27, 0.24, 0.62, 0.99)",
     });

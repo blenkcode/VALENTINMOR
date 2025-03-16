@@ -2,7 +2,7 @@ import React from "react";
 
 const Tech = () => {
   return (
-    <div className="w-full flex px-[2vw] pb-[8.2vw] relative mt-[4vw]">
+    <div className="w-full flex px-[2vw] pb-[0.2vw] relative mt-[4vw] ">
       <div className="h-[29vw] w-[1px] absolute left-1/2  bg-black"></div>
 
       <div className="h-[1px] w-[95vw]  absolute left-[2vw] top-[13.2vw] bg-black"></div>
