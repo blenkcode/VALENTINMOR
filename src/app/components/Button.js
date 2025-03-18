@@ -23,6 +23,7 @@ const Button = ({ text }) => {
   const handleMouseIn = () => {
     setIsHoverThing(true);
     setIsHover(true);
+    console.log("in");
   };
   const handleMouseOut = () => {
     setIsHoverThing(false);
@@ -32,7 +33,7 @@ const Button = ({ text }) => {
     <button
       onMouseEnter={handleMouseIn}
       onMouseLeave={handleMouseOut}
-      className="w-fit  flex  relative cursor-none"
+      className="w-fit  flex  relative cursor-none z-[1000] py-[0.1vw]"
     >
       <div className="w-full h-[1px] absolute bottom-0 overflow-hidden duration-[250ms] transition-transform">
         <div
@@ -40,7 +41,7 @@ const Button = ({ text }) => {
           style={{
             transform: isHover ? "translateX(0)" : "translateX(101%)",
           }}
-          className="w-full h-full bg-black"
+          className="w-full h-full bg-white"
         ></div>
       </div>
       {text}

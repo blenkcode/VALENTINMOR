@@ -109,7 +109,7 @@ const CircularCarouselScene = () => {
         // Valeur de base de l'amplitude: 0.45
         // Valeur max: 2.5 (positif) ou -2.5 (négatif)
         const baseAmplitude = 0.25;
-        const maxAmplitude = 6.5;
+        const maxAmplitude = 5.0;
 
         // Calculer la valeur d'amplitude en fonction de la direction et de la vélocité
         const amplitudeValue =

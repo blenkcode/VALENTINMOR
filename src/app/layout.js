@@ -9,6 +9,7 @@ import Frame from "./components/Frame";
 import Mouse from "./components/Mouse";
 import { ModalProvider } from "./Context/ModalContext";
 import ShaderEffectWithNoSSR from "./components/shaders/FrontGround";
+import FOOTER from "./components/FOOTER";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
             <Mouse />
             <ShaderEffectWithNoSSR />
             {children}
+            <FOOTER />
           </body>
         </ModalProvider>
       </SmoothScroll>

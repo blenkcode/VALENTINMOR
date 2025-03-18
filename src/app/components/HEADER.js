@@ -54,7 +54,7 @@ const HEADER = () => {
     }
   }, [hover]);
   return (
-    <nav className="w-screen fixed flex justify-between top-[2vw] px-[2vw]   text-[0.7vw] Med z-[100] left-0 mix-blend-difference text-white">
+    <nav className="w-screen fixed flex justify-between top-[2vw] px-[2vw]   text-[0.7vw] Med z-[1000] left-0 mix-blend-difference text-white">
       <div className=" w-1/4 relative ">
         <p>VA/ MOR</p>
         {/* <p>FOLIO 2025</p> */}
@@ -94,8 +94,8 @@ const HEADER = () => {
           </div>{" "}
         </div>
       </div>
-      <div className=" w-1/6 flex flex-col gap-[0.2vw]">
-        <div>
+      <div className=" w-1/6 flex flex-col ">
+        <div className="">
           <Button text="INDEX" />
         </div>
         <div>
@@ -117,10 +117,7 @@ const HEADER = () => {
           <Button text="MALT" />
         </div>
       </div>
-      <div className=" w-1/6 flex flex-col gap-[0.2vw]">
-        {/* <div className="underline">VALENTINMOR.PRO@GMAIL.COM</div>
-        <div className="underline">+33 631 81 72 32</div> */}
-      </div>
+      <div className=" w-1/6 flex  pr-[1vw] text-[1vw] justify-end ">回航</div>
     </nav>
   );
 };

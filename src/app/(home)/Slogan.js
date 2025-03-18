@@ -78,11 +78,11 @@ const Slogan = ({ container }) => {
       style={{
         willChange: "transform, position",
         position: isFixed ? "fixed" : "absolute",
-        top: isFixed ? 0 : isBottom ? "470svh" : "",
+        top: isFixed ? 0 : isBottom ? "570svh" : "",
       }}
       className={`w-full h-[100svh] flex justify-start flex-col items-center overflow-visible z-20`}
     >
-      <div className="absolute top-[11vw] left-[66%] w-[1px] h-[80%] bg-black"></div>
+      {/* <div className="absolute top-[11vw] left-[66%] w-[1px] h-[80%] bg-black"></div> */}
       <div className="w-full  h-[100svh]   relative z-10 ">
         <div
           className={`w-full h-[100svh] flex justify-start flex-col items-center overflow-visible -translate-x-[17vw]  z-10`}

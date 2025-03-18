@@ -3,16 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { createExitTimeline } from "../animations/CreateExitTimeLine";
-import { useBurger } from "../Context/ModalContext";
+
 const TransitionLink = ({ children, href, ...props }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { setArtist } = useBurger();
+
   const handleTransition = async (e) => {
     e.preventDefault();
 
     if (pathname !== href) {
-      setArtist(null);
       console.log("patname:", pathname, "href:", href);
 
       await createExitTimeline(router, href);

@@ -9,7 +9,6 @@ const page = () => {
 
       <Folio />
       <CarousselSection />
-      <div className="w-full h-[70svh] "></div>
     </main>
   );
 };

@@ -25,7 +25,7 @@ const CarousselSection = () => {
       trigger: block1.current,
       start: "top top",
       end: "bottom top",
-      scrub: true,
+      scrub: 1,
       onUpdate: (self) => {
         const yValue = 100 - self.progress * 100;
 
@@ -37,7 +37,7 @@ const CarousselSection = () => {
       trigger: block2.current,
       start: "top top",
       end: "bottom top",
-      scrub: true,
+      scrub: 1,
       onUpdate: (self) => {
         const yValue = 100 - self.progress * 100;
 
@@ -49,7 +49,7 @@ const CarousselSection = () => {
       trigger: block3.current,
       start: "top top",
       end: "bottom top",
-      scrub: true,
+      scrub: 1,
       onUpdate: (self) => {
         const yValue = 100 - self.progress * 100;
 
@@ -59,7 +59,7 @@ const CarousselSection = () => {
     ScrollTrigger.create({
       trigger: block4.current,
       start: "top top",
-      markers: true,
+
       onEnter: () => {
         setIsBottom(false);
       },
@@ -80,7 +80,7 @@ const CarousselSection = () => {
     };
   }, []);
   return (
-    <div ref={container} className="h-[570svh]   w-full relative">
+    <div ref={container} className="h-[670svh]   w-full relative">
       <Slogan container={container}></Slogan>
       <FixedText
         title1={title1}
@@ -88,10 +88,10 @@ const CarousselSection = () => {
         title3={title3}
         isBottom={isBottom}
       ></FixedText>
-      <div ref={block1} className="relative h-[100svh] w-screen "></div>
-      <div ref={block2} className="relative h-[100svh] w-screen "></div>
-      <div ref={block3} className="relative h-[100svh] w-screen "></div>
-      <div ref={block4} className="relative h-[170svh] w-screen "></div>
+      <div ref={block1} className="relative h-[150svh] w-screen "></div>
+      <div ref={block2} className="relative h-[150svh] w-screen "></div>
+      <div ref={block3} className="relative h-[150svh] w-screen "></div>
+      <div ref={block4} className="relative h-[120svh] w-screen "></div>
     </div>
   );
 };
