@@ -239,33 +239,29 @@ const ShaderEffect = () => {
 
   // useEffect(() => {
   //   if (shaderMaterialRef.current) {
-  //     if (menuOpen) {
-  //       gsap.to(shaderMaterialRef.current.uniforms.uAnimMenu, {
-  //         value: 10,
-  //         duration: 0.9,
+  //     if (transition) {
+  //       const tl = gsap.timeline();
+  //       tl.to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
+  //         value: 0.1,
+  //         duration: 0.7,
+  //         ease: "sine.inOut",
+  //       }).to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
+  //         value: 1,
+  //         duration: 2.7,
   //         ease: "sine.inOut",
   //       });
-  //     } else {
-  //       gsap.to(shaderMaterialRef.current.uniforms.uAnimMenu, {
+  //     } else if (!transition) {
+  //       const tl = gsap.timeline();
+  //       tl.to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
+  //         value: 0.1,
+  //         duration: 0.7,
+  //         ease: "sine.inOut",
+  //       }).to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
   //         value: 1,
-  //         duration: 0.6,
-  //         ease: "expo.out",
+  //         duration: 2.7,
+  //         ease: "sine.inOut",
   //       });
   //     }
-  //   }
-  // }, [menuOpen]);
-  // useEffect(() => {
-  //   if (shaderMaterialRef.current) {
-  //     const tl = gsap.timeline();
-  //     tl.to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
-  //       value: 0.1,
-  //       duration: 0.7,
-  //       ease: "sine.inOut",
-  //     }).to(shaderMaterialRef.current.uniforms.uAnimMenuVar, {
-  //       value: 1,
-  //       duration: 2.7,
-  //       ease: "sine.inOut",
-  //     });
 
   //     // .to(
   //     //   shaderMaterialRef.current.uniforms.uAnim2,
@@ -282,12 +278,12 @@ const ShaderEffect = () => {
   //     //   ease: "sine.inOut",
   //     // });
   //   }
-  // }, [pathname]);
+  // }, [transition]);
 
   return (
     <div
       ref={containerRef}
-      className="w-[120vw] h-[200vh] left-[-10vw] top-0  fixed z-[1000] opacity-[10%] pointer-events-none "
+      className="w-[120vw] h-[200vh] left-[-10vw] top-0  fixed z-[1000] opacity-[7%] pointer-events-none "
     ></div>
   );
 };

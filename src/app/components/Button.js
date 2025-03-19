@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useModal } from "../Context/ModalContext";
-const Button = ({ text }) => {
+import TransitionLink from "../utils/TransitionLink";
+const Button = ({ text, href }) => {
   const [isHover, setIsHover] = useState(false);
   const backgroundRef = useRef(null);
   const { setIsHoverThing } = useModal();
@@ -30,7 +31,8 @@ const Button = ({ text }) => {
     setIsHover(false);
   };
   return (
-    <button
+    <TransitionLink
+      href={href}
       onMouseEnter={handleMouseIn}
       onMouseLeave={handleMouseOut}
       className="w-fit  flex  relative cursor-none z-[1000] py-[0.1vw]"
@@ -41,11 +43,11 @@ const Button = ({ text }) => {
           style={{
             transform: isHover ? "translateX(0)" : "translateX(101%)",
           }}
-          className="w-full h-full bg-white"
+          className="w-full h-full bg-black"
         ></div>
       </div>
       {text}
-    </button>
+    </TransitionLink>
   );
 };
 

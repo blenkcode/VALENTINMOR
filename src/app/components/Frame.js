@@ -6,7 +6,7 @@ const Frame = ({ children }) => {
       style={{
         clipPath: "inset(3% 3% 3% 3%)", // État initial du clip-path
       }}
-      className="fixed w-screen top-0 left-0 h-[100svh]"
+      className="absolute w-screen bg-red-500 top-0 left-0 h-full"
     >
       {children}
     </div>

@@ -76,3 +76,27 @@ body {
   height: 300px;
   border-radius: 50%;
 }
+::-webkit-scrollbar {
+  width: 0px; /* Largeur de la scrollbar */
+  height: 0px;
+  background-color: #000; /* Hauteur de la scrollbar (pour les barres horizontales) */
+}
+
+/* Styliser la "thumb" (la partie défilante) */
+::-webkit-scrollbar-thumb {
+  background-color: #000000; /* Couleur de la thumb */
+  border-radius: 0px;
+  width: 0px;
+  height: 10px;
+}
+
+/* Styliser la "track" (la piste où défile la thumb) */
+::-webkit-scrollbar-track {
+  background-color: #18181a; /* Couleur de la piste */
+  /* Arrondir la piste */
+}
+
+/* Pour styliser la barre au survol */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Couleur au survol */
+}

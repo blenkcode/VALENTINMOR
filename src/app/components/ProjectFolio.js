@@ -1,16 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-
+import TransitionLink from "../utils/TransitionLink";
 import { useModal } from "../Context/ModalContext";
 const ProjectFolio = ({
   title,
   date,
   type,
   src,
+  href,
   project,
   number,
   lastpProject,
   projectIndex,
+  frame,
 }) => {
   const background1 = useRef(null);
   const background2 = useRef(null);
@@ -103,14 +105,16 @@ const ProjectFolio = ({
     setIsHoverLink(true);
   };
   return (
-    <div
+    <TransitionLink
+      frame={frame}
+      href={href}
       style={{
         transformOrigin: "center bottom",
         perspective: "1000px",
         perspectiveOrigin: "center bottom",
       }}
       onMouseEnter={handleMouseIn}
-      className={`w-full flex relative overflow-hidden border-t-[1px] h-[8vw] transition-colors ${
+      className={`w-full flex relative overflow-hidden border-t-[0px] h-[3.5vw] transition-colors ${
         projectIndex === project ||
         (projectIndex > project && projectIndex === lastpProject)
           ? "border-white "
@@ -119,21 +123,23 @@ const ProjectFolio = ({
     >
       <div
         ref={background1}
-        className="flex w-full h-full px-[2vw] [backface-visibility:hidden] will-change-transform "
+        className="flex w-full h-full px-[2vw] [backface-visibility:hidden] will-change-transform line1 translate-y-full"
       >
         {" "}
-        <div className="w-1/4 text-[0.8vw] Med flex  items-center gap-[5vw] h-full">
+        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
-        <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
-          <div>{date}</div> <div className="opacity-0">x</div>
-        </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
         <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
-        <div className="w-1/6"> </div>
+        <div className="w-1/6">
+          {" "}
+          <div className="  h-full flex items-center justify-end Med  ">
+            <div>{date}</div>
+          </div>
+        </div>
       </div>
       <div
         ref={background2}
@@ -142,22 +148,20 @@ const ProjectFolio = ({
         }}
         className={`flex w-full h-full absolute top-0 bg-neutral-950 text-white  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
       >
-        {" "}
-        <div className="w-1/4 text-[0.8vw] Med flex  items-center gap-[5vw] h-full">
+        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
-        <div className="w-2/8  h-full flex items-center justify-between Med pr-[4vw] ">
-          {/* <div>{date}</div>{" "} */}
-          <div className="w-[8vw]">
-            <img src={src}></img>
-          </div>
-        </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  duration-[400ms] translate-x-[0.2vw]  ease-in-out [transform-origin:center]  relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
         <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
-        <div className="w-1/6"> </div>
+        <div className="w-1/6">
+          {" "}
+          <div className="  h-full flex items-center justify-end Med  ">
+            <div>{date}</div>
+          </div>
+        </div>
       </div>
       <div
         ref={background3}
@@ -167,20 +171,22 @@ const ProjectFolio = ({
         className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] [backface-visibility:hidden] will-change-transform `}
       >
         {" "}
-        <div className="w-1/4 text-[0.8vw] Med flex  items-center gap-[5vw] h-full">
+        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
-        <div className="w-2/8  h-full flex items-center justify-between Med pr-[2vw] ">
-          <div>{date}</div> <div className="opacity-0">x</div>
-        </div>
-        <div className="w-1/6 Med text-[3vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw]  [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
         <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
-        <div className="w-1/6"> </div>
+        <div className="w-1/6">
+          {" "}
+          <div className="  h-full flex items-center justify-end Med  ">
+            <div>{date}</div>
+          </div>
+        </div>
       </div>
-    </div>
+    </TransitionLink>
   );
 };
 

@@ -9,12 +9,12 @@ const Scene = dynamic(
     ssr: false,
   }
 );
-const Carrousel = () => {
+const Carrousel = ({ lastpProject, project }) => {
   return (
-    <div className="w-screen  h-[100vh]  z-20">
+    <div className="w-full h-full z-20">
       {" "}
       <Canvas>
-        <Scene />
+        <Scene lastpProject={lastpProject} project={project} />
       </Canvas>
     </div>
   );

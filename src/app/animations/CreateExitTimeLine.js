@@ -2,18 +2,18 @@
 import gsap from "gsap";
 
 import CustomEase from "gsap/CustomEase";
-export const createExitTimeline = (router, href) => {
+export const createExitTimeline = (router, href, frame) => {
   gsap.registerPlugin(CustomEase);
 
   CustomEase.create("customEasing", "M0,0 C0.89,0 0.48,0.98 1,1");
   const tl = gsap.timeline();
   return new Promise((resolve) => {
     tl.fromTo(
-      ".transitionBlack",
-      { y: "100%" },
+      ".all",
+      { opacity: 1 },
 
       {
-        y: "0%",
+        opacity: 0,
 
         duration: 0.7,
         ease: "customEasing",
@@ -23,40 +23,17 @@ export const createExitTimeline = (router, href) => {
           });
         },
       }
-    )
-      .fromTo(
-        ".mainContainer",
-        { y: 0, opacity: "100%" },
+    ).fromTo(
+      frame.current,
+      { clipPath: "inset(0% 0% 0% 0%)" },
 
-        {
-          y: "-20vh",
-          opacity: "30%",
-          duration: 0.7,
-          ease: "customEasing",
-        },
-        0
-      )
-      .to(
-        ".item-nav",
+      {
+        clipPath: " inset(50% 50% 50% 50%)",
 
-        {
-          y: "-100%",
-
-          duration: 0.6,
-          ease: "customEasing",
-        },
-        0
-      )
-      .to(
-        ".item-header",
-
-        {
-          y: "-100%",
-
-          duration: 0.6,
-          ease: "customEasing",
-        },
-        0
-      );
+        duration: 0.7,
+        ease: "customEasing",
+      },
+      0
+    );
   });
 };
