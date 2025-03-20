@@ -108,8 +108,107 @@ export const createEnterLanding = ({
           y: 0,
           paddingLeft: "2vw",
           paddingRight: "2vw",
-          duration: 0.8,
-          ease: "expo.inOut",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+      .to(
+        ".carrou",
+
+        {
+          y: 0,
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".frametop",
+
+        {
+          y: "-4vw",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+
+        0
+      )
+      .to(
+        ".framebottom",
+
+        {
+          y: "4vw",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+      .to(
+        ".frameleft",
+
+        {
+          x: "-4vw",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+      .to(
+        ".frameright",
+
+        {
+          x: "4vw",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+
+      .fromTo(
+        ".foliol",
+        { paddingLeft: "4vw" },
+
+        {
+          paddingLeft: "0vw",
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+
+      .fromTo(
+        ".folior",
+        { paddingRight: "4vw" },
+
+        {
+          paddingRight: "0vw",
+
+          duration: 0.95,
+          ease: "power3.inOut",
+        },
+        0
+      )
+      .fromTo(
+        ".carrou",
+        { y: "-50vw" },
+
+        {
+          y: 0,
+
+          duration: 1.5,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .fromTo(
+        ".foliolines",
+        { y: "-2vw" },
+
+        {
+          y: 0,
+          duration: 0.95,
+          ease: "power3.inOut",
         },
         0
       );

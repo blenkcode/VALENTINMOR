@@ -10,6 +10,7 @@ export const createEnterWorks = ({
   type,
   title,
   arrow,
+  frameRef,
   visit,
 }) => {
   gsap.registerPlugin(CustomEase);
@@ -33,16 +34,31 @@ export const createEnterWorks = ({
     { clipPath: "inset(50% 50% 50% 50%)" },
     {
       clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.28,
-      ease: "power4.out",
+      duration: 1.2,
+      ease: "power3.out",
       stagger: {
         amount: 0.2,
         from: "end",
         ease: "customEasing",
       },
     },
-    0.16
+    0.11
   )
+    .fromTo(
+      frameRef.map((ref) => ref.current).filter(Boolean), // Filter out any null refs
+      { clipPath: "inset(50% 50% 50% 50%)" },
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.1,
+        ease: "power3.out",
+        stagger: {
+          amount: 0.2,
+          from: "end",
+          ease: "customEasing",
+        },
+      },
+      0.11
+    )
     .fromTo(
       smallImageRefs.map((ref) => ref.current).filter(Boolean),
       { clipPath: "inset(50% 50% 50% 50%)" },
@@ -63,7 +79,7 @@ export const createEnterWorks = ({
       { y: "100%" },
       {
         y: 0,
-        duration: 2,
+        duration: 2.2,
         ease: "expo.out",
         stagger: {
           amount: 0.1,
@@ -77,7 +93,7 @@ export const createEnterWorks = ({
       { y: "100%" },
       {
         y: 0,
-        duration: 2,
+        duration: 2.2,
         ease: "expo.out",
       },
       0.35
@@ -87,7 +103,7 @@ export const createEnterWorks = ({
       { y: "100%" },
       {
         y: 0,
-        duration: 2,
+        duration: 2.2,
         ease: "expo.out",
       },
       0.35
@@ -98,8 +114,8 @@ export const createEnterWorks = ({
       {
         y: 0,
         rotateX: 0,
-        duration: 1.65,
-        ease: "power4.out",
+        duration: 1.22,
+        ease: "power2.out",
       },
       0.15
     )
@@ -112,7 +128,7 @@ export const createEnterWorks = ({
         duration: 2.2,
         ease: "expo.out",
       },
-      0.9
+      0.5
     )
     .fromTo(
       visit.current,
@@ -120,7 +136,7 @@ export const createEnterWorks = ({
       {
         y: 0,
         rotateX: 0,
-        duration: 1.8,
+        duration: 1.95,
         ease: "expo.out",
       },
       0.5
@@ -132,7 +148,7 @@ export const createEnterWorks = ({
         y: 0,
         paddingLeft: "2vw",
         paddingRight: "2vw",
-        duration: 0.92,
+        duration: 0.95,
         ease: "power3.inOut",
       },
       0
@@ -141,8 +157,8 @@ export const createEnterWorks = ({
       ".frametop",
 
       {
-        y: "-3vw",
-        duration: 0.92,
+        y: "-4vw",
+        duration: 0.95,
         ease: "power3.inOut",
       },
 
@@ -152,8 +168,8 @@ export const createEnterWorks = ({
       ".framebottom",
 
       {
-        y: "3vw",
-        duration: 0.92,
+        y: "4vw",
+        duration: 0.95,
         ease: "power3.inOut",
       },
       0
@@ -162,8 +178,8 @@ export const createEnterWorks = ({
       ".frameleft",
 
       {
-        x: "-3vw",
-        duration: 0.92,
+        x: "-4vw",
+        duration: 0.95,
         ease: "power3.inOut",
       },
       0
@@ -172,8 +188,8 @@ export const createEnterWorks = ({
       ".frameright",
 
       {
-        x: "3vw",
-        duration: 0.92,
+        x: "4vw",
+        duration: 0.95,
         ease: "power3.inOut",
       },
       0
@@ -183,7 +199,7 @@ export const createEnterWorks = ({
 
       {
         x: 0,
-        duration: 0.92,
+        duration: 0.95,
         ease: "power3.inOut",
       },
       0

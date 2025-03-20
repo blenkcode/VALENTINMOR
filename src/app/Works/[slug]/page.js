@@ -20,6 +20,7 @@ export default function WorksPage() {
   const frame = useRef(null);
   const slider = useRef(null);
   const [imageRefs, setImageRefs] = useState([]);
+  const [frameRef, setFrameRef] = useState([]);
   const [smallImages, setSmallImages] = useState([]);
   const [descriptionsRef, setDescriptionsRef] = useState([]);
   const [smallImageRefs, setSmallImageRefs] = useState([]);
@@ -41,6 +42,7 @@ export default function WorksPage() {
       setDescriptions(descriptionsData);
 
       setImageRefs(imagesData.map(() => createRef()));
+      setFrameRef(imagesData.map(() => createRef()));
       setSmallImageRefs(imagesData.map(() => createRef()));
       setDescriptionsRef(descriptionsData.map(() => createRef()));
     }
@@ -64,6 +66,7 @@ export default function WorksPage() {
         title,
         visit,
         arrow,
+        frameRef,
       });
       gsap.to(frame.current, {
         y: `${images.length * (0.537 * images.length)}vw`,
@@ -93,7 +96,7 @@ export default function WorksPage() {
 
   return (
     <div className="main w-screen min-h-[100svh] all">
-      <div className="fixed w-1/2 right-0 top-0 flex justify-between pt-[15vw] pr-[4vw] items-center">
+      <div className="fixed w-1/2 right-0 top-0 flex justify-between pt-[8.5vw] pr-[4vw] items-center">
         <div className="flex flex-col">
           <div
             style={{
@@ -114,7 +117,7 @@ export default function WorksPage() {
             </h1>
           </div>
 
-          <div className="overflow-hidden mt-[1vw]">
+          <div className="overflow-hidden mt-[5vw]">
             {" "}
             <p
               ref={type}
@@ -123,7 +126,7 @@ export default function WorksPage() {
               {works.type}
             </p>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden mt-[1vw]">
             {" "}
             <p
               ref={date}
@@ -132,7 +135,7 @@ export default function WorksPage() {
               {works.date}
             </p>
           </div>
-          <div className=" Med mt-[2vw] text-[0.7vw}">
+          <div className=" Med mt-[8.8vw] text-[0.7vw}">
             {descriptions.map((desc, index) => (
               <div key={index} className="overflow-hidden ">
                 <p
@@ -151,7 +154,7 @@ export default function WorksPage() {
             </div>
           </div>
         </div>
-        <div className="w-[5vw] gap-[1.5vw] flex flex-col  fixed top-1/2 -translate-y-1/2 right-[3vw] translate-x-[-3vw] smallimgs">
+        <div className="w-[5vw] gap-[1.5vw] flex flex-col  fixed top-1/2 -translate-y-1/2 right-[3vw]  ">
           <div
             ref={frame}
             className="w-[3.5vw] top-[-0.5vw] right-1/2 translate-x-1/2 aspect-square border-[1px] border-black absolute"
@@ -203,18 +206,25 @@ export default function WorksPage() {
           {images.map((image, index) => (
             <div
               key={index}
-              ref={imageRefs[index]}
-              style={{
-                clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
-              }}
-              className={`w-[32vw] aspect-square flex items-center justify-center px-[2vw]   ${
-                pathname === "/Works/Amouratroi"
-                  ? "bg-black "
-                  : "bg-neutral-200 "
-              }`}
+              className={`w-[32vw] aspect-square flex items-center justify-center px-[2vw] relative  `}
             >
+              <div
+                style={{
+                  clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                }}
+                ref={frameRef[index]}
+                className={`w-full absolute inset-0 h-full ${
+                  pathname === "/Works/Amouratroi"
+                    ? "bg-black "
+                    : "bg-neutral-300 "
+                }`}
+              ></div>
               {isVideo(image) ? (
                 <video
+                  style={{
+                    clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                  }}
+                  ref={imageRefs[index]}
                   src={image}
                   autoPlay
                   loop
@@ -224,6 +234,10 @@ export default function WorksPage() {
                 />
               ) : (
                 <Image
+                  style={{
+                    clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                  }}
+                  ref={imageRefs[index]}
                   src={image}
                   width={500}
                   loading="lazy"

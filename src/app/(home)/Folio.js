@@ -5,9 +5,8 @@ import ProjectFolio from "../components/ProjectFolio";
 import { useModal } from "../Context/ModalContext";
 import { createEnterLanding } from "../animations/CreateEnterLanding";
 import Carrousel from "./Carrousel";
+import { useProject } from "../Context/ProjectContext";
 const Folio = () => {
-  const [lastpProject, setLastProject] = useState("0");
-  const [project, setProject] = useState("0");
   const { setIsHoverLink } = useModal();
   const works = useRef(null);
   const number = useRef(null);
@@ -15,8 +14,10 @@ const Folio = () => {
   const date = useRef(null);
   const arrow = useRef(null);
   const frame = useRef(null);
-  //foliocompnent refs
 
+  const [events, setEvents] = useState(false);
+  //foliocompnent refs
+  const { project, setProject, lastpProject, setLastProject } = useProject();
   const handleMouseIn = () => {
     setProject("0");
     setIsHoverLink(false);
@@ -280,9 +281,15 @@ const Folio = () => {
   //     );
   //   }
   // }, [project]);
-
+  const handlereset = () => {
+    setEvents(true);
+  };
   return (
-    <div className=" h-auto w-full mt-[2vw] z-10   ">
+    <div
+      className={` h-auto w-full mt-[2vw] z-10  folio  ${
+        events ? "pointer-events-none" : ""
+      }`}
+    >
       <div
         style={{
           transformOrigin: "center bottom",
@@ -298,7 +305,7 @@ const Folio = () => {
               transform: "rotateX(120deg)",
             }}
             ref={jap}
-            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
+            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform foliol"
           >
             作品
           </p>
@@ -306,7 +313,7 @@ const Folio = () => {
         <div className="w-1/6 flex -translate-x-[0.1vw]">
           <div className="overflow-hidden">
             {" "}
-            <h3 className="Med text-[5vw]  [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
+            <h3 className="Med text-[5vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
               <div
                 style={{
                   transform: "rotateX(120deg) ",
@@ -379,7 +386,7 @@ const Folio = () => {
               transform: "rotateX(120deg)",
             }}
             ref={date}
-            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
+            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform folior"
           >
             {" "}
             2024/25
@@ -391,7 +398,7 @@ const Folio = () => {
         onMouseLeave={handleMouseOut}
         className="w-full h-[5vw]"
       ></div>
-      <div className="w-full foliolines">
+      <div onClick={handlereset} className="w-full foliolines">
         <div
           onMouseEnter={() => setProject("1")}
           onMouseLeave={() => setLastProject("1")}

@@ -2,7 +2,7 @@
 import gsap from "gsap";
 
 import CustomEase from "gsap/CustomEase";
-export const createExitTimeline = (router, href, frame) => {
+export const createExitTimeline = (router, href) => {
   gsap.registerPlugin(CustomEase);
 
   CustomEase.create("customEasing", "M0,0 C0.89,0 0.48,0.98 1,1");
@@ -15,7 +15,7 @@ export const createExitTimeline = (router, href, frame) => {
       {
         opacity: 0,
 
-        duration: 0.5,
+        duration: 0.4,
         ease: "power2.inOut",
         onComplete: () => {
           requestAnimationFrame(() => {
@@ -23,39 +23,55 @@ export const createExitTimeline = (router, href, frame) => {
           });
         },
       },
-      0
+      0.4
     )
+
       .fromTo(
-        frame.current,
-        { clipPath: "inset(0% 0% 0% 0%)" },
-
-        {
-          clipPath: " inset(50% 50% 50% 50%)",
-
-          duration: 0.7,
-          ease: "power4.inOut",
-        },
-        0
-      )
-      .to(
         ".header",
+        {
+          y: 0,
+          paddingLeft: "2vw",
+          paddingRight: "2vw",
+        },
 
         {
-          y: "3vw",
-          paddingLeft: "5vw",
-          paddingRight: "5vw",
-          duration: 0.7,
+          y: "4vw",
+          paddingLeft: "6vw",
+          paddingRight: "6vw",
+          duration: 1,
           ease: "power4.inOut",
         },
         0
       )
       .to(
-        ".folio",
+        ".carrou",
+
+        {
+          y: "-50vw",
+
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".foliol",
 
         {
           paddingLeft: "4vw",
+
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".folior",
+
+        {
           paddingRight: "4vw",
-          duration: 0.7,
+
+          duration: 1,
           ease: "power4.inOut",
         },
         0
@@ -65,7 +81,7 @@ export const createExitTimeline = (router, href, frame) => {
 
         {
           y: 0,
-          duration: 0.7,
+          duration: 1,
           ease: "power4.inOut",
         },
         0
@@ -75,7 +91,7 @@ export const createExitTimeline = (router, href, frame) => {
 
         {
           y: 0,
-          duration: 0.7,
+          duration: 1,
           ease: "power4.inOut",
         },
         0
@@ -85,7 +101,7 @@ export const createExitTimeline = (router, href, frame) => {
 
         {
           x: 0,
-          duration: 0.7,
+          duration: 1,
           ease: "power4.inOut",
         },
         0
@@ -95,7 +111,7 @@ export const createExitTimeline = (router, href, frame) => {
 
         {
           x: 0,
-          duration: 0.7,
+          duration: 1,
           ease: "power4.inOut",
         },
         0
@@ -104,12 +120,23 @@ export const createExitTimeline = (router, href, frame) => {
         ".foliolines",
 
         {
-          scale: 0.91,
-          y: "-1vw",
-          duration: 0.7,
+          y: "-2vw",
+          duration: 1,
           ease: "power4.inOut",
         },
         0
       );
+    // .to(
+    //   ".works2",
+
+    //   {
+    //     scale: 0.91,
+    //     y: "1vw",
+    //     x: "-1vw",
+    //     duration: 0.9,
+    //     ease: "power4.inOut",
+    //   },
+    //   0
+    // );
   });
 };
