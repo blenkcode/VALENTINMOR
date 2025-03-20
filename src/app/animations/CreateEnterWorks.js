@@ -132,7 +132,7 @@ export const createEnterWorks = ({
         y: 0,
         paddingLeft: "2vw",
         paddingRight: "2vw",
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
       0
@@ -142,7 +142,7 @@ export const createEnterWorks = ({
 
       {
         y: "-3vw",
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
 
@@ -153,7 +153,7 @@ export const createEnterWorks = ({
 
       {
         y: "3vw",
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
       0
@@ -163,7 +163,7 @@ export const createEnterWorks = ({
 
       {
         x: "-3vw",
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
       0
@@ -173,7 +173,7 @@ export const createEnterWorks = ({
 
       {
         x: "3vw",
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
       0
@@ -183,7 +183,7 @@ export const createEnterWorks = ({
 
       {
         x: 0,
-        duration: 0.85,
+        duration: 0.92,
         ease: "power3.inOut",
       },
       0
