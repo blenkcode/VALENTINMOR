@@ -17,74 +17,75 @@ export const createEnterLanding = ({
   return new Promise((resolve) => {
     tl.fromTo(
       ".line1",
-      { y: "100%", rotateX: -90 },
+      { y: "100%", rotateX: "90deg" },
 
       {
         y: 0,
         rotateX: 0,
-        stagger: 0.15,
-        duration: 1.4,
-        ease: "customEasing",
+        stagger: 0.1,
+        duration: 1.3,
+        ease: "expo.out",
       },
       0.15
     )
       .fromTo(
-        works.current,
-        { y: "100%" },
+        ".works",
+        { y: "100%", rotateX: "90deg" },
 
         {
           y: 0,
-
-          duration: 1.2,
-          ease: "customEasing",
+          rotateX: 0,
+          stagger: 0.04,
+          duration: 1.7,
+          ease: "expo.out",
         },
-        0
+        0.1
       )
       .fromTo(
         arrow.current,
-        { y: "100%" },
+        { y: "100%", rotateX: "120deg" },
 
         {
           y: 0,
-
-          duration: 1.2,
-          ease: "customEasing",
+          rotateX: 0,
+          duration: 1.7,
+          ease: "expo.out",
         },
-        0
+        0.4
       )
       .fromTo(
         number.current,
-        { y: "100%" },
+        { y: "100%", rotateX: "90deg" },
 
         {
           y: 0,
-
-          duration: 1.2,
-          ease: "customEasing",
+          rotateX: 0,
+          duration: 1.7,
+          ease: "expo.out",
         },
-        0
+        0.7
       )
       .fromTo(
         date.current,
-        { y: "100%" },
+        { y: "100%", rotateX: "90deg" },
 
         {
           y: 0,
-
-          duration: 1.2,
-          ease: "customEasing",
+          rotateX: 0,
+          duration: 1.7,
+          ease: "expo.out",
         },
-        0
+        0.7
       )
       .fromTo(
         jap.current,
-        { y: "100%" },
+        { y: "100%", rotateX: "90deg" },
 
         {
           y: 0,
-
-          duration: 1.2,
-          ease: "customEasing",
+          rotateX: 0,
+          duration: 1.7,
+          ease: "expo.out",
         },
         0
       )
@@ -95,8 +96,20 @@ export const createEnterLanding = ({
         {
           clipPath: "inset(0% 0% 0% 0%)",
 
-          duration: 2,
-          ease: "customEasing",
+          duration: 1,
+          ease: "expo.out",
+        },
+        0.5
+      )
+      .to(
+        ".header",
+
+        {
+          y: 0,
+          paddingLeft: "2vw",
+          paddingRight: "2vw",
+          duration: 0.8,
+          ease: "expo.inOut",
         },
         0
       );

@@ -1,14 +1,12 @@
 import React from "react";
 
-const Frame = ({ children }) => {
+const Frame = ({}) => {
   return (
-    <div
-      style={{
-        clipPath: "inset(3% 3% 3% 3%)", // État initial du clip-path
-      }}
-      className="absolute w-screen bg-red-500 top-0 left-0 h-full"
-    >
-      {children}
+    <div className="fixed w-screen top-0 left-0 h-[100svh] z-[10000] pointer-events-none">
+      <div className="h-full absolute w-[3vw] bg-black left-0 top-0 frameleft -translate-x-[3vw]"></div>
+      <div className="h-full absolute  w-[3vw] bg-black right-0 top-0 frameright translate-x-[3vw]"></div>
+      <div className="h-[3vw] absolute w-screen bg-black left-0 top-0 frametop -translate-y-[3vw]"></div>
+      <div className="h-[3vw] absolute w-screen bg-black left-0 bottom-0 framebottom translate-y-[3vw]"></div>
     </div>
   );
 };

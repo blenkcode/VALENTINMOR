@@ -20,18 +20,23 @@ export default function WorksPage() {
   const frame = useRef(null);
   const slider = useRef(null);
   const [imageRefs, setImageRefs] = useState([]);
+  const [smallImages, setSmallImages] = useState([]);
   const [descriptionsRef, setDescriptionsRef] = useState([]);
   const [smallImageRefs, setSmallImageRefs] = useState([]);
   const date = useRef(null);
   const title = useRef(null);
   const type = useRef(null);
+
+  const arrow = useRef(null);
+  const visit = useRef(null);
   const pathname = usePathname();
   useEffect(() => {
     if (slug && worksData[slug]) {
       setWorks(worksData[slug]);
       const imagesData = worksData[slug].imgs;
       setImages(imagesData);
-
+      const smallImagesData = worksData[slug].smallsImgs;
+      setSmallImages(smallImagesData);
       const descriptionsData = worksData[slug].description;
       setDescriptions(descriptionsData);
 
@@ -57,9 +62,11 @@ export default function WorksPage() {
         date,
         type,
         title,
+        visit,
+        arrow,
       });
       gsap.to(frame.current, {
-        y: `${images.length * (0.599 * images.length)}vw`,
+        y: `${images.length * (0.537 * images.length)}vw`,
         ease: "none",
         scrollTrigger: {
           trigger: imgContainer.current,
@@ -88,20 +95,30 @@ export default function WorksPage() {
     <div className="main w-screen min-h-[100svh] all">
       <div className="fixed w-1/2 right-0 top-0 flex justify-between pt-[15vw] pr-[4vw] items-center">
         <div className="flex flex-col">
-          <div className="overflow-hidden">
+          <div
+            style={{
+              transformOrigin: "center bottom",
+              perspective: "1000px",
+              perspectiveOrigin: "center bottom",
+            }}
+            className="overflow-hidden"
+          >
             <h1
               ref={title}
-              className="text-[4vw] Med -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
+              style={{
+                transform: "rotateX(120deg)",
+              }}
+              className="Med text-[5vw]  -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
             >
               {works.name}
             </h1>
           </div>
 
-          <div className="overflow-hidden mt-[2vw]">
+          <div className="overflow-hidden mt-[1vw]">
             {" "}
             <p
               ref={type}
-              className="Med text-[0.8vw] opacity-50 translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
+              className="Med text-[0.7vw] opacity-50 translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
             >
               {works.type}
             </p>
@@ -110,14 +127,14 @@ export default function WorksPage() {
             {" "}
             <p
               ref={date}
-              className="Med text-[0.8vw] opacity-50 translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
+              className="Med text-[0.7vw] opacity-50 translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
             >
               {works.date}
             </p>
           </div>
-          <div className=" Med mt-[2vw]">
+          <div className=" Med mt-[2vw] text-[0.7vw}">
             {descriptions.map((desc, index) => (
-              <div key={index} className="overflow-hidden">
+              <div key={index} className="overflow-hidden ">
                 <p
                   ref={descriptionsRef[index]}
                   className="will-change-transform [transform-origin:center] [backface-visibility:hidden] translate-y-full"
@@ -127,18 +144,20 @@ export default function WorksPage() {
               </div>
             ))}
           </div>
-          <div className="mt-[2vw] Med text-[0.8vw]">
-            {" "}
-            <Button href="/" text=" VISIT SITE"></Button>
+          <div className="mt-[2vw] Med text-[0.7vw] overflow-hidden">
+            <div ref={visit} className="translate-y-full">
+              {" "}
+              <Button href="/" text=" VISIT SITE"></Button>
+            </div>
           </div>
         </div>
-        <div className="w-[5vw] flex flex-col gap-[2vw] h-auto fixed top-1/2 -translate-y-1/2 right-[3vw]">
+        <div className="w-[5vw] gap-[1.5vw] flex flex-col  fixed top-1/2 -translate-y-1/2 right-[3vw] translate-x-[-3vw] smallimgs">
           <div
             ref={frame}
             className="w-[3.5vw] top-[-0.5vw] right-1/2 translate-x-1/2 aspect-square border-[1px] border-black absolute"
           ></div>
 
-          {images.map((image, index) => (
+          {smallImages.map((image, index) => (
             <div
               ref={smallImageRefs[index]}
               style={{
@@ -159,8 +178,9 @@ export default function WorksPage() {
               ) : (
                 <Image
                   src={image}
-                  width={500}
+                  width={250}
                   height={500}
+                  priority
                   alt={`${works.name} image ${index + 1}`}
                   className="w-full border-[1px] border-neutral-200"
                 />
@@ -171,9 +191,14 @@ export default function WorksPage() {
       </div>{" "}
       <div ref={imgContainer} className="w-1/2 py-[10vw]  relative ">
         {" "}
-        <p className="Med text-[0.8vw] absolute top-[1.7vw] right-1/2 translate-x-1/2 pl-[5vw]">
-          <div className="-rotate-90 text-[2vw]">→</div>
-        </p>{" "}
+        <div className="Med text-[0.8vw] absolute top-[1.7vw] right-1/2 translate-x-1/2 pl-[5vw]">
+          <div className="overflow-hidden">
+            {" "}
+            <div ref={arrow} className=" text-[2vw] translate-y-full">
+              <div className="-rotate-90"> →</div>
+            </div>
+          </div>
+        </div>{" "}
         <div className="gap-[4vw]  pl-[5vw]  flex flex-col items-center">
           {images.map((image, index) => (
             <div
@@ -201,6 +226,7 @@ export default function WorksPage() {
                 <Image
                   src={image}
                   width={500}
+                  loading="lazy"
                   height={500}
                   alt={`${works.name} image ${index + 1}`}
                   className="w-full "

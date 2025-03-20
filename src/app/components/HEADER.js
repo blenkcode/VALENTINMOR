@@ -54,7 +54,7 @@ const HEADER = () => {
     }
   }, [hover]);
   return (
-    <nav className="w-screen fixed flex justify-between top-[2vw] px-[2vw]   text-[0.7vw] Med z-[1000] left-0  text-black">
+    <nav className="w-screen fixed flex justify-between top-[2vw] px-[2vw]   text-[0.7vw] Med z-[1000] left-0   header will-change-transform [backface-visibility:hidden] [transform-origin:center]">
       <div className=" w-1/4 relative ">VALENTIN MOR</div>
       <div className=" w-2/8 flex flex-col gap-[0.2vw] "> </div>
       <div className=" w-1/6 flex flex-col ">

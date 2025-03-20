@@ -126,14 +126,14 @@ const ProjectFolio = ({
         className="flex w-full h-full px-[2vw] [backface-visibility:hidden] will-change-transform line1 translate-y-full"
       >
         {" "}
-        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
+        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
         <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
+        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
           <div className="  h-full flex items-center justify-end Med  ">
@@ -148,14 +148,14 @@ const ProjectFolio = ({
         }}
         className={`flex w-full h-full absolute top-0 bg-neutral-950 text-white  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
       >
-        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
+        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
         <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
+        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
           <div className="  h-full flex items-center justify-end Med  ">
@@ -171,14 +171,14 @@ const ProjectFolio = ({
         className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] [backface-visibility:hidden] will-change-transform `}
       >
         {" "}
-        <div className="w-1/2 text-[0.8vw] Med flex  items-center gap-[16.3vw] h-full">
+        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full">
           {number} <div className="flex h-full items-center"> {type} </div>
         </div>
         <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.9vw] Med pl-[1vw]"></div>
+        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
           <div className="  h-full flex items-center justify-end Med  ">

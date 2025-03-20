@@ -70,10 +70,26 @@ export const worksData = {
       "/Amour/tomfinal2.mp4",
       "/Amour/4.webp",
     ],
+    smallsImgs: [
+      "/Amour/littles/A1.webp",
+
+      "/Amour/littles/A52.webp",
+      "/Amour/littles/A2.webp",
+
+      "/Amour/littles/A53.webp",
+      "/Amour/littles/A3.webp",
+      "/Amour/littles/A51.webp",
+      "/Amour/littles/A4.webp",
+    ],
     type: "PHOTOGRAPHIC PORTFOLIO",
     date: "DECEMBER 2024 ",
-    description:
-      "In this portfolio project, I collaborated with photographer Tom Petit to create a digital experience that faithfully reflects his distinctive artistic approach. The website needed to capture the essence of his photographic work, where emotion and imagination transcend the visual documentation.",
+    description: [
+      "In this portfolio project, I collaborated with photographer",
+      "Tom Petit to create a digital experience that faithfully ",
+      "reflects his distinctive artistic approach. The website needed",
+      "to capture the essence of his photographic work, where",
+      " emotion and imagination transcend the visual documentation.",
+    ],
   },
   LeChantDesOiseaux: {
     name: "LCDO",

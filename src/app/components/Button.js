@@ -35,7 +35,7 @@ const Button = ({ text, href }) => {
       href={href}
       onMouseEnter={handleMouseIn}
       onMouseLeave={handleMouseOut}
-      className="w-fit  flex  relative cursor-none z-[1000] py-[0.1vw]"
+      className="w-fit  flex  relative  z-[1000] py-[0.1vw]"
     >
       <div className="w-full h-[1px] absolute bottom-0 overflow-hidden duration-[250ms] transition-transform">
         <div

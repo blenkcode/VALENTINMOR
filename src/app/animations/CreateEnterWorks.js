@@ -9,6 +9,8 @@ export const createEnterWorks = ({
   date,
   type,
   title,
+  arrow,
+  visit,
 }) => {
   gsap.registerPlugin(CustomEase);
 
@@ -31,74 +33,160 @@ export const createEnterWorks = ({
     { clipPath: "inset(50% 50% 50% 50%)" },
     {
       clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.6,
-      ease: "expo.out",
+      duration: 1.28,
+      ease: "power4.out",
       stagger: {
-        amount: 0.5,
+        amount: 0.2,
         from: "end",
         ease: "customEasing",
       },
     },
-    0
+    0.16
   )
     .fromTo(
       smallImageRefs.map((ref) => ref.current).filter(Boolean),
       { clipPath: "inset(50% 50% 50% 50%)" },
       {
         clipPath: "inset(0% 0% 0% 0%)",
-        duration: 1.2,
+        duration: 2.2,
         ease: "expo.out",
         stagger: {
-          amount: 0.5,
+          amount: 0.4,
           from: "end",
           ease: "customEasing",
         },
       },
-      0.4
+      0.2
     )
     .fromTo(
       descriptionsRef.map((ref) => ref.current).filter(Boolean),
       { y: "100%" },
       {
         y: 0,
-        duration: 1.2,
-        ease: "expo.inOut",
+        duration: 2,
+        ease: "expo.out",
         stagger: {
-          amount: 0.3,
+          amount: 0.1,
           from: "end",
         },
       },
-      0
+      0.3
     )
     .fromTo(
       date.current,
       { y: "100%" },
       {
         y: 0,
-        duration: 1.5,
-        ease: "expo.inOut",
+        duration: 2,
+        ease: "expo.out",
       },
-      0.3
+      0.35
     )
     .fromTo(
       type.current,
       { y: "100%" },
       {
         y: 0,
-        duration: 1.5,
-        ease: "expo.inOut",
+        duration: 2,
+        ease: "expo.out",
       },
       0.35
     )
     .fromTo(
       title.current,
-      { y: "-100%" },
+      { y: "100%", rotateX: "120deg" },
       {
         y: 0,
-        duration: 1.8,
-        ease: "expo.inOut",
+        rotateX: 0,
+        duration: 1.65,
+        ease: "power4.out",
       },
-      0.1
+      0.15
+    )
+    .fromTo(
+      arrow.current,
+      { y: "100%", rotateX: "-120deg" },
+      {
+        y: 0,
+        rotateX: 0,
+        duration: 2.2,
+        ease: "expo.out",
+      },
+      0.9
+    )
+    .fromTo(
+      visit.current,
+      { y: "100%", rotateX: "-120deg" },
+      {
+        y: 0,
+        rotateX: 0,
+        duration: 1.8,
+        ease: "expo.out",
+      },
+      0.5
+    )
+    .to(
+      ".header",
+
+      {
+        y: 0,
+        paddingLeft: "2vw",
+        paddingRight: "2vw",
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+      0
+    )
+    .to(
+      ".frametop",
+
+      {
+        y: "-3vw",
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+
+      0
+    )
+    .to(
+      ".framebottom",
+
+      {
+        y: "3vw",
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+      0
+    )
+    .to(
+      ".frameleft",
+
+      {
+        x: "-3vw",
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+      0
+    )
+    .to(
+      ".frameright",
+
+      {
+        x: "3vw",
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+      0
+    )
+    .to(
+      ".smallimgs",
+
+      {
+        x: 0,
+        duration: 0.85,
+        ease: "power3.inOut",
+      },
+      0
     );
 
   return new Promise((resolve) => {

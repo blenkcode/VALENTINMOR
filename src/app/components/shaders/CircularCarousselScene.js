@@ -13,12 +13,11 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const texture = useTexture("/VAL.png");
   const textures = useTexture([
-    "/VAL.png",
-    "/FERTILE.png",
-    "/JUTEL.png",
-    "/MBM.png",
-    "/AMOURATROI.png",
-    "/LCDO.png",
+    "/FERTILE1.png",
+    "/JUTEL1.png",
+    "/MBM1.png",
+    "/AMOUR1.png",
+    "/LCDO1.png",
   ]);
 
   useEffect(() => {
@@ -87,8 +86,8 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
   const planePositions = useMemo(() => {
     return textureArray.map((_, index) => {
       // Positionnement vertical avec espacement de 8 unités par mesh
-      const y = -4.5 * index - 0.18; // Négatif pour descendre verticalement
-      const x = 0;
+      const x = 6 * index; // Négatif pour descendre verticalement
+      const y = 0;
       const z = 0;
       const rotation = [0, 0, 0];
 
@@ -100,21 +99,21 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
       // Si project est 1, on translate vers le haut de la taille d'un mesh (8 unités)
       const targetY =
         project === "1"
-          ? 4.5
+          ? 0
           : project === "2"
-          ? 9.0
+          ? 6
           : project === "3"
-          ? 13.5
+          ? 12
           : project === "4"
           ? 18
           : project === "5"
-          ? 22.5
-          : 0;
+          ? 24
+          : -5.5;
       setIsAnimating(true);
       // Animation avec GSAP pour une transition fluide
       gsap.to(groupRef.current.position, {
-        y: targetY,
-        duration: 1.8,
+        x: -targetY,
+        duration: 1.5,
         ease: "expo.out",
         onComplete: () => {
           setIsAnimating(false);
@@ -129,37 +128,31 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
     tl.to(
       controls.current.rotation,
       {
-        value: 1.0,
-        duration: 0.4,
+        value: 0.5,
+        duration: 0.5,
         ease: "expo.out",
       },
       0
-    ).to(
-      controls.current.rotation,
-      {
-        value: 0.0,
-        duration: 2,
-        ease: "power2.inOut",
-      },
-      "-=0.4"
-    );
+    ).to(controls.current.rotation, {
+      value: 0.0,
+      duration: 1.7,
+      ease: "expo.out",
+    });
   }, [project]);
 
-  // useEffect(() => {
-
-  //   if(project===1)
-  //   const tl = gsap.timeline();
-  //   // Animation avec GSAP pour une transition fluide
-  //   tl.to(controls.current.amplitude, {
-  //     value: 0.8,
-  //     duration: 0.8,
-  //     ease: "expo.out",
-  //   }).to(controls.current.amplitude, {
-  //     value: 0.0,
-  //     duration: 0.6,
-  //     ease: "power4.inOut",
-  //   });
-  // }, [project]);
+  useEffect(() => {
+    const tl = gsap.timeline();
+    // Animation avec GSAP pour une transition fluide
+    tl.to(controls.current.distortion, {
+      value: 0.0,
+      duration: 0.5,
+      ease: "expo.out",
+    }).to(controls.current.distortion, {
+      value: 0.0,
+      duration: 1.3,
+      ease: "expo.out",
+    });
+  }, [project]);
   return (
     <group ref={groupRef}>
       {textureArray.map((texture, index) => {
@@ -172,7 +165,7 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
             position={new THREE.Vector3(...position)}
             rotation={new THREE.Euler(...rotation)}
           >
-            <planeGeometry args={[7, 7, 70, 70]} />
+            <planeGeometry args={[5, 5, 70, 70]} />
             <shaderMaterial
               vertexShader={vertex}
               fragmentShader={fragment}
