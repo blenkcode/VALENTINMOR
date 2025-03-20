@@ -15,7 +15,7 @@ export const createExitTimeline = (router, href) => {
       {
         opacity: 0,
 
-        duration: 0.4,
+        duration: 0.8,
         ease: "power2.inOut",
         onComplete: () => {
           requestAnimationFrame(() => {
@@ -23,7 +23,7 @@ export const createExitTimeline = (router, href) => {
           });
         },
       },
-      0.4
+      0
     )
 
       .fromTo(
@@ -35,9 +35,9 @@ export const createExitTimeline = (router, href) => {
         },
 
         {
-          y: "4vw",
-          paddingLeft: "6vw",
-          paddingRight: "6vw",
+          y: "3vw",
+          paddingLeft: "4.5vw",
+          paddingRight: "4.5vw",
           duration: 1,
           ease: "power4.inOut",
         },
@@ -47,7 +47,7 @@ export const createExitTimeline = (router, href) => {
         ".carrou",
 
         {
-          y: "-50vw",
+          opacity: 0,
 
           duration: 1,
           ease: "power4.inOut",
@@ -58,7 +58,7 @@ export const createExitTimeline = (router, href) => {
         ".foliol",
 
         {
-          paddingLeft: "4vw",
+          paddingLeft: "3vw",
 
           duration: 1,
           ease: "power4.inOut",
@@ -69,7 +69,7 @@ export const createExitTimeline = (router, href) => {
         ".folior",
 
         {
-          paddingRight: "4vw",
+          paddingRight: "3vw",
 
           duration: 1,
           ease: "power4.inOut",

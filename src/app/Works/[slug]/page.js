@@ -96,28 +96,28 @@ export default function WorksPage() {
 
   return (
     <div className="main w-screen min-h-[100svh] all">
-      <div className="fixed w-1/2 right-0 top-0 flex justify-between pt-[8.5vw] pr-[4vw] items-center">
-        <div className="flex flex-col">
+      <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center">
+        <div className="flex flex-col h-[32vw] justify-between">
           <div
             style={{
               transformOrigin: "center bottom",
               perspective: "1000px",
               perspectiveOrigin: "center bottom",
             }}
-            className="overflow-hidden"
+            className="overflow-hidden  leading-[3vw]"
           >
             <h1
               ref={title}
               style={{
                 transform: "rotateX(120deg)",
               }}
-              className="Med text-[5vw]  -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
+              className="Med text-[3vw]  -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] "
             >
               {works.name}
             </h1>
           </div>
 
-          <div className="overflow-hidden mt-[5vw]">
+          {/* <div className="overflow-hidden mt-[5vw]">
             {" "}
             <p
               ref={type}
@@ -134,8 +134,8 @@ export default function WorksPage() {
             >
               {works.date}
             </p>
-          </div>
-          <div className=" Med mt-[8.8vw] text-[0.7vw}">
+          </div> */}
+          <div className=" Med  text-[0.8vw]">
             {descriptions.map((desc, index) => (
               <div key={index} className="overflow-hidden ">
                 <p
@@ -146,15 +146,15 @@ export default function WorksPage() {
                 </p>
               </div>
             ))}
-          </div>
-          <div className="mt-[2vw] Med text-[0.7vw] overflow-hidden">
-            <div ref={visit} className="translate-y-full">
-              {" "}
-              <Button href="/" text=" VISIT SITE"></Button>
+            <div className=" mt-[2vw] Med text-[0.7vw] overflow-hidden">
+              <div ref={visit} className="translate-y-full">
+                {" "}
+                <Button href="/" text=" VISIT SITE"></Button>
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-[5vw] gap-[1.5vw] flex flex-col  fixed top-1/2 -translate-y-1/2 right-[3vw]  ">
+        <div className="w-[5vw] gap-[1.5vw] flex flex-col  fixed top-1/2 -translate-y-1/2 right-[5vw]  ">
           <div
             ref={frame}
             className="w-[3.5vw] top-[-0.5vw] right-1/2 translate-x-1/2 aspect-square border-[1px] border-black absolute"

@@ -157,7 +157,7 @@ export const createEnterWorks = ({
       ".frametop",
 
       {
-        y: "-4vw",
+        y: "-3vw",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -168,7 +168,7 @@ export const createEnterWorks = ({
       ".framebottom",
 
       {
-        y: "4vw",
+        y: "3vw",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -178,7 +178,7 @@ export const createEnterWorks = ({
       ".frameleft",
 
       {
-        x: "-4vw",
+        x: "-3vw",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -188,7 +188,7 @@ export const createEnterWorks = ({
       ".frameright",
 
       {
-        x: "4vw",
+        x: "3vw",
         duration: 0.95,
         ease: "power3.inOut",
       },

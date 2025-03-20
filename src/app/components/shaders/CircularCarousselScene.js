@@ -151,7 +151,7 @@ const CircularCarouselScene = () => {
   ]);
 
   const controls = useRef({
-    amplitude: { value: 1.7, min: -3.5, max: 3.5, step: 0.05 },
+    amplitude: { value: 1, min: -3.5, max: 3.5, step: 0.05 },
     waveLength: { value: 1, min: 0, max: 20, step: 1 },
   });
 
@@ -176,7 +176,7 @@ const CircularCarouselScene = () => {
   );
 
   // Paramètres de l'éventail
-  const radius = 2.4; // Distance du centre
+  const radius = 2.5; // Distance du centre
   const totalAngle = Math.PI * 1.6; // Angle total de l'éventail (environ 108 degrés)
   const startAngle = -totalAngle / 2; // Angle de départ
 
@@ -225,8 +225,8 @@ const CircularCarouselScene = () => {
 
         // Valeur de base de l'amplitude: 0.25
         // Valeur max: -1.7
-        const baseAmplitude = -1.7;
-        const maxAmplitude = -1.7;
+        const baseAmplitude = -1.3;
+        const maxAmplitude = -1.3;
 
         // Calculer la valeur d'amplitude en fonction de la direction et de la vélocité
         const amplitudeValue =
@@ -240,7 +240,7 @@ const CircularCarouselScene = () => {
         gsap.to(
           uniformsArrayRef.current.map((u) => u.uAmplitude),
           {
-            value: 1.7,
+            value: 1.3,
             duration: 0.9,
             ease: "power1.out",
           }

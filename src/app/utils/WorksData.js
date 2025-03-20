@@ -1,6 +1,6 @@
 export const worksData = {
   Fertile: {
-    name: "Fertile",
+    name: "FERTILE",
     imgs: [
       "/mockup1.webp",
       "/mockup1.webp",
@@ -32,7 +32,7 @@ export const worksData = {
   },
 
   CamilleJutel: {
-    name: "Camille Jutel",
+    name: "CAMILLE JUTEL",
     imgs: [
       "/Juliette/demo2.mp4",
       "/Juliette/juliette1.webp",
@@ -66,7 +66,7 @@ export const worksData = {
     ],
   },
   MarineBenabou: {
-    name: "Marine Benabou",
+    name: "MARINE BENABOU",
     imgs: [
       "/Marine/mbok.mp4",
       "/Marine/m1.webp",
@@ -101,7 +101,7 @@ export const worksData = {
     ],
   },
   Amouratroi: {
-    name: "Amouratroi",
+    name: "AMOURATROI",
     imgs: [
       "/Amour/tomfinal1.mp4",
       "/Amour/1.webp",

@@ -313,7 +313,7 @@ const Folio = () => {
         <div className="w-1/6 flex -translate-x-[0.1vw]">
           <div className="overflow-hidden">
             {" "}
-            <h3 className="Med text-[5vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
+            <h3 className="Med text-[4vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
               <div
                 style={{
                   transform: "rotateX(120deg) ",
@@ -494,7 +494,7 @@ const Folio = () => {
       <div
         onMouseEnter={handleMouseIn2}
         onMouseLeave={handleMouseOut2}
-        className="w-full h-[4vw]"
+        className="w-full h-[1vw]"
       ></div>
     </div>
   );

@@ -113,21 +113,12 @@ export const createEnterLanding = ({
         },
         0
       )
-      .to(
-        ".carrou",
 
-        {
-          y: 0,
-          duration: 1,
-          ease: "power4.inOut",
-        },
-        0
-      )
       .to(
         ".frametop",
 
         {
-          y: "-4vw",
+          y: "-3vw",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -138,7 +129,7 @@ export const createEnterLanding = ({
         ".framebottom",
 
         {
-          y: "4vw",
+          y: "3vw",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -148,7 +139,7 @@ export const createEnterLanding = ({
         ".frameleft",
 
         {
-          x: "-4vw",
+          x: "-3vw",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -158,57 +149,22 @@ export const createEnterLanding = ({
         ".frameright",
 
         {
-          x: "4vw",
+          x: "3vw",
           duration: 0.95,
           ease: "power3.inOut",
         },
         0
       )
 
-      .fromTo(
-        ".foliol",
-        { paddingLeft: "4vw" },
-
-        {
-          paddingLeft: "0vw",
-          duration: 0.95,
-          ease: "power3.inOut",
-        },
-        0
-      )
-
-      .fromTo(
-        ".folior",
-        { paddingRight: "4vw" },
-
-        {
-          paddingRight: "0vw",
-
-          duration: 0.95,
-          ease: "power3.inOut",
-        },
-        0
-      )
       .fromTo(
         ".carrou",
-        { y: "-50vw" },
+        { opacity: 0 },
 
         {
-          y: 0,
+          opacity: 1,
 
           duration: 1.5,
           ease: "power4.inOut",
-        },
-        0
-      )
-      .fromTo(
-        ".foliolines",
-        { y: "-2vw" },
-
-        {
-          y: 0,
-          duration: 0.95,
-          ease: "power3.inOut",
         },
         0
       );
