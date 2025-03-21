@@ -9,6 +9,9 @@ export const worksData = {
       "/mockup1.webp",
       "/mockup1.webp",
     ],
+    pr: "2",
+    href: "/Works/CamilleJutel",
+    mockup: "/JUTELC.png",
     smallsImgs: [
       "/Amour/littles/A1.webp",
 
@@ -32,6 +35,7 @@ export const worksData = {
   },
 
   CamilleJutel: {
+    pr: "3",
     name: "CAMILLE JUTEL",
     imgs: [
       "/Juliette/demo2.mp4",
@@ -43,6 +47,8 @@ export const worksData = {
 
       "/Juliette/juliette4.webp",
     ],
+    href: "/Works/MarineBenabou",
+    mockup: "/MBMC.png",
     smallsImgs: [
       "/Amour/littles/A1.webp",
 
@@ -66,6 +72,7 @@ export const worksData = {
     ],
   },
   MarineBenabou: {
+    pr: "4",
     name: "MARINE BENABOU",
     imgs: [
       "/Marine/mbok.mp4",
@@ -77,6 +84,8 @@ export const worksData = {
 
       "/Marine/mb7.webp",
     ],
+    href: "/Works/Amouratroi",
+    mockup: "/AMOURC.png",
     smallsImgs: [
       "/Amour/littles/A1.webp",
 
@@ -101,6 +110,7 @@ export const worksData = {
     ],
   },
   Amouratroi: {
+    pr: "5",
     name: "AMOURATROI",
     imgs: [
       "/Amour/tomfinal1.mp4",
@@ -133,8 +143,11 @@ export const worksData = {
       "to capture the essence of his photographic work, where",
       " emotion and imagination transcend the visual documentation.",
     ],
+    href: "/Works/LeChantDesOiseaux",
+    mockup: "/LCDOC.png",
   },
   LeChantDesOiseaux: {
+    pr: "1",
     name: "LCDO FESTIVAL",
     imgs: [
       "/lcdo/l3.mp4",
@@ -160,6 +173,8 @@ export const worksData = {
     ],
     type: "MUSIC FESTIVAL",
     date: "NOVEMBER 2024 ",
+    href: "/Works/Fertile",
+    mockup: "/FERTILEC.png",
     description: [
       "Nestled in the heart of the Cévennes mountains in France,",
       "this unique music festival unfolds over six immersive days, ",

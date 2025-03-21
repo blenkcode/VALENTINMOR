@@ -49,7 +49,7 @@ const Folio = () => {
     });
     setTimeout(() => {
       setEvents(false);
-    }, 1000);
+    }, 1500);
 
     setProject("0");
   }, []);
@@ -75,7 +75,22 @@ const Folio = () => {
         : project === "6"
         ? "20vw"
         : "";
-
+    const Ytarget2 =
+      project === "0"
+        ? "-4vw"
+        : project === "1"
+        ? "0vw"
+        : project === "2"
+        ? "4vw"
+        : project === "3"
+        ? "8vw"
+        : project === "4"
+        ? "12vw"
+        : project === "5"
+        ? "16vw"
+        : project === "6"
+        ? "20vw"
+        : "";
     const tl = gsap.timeline();
 
     tl.to(
@@ -112,15 +127,47 @@ const Folio = () => {
       >
         <div
           ref={neutral}
-          className="w-full h-[4vw] bg-neutral-200  absolute top-0 -translate-y-[4vw] neutral1 opacity-0 flex all"
+          className="w-full h-[4vw] bg-neutral-200  absolute top-0 -translate-y-[4vw] neutral1 opacity-0 flex all px-[2vw] pointer-events-none"
         >
-          <div className="w-1/3 flex justify-center items-center">
-            <img src="/chevron.svg"></img>
+          {/* <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
+            <div className="overflow-hidden relative">
+              <div>
+                {" "}
+                <div>PR.01</div>
+              </div>
+            </div>
+            <div className="flex h-full items-center justify-end">
+              {" "}
+              <div className="overflow-hidden relative">
+                <div>ARTISTIC AGENCY</div>
+              </div>{" "}
+            </div>
           </div>
-          <div className="w-1/3"></div>
-          <div className="w-1/3 flex justify-center items-center">
+          <div className="w-[33vw]"></div>
+          <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
             {" "}
-            <img src="/chevron.svg" className="rotate-180"></img>
+            <div className="overflow-hidden relative">
+              <div>FERTILE</div>
+            </div>{" "}
+          </div>
+          <div className="w-1/6">
+            {" "}
+            <div className=" text-[0.7vw] h-full flex items-center justify-end Med  folior">
+              <div className="overflow-hidden relative">
+                <div>MARS 25</div>
+              </div>{" "}
+            </div>
+          </div> */}
+          <div className="absolute w-full h-full top-0 left-0 flex">
+            {" "}
+            <div className="w-1/3 flex justify-center items-center">
+              <img src="/chevron.svg"></img>
+            </div>
+            <div className="w-1/3"></div>
+            <div className="w-1/3 flex justify-center items-center">
+              {" "}
+              <img src="/chevron.svg" className="rotate-180"></img>
+            </div>
           </div>
         </div>
         <div

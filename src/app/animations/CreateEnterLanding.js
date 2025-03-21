@@ -190,7 +190,7 @@ export const createEnterLanding = ({
           duration: 1.6,
           ease: "power3.inOut",
         },
-        0
+        0.3
       );
   });
 };

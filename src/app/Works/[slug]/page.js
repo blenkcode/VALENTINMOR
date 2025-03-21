@@ -10,6 +10,7 @@ import gsap from "gsap";
 import Button from "@/app/components/Button";
 import { usePathname } from "next/navigation";
 import { createEnterWorks } from "@/app/animations/CreateEnterWorks";
+import TransitionLink from "@/app/utils/TransitionLink";
 export default function WorksPage() {
   const params = useParams();
   const { slug } = params;
@@ -29,7 +30,11 @@ export default function WorksPage() {
   const overview = useRef(null);
   const arrow = useRef(null);
   const visit = useRef(null);
+  const containerMain = useRef(null);
+  const next = useRef(null);
+  const nextRef = useRef(null);
   const pathname = usePathname();
+  const [bottom, setBottom] = useState(false);
   useEffect(() => {
     if (slug && worksData[slug]) {
       setWorks(worksData[slug]);
@@ -119,6 +124,25 @@ export default function WorksPage() {
             });
           }
         });
+        if (
+          frameRef &&
+          frameRef.length > 0 &&
+          frameRef[frameRef.length - 1]?.current
+        ) {
+          const scrollTrigger2 = gsap.timeline({
+            scrollTrigger: {
+              trigger: frameRef[frameRef.length - 1].current,
+              start: "center center",
+              onEnter: () => setBottom(true),
+            },
+          });
+
+          scrollTrigger2.to(nextRef.current, {
+            y: 0,
+            duration: 1.7,
+            ease: "power3.out",
+          });
+        }
 
         return () => ctx.revert();
       });
@@ -156,7 +180,7 @@ export default function WorksPage() {
   }
 
   return (
-    <div className="main w-screen min-h-[100svh] all">
+    <div ref={containerMain} className="main w-screen min-h-[100svh] all">
       <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center">
         <div className="flex flex-col h-[29vw] justify-between">
           <div
@@ -222,10 +246,20 @@ export default function WorksPage() {
                 </p>
               </div>
             ))}
-            <div className=" mt-[2vw] Med text-[0.7vw] overflow-hidden">
-              <div ref={visit} className="translate-y-full">
-                {" "}
+            <div className=" mt-[2vw] Med text-[0.8vw] overflow-hidden">
+              <div
+                ref={visit}
+                className="translate-y-full gap-[0.5vw] relative w-fit group flex"
+              >
                 <Button href="/" text=" VISIT SITE"></Button>
+                <div className="relative overflow-hidden">
+                  <div className=" -rotate-45 duration-300 group-hover:translate-x-full group-hover:-translate-y-1/2 ">
+                    →
+                  </div>
+                  <div className=" absolute top-0 -rotate-45 duration-300 group-hover:translate-x-0 translate-y-1/2 -translate-x-full group-hover:translate-y-0">
+                    →
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -248,7 +282,7 @@ export default function WorksPage() {
               onClick={() => handleScrollTo(index)}
               ref={smallImageRefs[index]}
               style={{
-                clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                clipPath: "inset(50% 50% 50% 50%)",
               }}
               key={index}
               className="relative group cursor-pointer"
@@ -294,7 +328,7 @@ export default function WorksPage() {
             >
               <div
                 style={{
-                  clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                  clipPath: "inset(50% 50% 50% 50%)",
                 }}
                 ref={frameRef[index]}
                 className={`w-full absolute inset-0 h-full ${
@@ -306,7 +340,7 @@ export default function WorksPage() {
               {isVideo(image) ? (
                 <video
                   style={{
-                    clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                    clipPath: "inset(50% 50% 50% 50%)",
                   }}
                   ref={imageRefs[index]}
                   src={image}
@@ -319,7 +353,7 @@ export default function WorksPage() {
               ) : (
                 <Image
                   style={{
-                    clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
+                    clipPath: "inset(50% 50% 50% 50%)",
                   }}
                   ref={imageRefs[index]}
                   src={image}
@@ -334,21 +368,78 @@ export default function WorksPage() {
           ))}
         </div>
       </div>
-      <div className="w-1/2 pl-[5vw] flex items-center justify-center pb-[12vw] ">
+      <div className="w-1/2 pl-[5vw] flex items-center justify-center pb-[15vw] ">
         {" "}
-        <div
-          // style={{
-          //   clipPath: "inset(50% 50% 50% 50%)", // État initial du clip-path
-          // }}
-          className={`w-[15vw] aspect-square  ${
+        <TransitionLink
+          href={works.href}
+          className={`w-[20vw]  group relative ${
             pathname === "/Works/Amouratroi"
               ? " "
               : " text-[1.5vw] Med flex flex-col items-center justify-center"
           }`}
         >
-          <div> NEXT PR.02 </div>
-          <div>CAMILLE JUTEL</div>
-        </div>
+          <div className="  absolute top-[-4vw] right-1/2 translate-x-1/2 Med overflow-hidden">
+            <div
+              ref={nextRef}
+              className="translate-y-full relative overflo-hidden will-change-transform "
+            >
+              NEXT → PR.0{works.pr}
+              <div className="absolute bottom-0 w-full h-[1px] bg-black -translate-x-full group-hover:translate-x-0 duration-500 ease-in-out will-change-transform "></div>
+            </div>{" "}
+          </div>
+          <div
+            style={{
+              clipPath: bottom
+                ? "inset(0% 0% 0% 0%)"
+                : "inset(50% 50% 50% 50%)",
+            }}
+            className=" w-full duration-[1000ms] ease-in-out will-change-transform "
+          >
+            {" "}
+            <img
+              className=" duration-500 group-hover:scale-90 will-change-transform  "
+              src={works.mockup}
+            ></img>
+          </div>
+          <div className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-[50%]">
+            {" "}
+            <div className=" w-[24vw] text-[10vw] h-[17vw] overflow-hidden relative      duration-500 group-hover:scale-95 will-change-transform  ">
+              <img
+                src="/arrow2.svg"
+                className={`absolute w-[1.8vw]  rotate-45 duration-1000 top-0 left-0 ease-in-out will-change-transform  ${
+                  bottom
+                    ? "translate-x-0 translate-y-0"
+                    : " -translate-y-[80%]  -translate-x-[80%]"
+                }`}
+              />
+
+              <img
+                src="/arrow2.svg"
+                className={`absolute  w-[1.8vw] will-change-transform     -rotate-45 duration-1000 bottom-0 left-0 ease-in-out ${
+                  bottom
+                    ? "translate-x-0 translate-y-0"
+                    : "translate-y-[80%]  -translate-x-[80%] "
+                }`}
+              ></img>
+              <img
+                src="/arrow2.svg"
+                className={`absolute  w-[1.8vw] will-change-transform   -rotate-[225deg] duration-1000 top-0 right-0 ease-in-out ${
+                  bottom
+                    ? "translate-x-0 translate-y-0"
+                    : "-translate-y-[80%] translate-x-[80%]  "
+                }`}
+              ></img>
+              <img
+                src="/arrow2.svg"
+                className={`absolute  w-[1.8vw] will-change-transform  bottom-0 right-0   duration-1000 rotate-[225deg] ease-in-out ${
+                  bottom
+                    ? "translate-x-0 translate-y-0"
+                    : "translate-y-[80%] translate-x-[80%]  "
+                }`}
+              ></img>
+            </div>
+          </div>
+        </TransitionLink>
       </div>
     </div>
   );
