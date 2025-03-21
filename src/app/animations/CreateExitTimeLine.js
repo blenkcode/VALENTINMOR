@@ -16,8 +16,8 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
       {
         opacity: 0,
 
-        duration: 0.6,
-        ease: "power2.inOut",
+        duration: 0.8,
+        ease: "power4.inOut",
         onComplete: () => {
           requestAnimationFrame(() => {
             router.push(href);
