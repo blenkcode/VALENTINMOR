@@ -1,12 +1,13 @@
 "use client";
 import gsap from "gsap";
-
+import { useTransition } from "../Context/TransitionContext";
 import CustomEase from "gsap/CustomEase";
-export const createExitTimeline = (router, href) => {
+export const createExitTimeline = (router, href, transition, setTransition) => {
   gsap.registerPlugin(CustomEase);
 
   CustomEase.create("customEasing", "M0,0 C0.89,0 0.48,0.98 1,1");
   const tl = gsap.timeline();
+  setTransition(true);
   return new Promise((resolve) => {
     tl.fromTo(
       ".all",
@@ -43,13 +44,14 @@ export const createExitTimeline = (router, href) => {
         },
         0
       )
+
       .to(
         ".carrou",
 
         {
           opacity: 0,
 
-          duration: 1,
+          duration: 0.8,
           ease: "power4.inOut",
         },
         0
@@ -117,15 +119,17 @@ export const createExitTimeline = (router, href) => {
         0
       )
       .to(
-        ".foliolines",
+        ".titlework",
 
         {
-          y: "-2vw",
+          x: "2vw",
+          y: "2vw",
           duration: 1,
           ease: "power4.inOut",
         },
         0
       );
+
     // .to(
     //   ".works2",
 

@@ -5,10 +5,10 @@ varying vec3 vPosition;
 uniform float uRotation;
 float PI = 3.141592;
 varying float vZPosition;
-vec3 rotateY(vec3 pos, float angle) {
+vec3 rotateX(vec3 pos, float angle) {
     float c = cos(angle);
     float s = sin(angle);
-    return vec3(pos.x * c - pos.z * s, pos.y, pos.x * s + pos.z * c);
+    return vec3(pos.x, pos.y * c - pos.z * s, pos.y * s + pos.z * c);
 }
 
 void main() {
@@ -23,11 +23,11 @@ void main() {
     vPosition = vWorldPosition;
     
     // Calculer l'angle de rotation basé sur la position Y
-    float rotationAngle = cos(smoothstep(-15.0, 15.0, vWorldPosition.x) * PI );
+    float rotationAngle = cos(smoothstep(-25.0, 25.0, vWorldPosition.y) * 2.9 );
     
     // Appliquer la rotation sur l'axe X à la position mondiale
-    vWorldPosition = rotateY(vWorldPosition, rotationAngle *uRotation);
-    vZPosition = smoothstep(-3.0, -2.0, vWorldPosition.z);
+    vWorldPosition = rotateX(vWorldPosition, rotationAngle *uRotation);
+    vZPosition = smoothstep(-2.6, -2.5, vWorldPosition.z);
     // Rendre avec la position mondiale transformée
     gl_Position = projectionMatrix * viewMatrix * vec4(vWorldPosition, 1.0);
 }
@@ -62,13 +62,13 @@ float noise(in vec2 p) {
 
 float fbm(vec2 p) {
     float value = 0.0;
-    float amplitude = 4.5;
-    float frequency = 2.0;
+    float amplitude = 9.5;
+    float frequency = 6.0;
 
     for (int i = 0; i < 4; i++) {
         value += amplitude * noise(p * frequency + uTime * 0.1);
         amplitude *= 5.5;
-        frequency *= 2.0;
+        frequency *= 5.0;
     }
 
     return value;
@@ -81,7 +81,7 @@ void main() {
     float edgeStrength = pow(abs(uv.y - 0.5) * 1.0, 1.0); // 0 au centre, 1 aux bords
     
     // Calculer la distortion en utilisant le bruit FBM
-    vec2 noiseCoord = uv * 0.4;
+    vec2 noiseCoord = uv * 10.4;
     float noiseValue = fbm(noiseCoord);
     
     // Appliquer la distortion si nécessaire

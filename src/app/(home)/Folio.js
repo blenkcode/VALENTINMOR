@@ -4,18 +4,21 @@ import ProjectFolio from "../components/ProjectFolio";
 
 import { useModal } from "../Context/ModalContext";
 import { createEnterLanding } from "../animations/CreateEnterLanding";
-import Carrousel from "./Carrousel";
+import { useTransition } from "../Context/TransitionContext";
 import { useProject } from "../Context/ProjectContext";
+import FolioTitle from "./FolioTitle";
+import gsap from "gsap";
 const Folio = () => {
   const { setIsHoverLink } = useModal();
+  const { setTransition } = useTransition();
   const works = useRef(null);
   const number = useRef(null);
   const jap = useRef(null);
   const date = useRef(null);
   const arrow = useRef(null);
   const frame = useRef(null);
-
-  const [events, setEvents] = useState(false);
+  const neutral = useRef(null);
+  const [events, setEvents] = useState(true);
   //foliocompnent refs
   const { project, setProject, lastpProject, setLastProject } = useProject();
   const handleMouseIn = () => {
@@ -35,370 +38,91 @@ const Folio = () => {
     setIsHoverLink(false);
   };
   useEffect(() => {
-    createEnterLanding({ works, number, jap, date, arrow, frame });
+    createEnterLanding({
+      works,
+      number,
+      jap,
+      date,
+      arrow,
+      frame,
+      setTransition,
+    });
+    setTimeout(() => {
+      setEvents(false);
+    }, 1000);
+
+    setProject("0");
   }, []);
-  //   const duration = 1.2;
 
-  //   if (project === "1" && lastpProject === "0") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       VAL.current,
-
-  //       {
-  //         y: "103%",
-  //         scale: 0.7,
-  //         rotateX: 90,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       FERTILE.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "0" && lastpProject === "1") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       VAL.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       FERTILE.current,
-
-  //       {
-  //         y: "-103%",
-  //         scale: 0.7,
-  //         rotateX: -90,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "2" && lastpProject === "1") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       FERTILE.current,
-
-  //       {
-  //         y: "103%",
-  //         scale: 0.7,
-  //         rotateX: 90,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       JUTEL.current,
-
-  //       {
-  //         y: 0,
-  //         rotateX: 0,
-  //         scale: 1,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "1" && lastpProject === "2") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       FERTILE.current,
-
-  //       {
-  //         y: 0,
-  //         rotateX: 0,
-  //         scale: 1,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       JUTEL.current,
-
-  //       {
-  //         y: "-103%",
-  //         rotateX: -90,
-  //         scale: 0.7,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "3" && lastpProject === "2") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       JUTEL.current,
-
-  //       {
-  //         y: "103%",
-  //         rotateX: 90,
-  //         scale: 0.7,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       MBM.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "2" && lastpProject === "3") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       JUTEL.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       MBM.current,
-
-  //       {
-  //         y: "-103%",
-  //         rotateX: -90,
-  //         scale: 0.7,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "4" && lastpProject === "3") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       MBM.current,
-
-  //       {
-  //         y: "103%",
-  //         rotateX: 90,
-  //         scale: 0.7,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       AMOURATROI.current,
-
-  //       {
-  //         y: 0,
-  //         rotateX: 0,
-  //         scale: 1,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "3" && lastpProject === "4") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       MBM.current,
-
-  //       {
-  //         y: 0,
-  //         rotateX: 0,
-  //         scale: 1,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       AMOURATROI.current,
-
-  //       {
-  //         y: "-103%",
-  //         scale: 0.7,
-  //         rotateX: -90,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "5" && lastpProject === "4") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       AMOURATROI.current,
-
-  //       {
-  //         y: "103%",
-  //         rotateX: 90,
-  //         scale: 0.7,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       LCDO.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   } else if (project === "4" && lastpProject === "5") {
-  //     const tl = gsap.timeline();
-  //     tl.to(
-  //       AMOURATROI.current,
-
-  //       {
-  //         y: 0,
-  //         scale: 1,
-  //         rotateX: 0,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       }
-  //     ).to(
-  //       LCDO.current,
-
-  //       {
-  //         y: "-103%",
-  //         scale: 0.7,
-  //         rotateX: -90,
-  //         duration: duration,
-  //         ease: "expo.out",
-  //       },
-  //       "<"
-  //     );
-  //   }
-  // }, [project]);
   const handlereset = () => {
     setEvents(true);
   };
+
+  useEffect(() => {
+    const Ytarget =
+      project === "0"
+        ? "-4vw"
+        : project === "1"
+        ? "0vw"
+        : project === "2"
+        ? "4vw"
+        : project === "3"
+        ? "8vw"
+        : project === "4"
+        ? "12vw"
+        : project === "5"
+        ? "16vw"
+        : project === "6"
+        ? "20vw"
+        : "";
+
+    const tl = gsap.timeline();
+
+    tl.to(
+      neutral.current,
+
+      {
+        y: Ytarget,
+
+        duration: 0.65,
+        ease: "expo.out",
+      },
+      "<"
+    );
+  }, [project]);
   return (
     <div
-      className={` h-auto w-full mt-[2vw] z-10  folio  ${
+      className={` h-auto w-full  z-10  folio  ${
         events ? "pointer-events-none" : ""
       }`}
     >
-      <div
-        style={{
-          transformOrigin: "center bottom",
-          perspective: "1000px",
-          perspectiveOrigin: "center bottom",
-        }}
-        className="w-full flex items-center all folio"
-      >
+      <div className="absolute top-[8vw] w-full">
         {" "}
-        <div className="w-1/2 text-[2vw] pl-[2vw] Med pt-[1.9vw] overflow-hidden">
-          <p
-            style={{
-              transform: "rotateX(120deg)",
-            }}
-            ref={jap}
-            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform foliol"
-          >
-            作品
-          </p>
-        </div>
-        <div className="w-1/6 flex -translate-x-[0.1vw]">
-          <div className="overflow-hidden">
-            {" "}
-            <h3 className="Med text-[4vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
-              <div
-                style={{
-                  transform: "rotateX(120deg) ",
-                }}
-                className="works translate-y-full"
-              >
-                W
-              </div>{" "}
-              <div
-                style={{
-                  transform: "rotateX(120deg) ",
-                }}
-                className="works translate-y-full"
-              >
-                o
-              </div>{" "}
-              <div
-                style={{
-                  transform: "rotateX(120deg) ",
-                }}
-                className="works translate-y-full"
-              >
-                r
-              </div>{" "}
-              <div
-                style={{
-                  transform: "rotateX(120deg) ",
-                }}
-                className="works translate-y-full"
-              >
-                k
-              </div>{" "}
-              <div
-                style={{
-                  transform: "rotateX(120deg) ",
-                }}
-                className="works translate-y-full"
-              >
-                s
-              </div>
-            </h3>
-          </div>
-          <div className="overflow-hidden h-fit">
-            {" "}
-            <div
-              style={{
-                transform: "rotateX(120deg)",
-              }}
-              ref={number}
-              className="text-[0.8vw] translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
-            >
-              (05)
-            </div>
-          </div>
-        </div>
-        <div className="Med text-[4vw] w-1/6 overflow-hidden">
-          <div
-            style={{
-              transform: "rotateX(120deg)",
-            }}
-            ref={arrow}
-            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
-          >
-            →
-          </div>
-        </div>
-        <div className="Med text-[2vw] w-1/6 flex justify-end pr-[2vw] overflow-hidden pt-[3vw] ">
-          <div
-            style={{
-              transform: "rotateX(120deg)",
-            }}
-            ref={date}
-            className="translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform folior"
-          >
-            {" "}
-            2024/25
-          </div>
-        </div>
+        <FolioTitle jap={jap} number={number} arrow={arrow}></FolioTitle>
       </div>
+
       <div
         onMouseEnter={handleMouseIn}
         onMouseLeave={handleMouseOut}
-        className="w-full h-[5vw]"
+        className="w-full h-[2vw]"
       ></div>
-      <div onClick={handlereset} className="w-full foliolines">
+      <div
+        onClick={handlereset}
+        className="w-full foliolines relative overflow-hidden"
+      >
+        <div
+          ref={neutral}
+          className="w-full h-[4vw] bg-neutral-200  absolute top-0 -translate-y-[4vw] neutral1 opacity-0 flex all"
+        >
+          <div className="w-1/3 flex justify-center items-center">
+            <img src="/chevron.svg"></img>
+          </div>
+          <div className="w-1/3"></div>
+          <div className="w-1/3 flex justify-center items-center">
+            {" "}
+            <img src="/chevron.svg" className="rotate-180"></img>
+          </div>
+        </div>
         <div
           onMouseEnter={() => setProject("1")}
           onMouseLeave={() => setLastProject("1")}
@@ -406,11 +130,12 @@ const Folio = () => {
         >
           <ProjectFolio
             title="FERTILE "
+            neutral={neutral}
             frame={frame}
             date="MAR 25"
             type="ARTISTIC AGENCY"
             src="/meta.webp"
-            number="01"
+            number="PR.01"
             projectIndex="1"
             href="/Works/Fertile"
             project={project}
@@ -428,7 +153,7 @@ const Folio = () => {
             frame={frame}
             type="PHOTOGRAPHIC PORTFOLIO"
             src="/bannerjuliette.webp"
-            number="02"
+            number="PR.02"
             href="/Works/CamilleJutel"
             projectIndex="2"
             project={project}
@@ -448,7 +173,7 @@ const Folio = () => {
             src="/music1.webp"
             href="/Works/MarineBenabou"
             projectIndex="3"
-            number="03"
+            number="PR.03"
             project={project}
             lastpProject={lastpProject}
           />
@@ -465,7 +190,7 @@ const Folio = () => {
             type="PHOTOGRAPHIC PORTFOLIO"
             src="/banneramour.webp"
             href="/Works/Amouratroi"
-            number="04"
+            number="PR.04"
             projectIndex="4"
             project={project}
             lastpProject={lastpProject}
@@ -477,12 +202,12 @@ const Folio = () => {
           className="w-full flex overflow-hidden  all"
         >
           <ProjectFolio
-            title="LE CHANT DES OISEAUX "
+            title="LCDO FESTIVAL "
             date="NOV 24"
             frame={frame}
             type="MUSIC FESTIVAL"
             src="/bannerlcdo.webp"
-            number="05"
+            number="PR.05"
             href="/Works/LeChantDesOiseaux"
             project={project}
             projectIndex="5"
@@ -490,12 +215,13 @@ const Folio = () => {
           />
         </div>
       </div>
-
       <div
-        onMouseEnter={handleMouseIn2}
-        onMouseLeave={handleMouseOut2}
-        className="w-full h-[1vw]"
-      ></div>
+        onMouseEnter={() => setProject("6")}
+        onMouseLeave={() => setLastProject("6")}
+        className="w-full h-[2vw] relative"
+      >
+        <div className="w-0 h-[1px] absolute top-0 linefoliowhite bg-neutral-200 all"></div>
+      </div>
     </div>
   );
 };

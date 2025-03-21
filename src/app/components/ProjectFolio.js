@@ -13,6 +13,7 @@ const ProjectFolio = ({
   lastpProject,
   projectIndex,
   frame,
+  neutral,
 }) => {
   const background1 = useRef(null);
   const background2 = useRef(null);
@@ -29,9 +30,12 @@ const ProjectFolio = ({
 
           {
             y: "103%",
-            rotateX: 70,
-            duration: 0.85,
+            rotateX: -0,
+            duration: 0.95,
             ease: "expo.out",
+            onComplete: () => {
+              gsap.set(background1.current, { rotateX: 0 });
+            },
           }
         ).to(
           background2.current,
@@ -39,7 +43,7 @@ const ProjectFolio = ({
           {
             y: 0,
             rotateX: 0,
-            duration: 0.85,
+            duration: 0.95,
             ease: "expo.out",
           },
           "<"
@@ -55,14 +59,17 @@ const ProjectFolio = ({
 
           {
             y: "103%",
-            rotateX: 90,
-            duration: 0.85,
+            rotateX: 0,
+            onComplete: () => {
+              gsap.set(background2.current, { rotateX: 0 });
+            },
+            duration: 0.95,
             ease: "expo.out",
           }
         ).to(
           background3.current,
 
-          { rotateX: 0, y: 0, duration: 0.85, ease: "expo.out" },
+          { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
       }
@@ -73,11 +80,19 @@ const ProjectFolio = ({
         tl.to(
           background3.current,
 
-          { rotateX: -90, y: "-103%", duration: 0.85, ease: "expo.out" }
+          {
+            rotateX: 0,
+            onComplete: () => {
+              gsap.set(background3.current, { rotateX: 0 });
+            },
+            y: "-103%",
+            duration: 0.95,
+            ease: "expo.out",
+          }
         ).to(
           background2.current,
 
-          { rotateX: 0, y: 0, duration: 0.85, ease: "expo.out" },
+          { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
       } else if (
@@ -90,11 +105,11 @@ const ProjectFolio = ({
         tl.to(
           background2.current,
 
-          { rotateX: -90, y: "-103%", duration: 0.85, ease: "expo.out" }
+          { rotateX: -0, y: "-103%", duration: 0.95, ease: "expo.out" }
         ).to(
           background1.current,
 
-          { rotateX: 0, y: 0, duration: 0.85, ease: "expo.out" },
+          { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
       }
@@ -114,29 +129,27 @@ const ProjectFolio = ({
         perspectiveOrigin: "center bottom",
       }}
       onMouseEnter={handleMouseIn}
-      className={`w-full flex relative overflow-hidden border-t-[0px] h-[3.5vw] transition-colors ${
-        projectIndex === project ||
-        (projectIndex > project && projectIndex === lastpProject)
-          ? "border-white "
-          : "border-black "
-      } `}
+      className={`w-full flex relative overflow-hidden items-center justify-center h-[4vw]  `}
     >
+      <div className="w-0 h-[1px] absolute top-0 linefoliowhite bg-neutral-200"></div>
+
       <div
         ref={background1}
         className="flex w-full h-full px-[2vw] [backface-visibility:hidden] will-change-transform line1 translate-y-full"
       >
         {" "}
-        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full foliol">
-          {number} <div className="flex h-full items-center"> {type} </div>
+        <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
+          {number}{" "}
+          <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
-        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-[33vw]"></div>
+        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
-          <div className="  h-full flex items-center justify-end Med  folior">
+          <div className=" text-[0.7vw] h-full flex items-center justify-end Med  folior">
             <div>{date}</div>
           </div>
         </div>
@@ -144,21 +157,22 @@ const ProjectFolio = ({
       <div
         ref={background2}
         style={{
-          transform: "rotateX(-90deg)",
+          transform: "rotateX(0deg)",
         }}
-        className={`flex w-full h-full absolute top-0 bg-neutral-950 text-white  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
+        className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
       >
-        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full foliol">
-          {number} <div className="flex h-full items-center"> {type} </div>
+        <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
+          {number}{" "}
+          <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
-        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-[33vw]"></div>
+        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
-          <div className="  h-full flex items-center justify-end Med  folior">
+          <div className=" text-[0.7vw] h-full flex items-center justify-end Med  folior">
             <div>{date}</div>
           </div>
         </div>
@@ -166,22 +180,23 @@ const ProjectFolio = ({
       <div
         ref={background3}
         style={{
-          transform: "rotateX(-90deg)",
+          transform: "rotateX(0deg)",
         }}
         className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] [backface-visibility:hidden] will-change-transform `}
       >
         {" "}
-        <div className="w-1/2 text-[0.7vw] Med flex  items-center gap-[16.3vw] h-full foliol">
-          {number} <div className="flex h-full items-center"> {type} </div>
+        <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
+          {number}{" "}
+          <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
-        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-[33vw]"></div>
+        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
-        <div className="w-1/6 text-[0.7vw] Med pl-[1vw]"></div>
         <div className="w-1/6">
           {" "}
-          <div className="  h-full flex items-center justify-end Med  folior">
+          <div className="text-[0.7vw]  h-full flex items-center justify-end Med  folior">
             <div>{date}</div>
           </div>
         </div>

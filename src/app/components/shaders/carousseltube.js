@@ -5,18 +5,19 @@ import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import { useProject } from "@/app/Context/ProjectContext";
 // Enregistrer le plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-const VerticalCarouselScene = ({ project, lastpProject }) => {
+const VerticalCarouselScene = ({}) => {
+  const { project } = useProject();
   const [isAnimating, setIsAnimating] = useState(false);
   const texture = useTexture("/VAL.png");
   const textures = useTexture([
     "/FERTILE1.png",
-    "/JUTEL1.png",
-    "/MBM1.png",
     "/AMOUR1.png",
+    "/MBM1.png",
+    "/JUTEL1.png",
     "/LCDO1.png",
   ]);
 
@@ -39,7 +40,7 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
   const meshRef = useRef();
 
   const controls = useRef({
-    amplitude: { value: 1.0 },
+    amplitude: { value: 0.6 },
     distortion: { value: 0.0 },
     rotation: { value: 1.0 },
   });
@@ -66,6 +67,7 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
       const currentAmplitude = uniformsArrayRef.current[index].uAmplitude.value;
 
       uniformsArrayRef.current[index].uTime.value += 0.004;
+
       uniformsArrayRef.current[index].uAmplitude.value =
         controls.current.amplitude.value;
       uniformsArrayRef.current[index].uDistortion.value =
@@ -86,41 +88,41 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
   const planePositions = useMemo(() => {
     return textureArray.map((_, index) => {
       // Positionnement vertical avec espacement de 8 unités par mesh
-      const x = 3 * index; // Négatif pour descendre verticalement
-      const y = 0;
+      const x = 0 * index; // Négatif pour descendre verticalement
+      const y = 4 * index;
       const z = 0;
       const rotation = [0, 0, 0];
 
       return { position: [x, y, z], rotation: rotation };
     });
   }, [textureArray.length]);
-  // useEffect(() => {
-  //   if (groupRef.current) {
-  //     // Si project est 1, on translate vers le haut de la taille d'un mesh (8 unités)
-  //     const targetY =
-  //       project === "1"
-  //         ? 0
-  //         : project === "2"
-  //         ? 6
-  //         : project === "3"
-  //         ? 12
-  //         : project === "4"
-  //         ? 18
-  //         : project === "5"
-  //         ? 24
-  //         : -5.5;
-  //     setIsAnimating(true);
-  //     // Animation avec GSAP pour une transition fluide
-  //     gsap.to(groupRef.current.position, {
-  //       x: -targetY,
-  //       duration: 1.5,
-  //       ease: "expo.out",
-  //       onComplete: () => {
-  //         setIsAnimating(false);
-  //       },
-  //     });
-  //   }
-  // }, [project]);
+  useEffect(() => {
+    if (groupRef.current) {
+      // Si project est 1, on translate vers le haut de la taille d'un mesh (8 unités)
+      const targetY =
+        project === "1"
+          ? 0
+          : project === "2"
+          ? 4
+          : project === "3"
+          ? 8
+          : project === "4"
+          ? 12
+          : project === "5"
+          ? 16
+          : -4;
+      setIsAnimating(true);
+      // Animation avec GSAP pour une transition fluide
+      gsap.to(groupRef.current.position, {
+        y: -targetY,
+        duration: 1.3,
+        ease: "expo.out",
+        onComplete: () => {
+          setIsAnimating(false);
+        },
+      });
+    }
+  }, [project]);
 
   // useEffect(() => {
   //   const tl = gsap.timeline();
@@ -165,7 +167,7 @@ const VerticalCarouselScene = ({ project, lastpProject }) => {
             position={new THREE.Vector3(...position)}
             rotation={new THREE.Euler(...rotation)}
           >
-            <planeGeometry args={[5, 5, 70, 70]} />
+            <planeGeometry args={[7, 7, 70, 70]} />
             <shaderMaterial
               vertexShader={vertex}
               fragmentShader={fragment}

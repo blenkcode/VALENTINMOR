@@ -12,6 +12,7 @@ export const createEnterWorks = ({
   arrow,
   frameRef,
   visit,
+  overview,
 }) => {
   gsap.registerPlugin(CustomEase);
 
@@ -68,11 +69,21 @@ export const createEnterWorks = ({
         ease: "expo.out",
         stagger: {
           amount: 0.4,
-          from: "end",
+          from: "left",
           ease: "customEasing",
         },
       },
       0.2
+    )
+    .fromTo(
+      overview.current,
+      { y: "100%" },
+      {
+        y: 0,
+        duration: 2.2,
+        ease: "expo.out",
+      },
+      0.3
     )
     .fromTo(
       descriptionsRef.map((ref) => ref.current).filter(Boolean),

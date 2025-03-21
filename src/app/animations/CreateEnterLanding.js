@@ -9,24 +9,26 @@ export const createEnterLanding = ({
   date,
   arrow,
   frame,
+  setTransition,
 }) => {
   gsap.registerPlugin(CustomEase);
 
   CustomEase.create("customEasing", "M0,0 C0.89,0 0.48,0.98 1,1");
   const tl = gsap.timeline();
+  setTransition(false);
   return new Promise((resolve) => {
     tl.fromTo(
       ".line1",
-      { y: "100%", rotateX: "90deg" },
+      { y: "100%" },
 
       {
         y: 0,
-        rotateX: 0,
-        stagger: 0.1,
-        duration: 1.3,
+
+        stagger: 0.13,
+        duration: 1.6,
         ease: "expo.out",
       },
-      0.15
+      0.5
     )
       .fromTo(
         ".works",
@@ -39,7 +41,7 @@ export const createEnterLanding = ({
           duration: 1.7,
           ease: "expo.out",
         },
-        0.1
+        0.4
       )
       .fromTo(
         arrow.current,
@@ -156,15 +158,37 @@ export const createEnterLanding = ({
         0
       )
 
-      .fromTo(
+      .to(
         ".carrou",
-        { opacity: 0 },
 
         {
           opacity: 1,
 
-          duration: 1.5,
-          ease: "power4.inOut",
+          duration: 1.2,
+          ease: "power3.inOut",
+        },
+        0.4
+      )
+      .to(
+        ".neutral1",
+
+        {
+          opacity: 1,
+
+          duration: 1.2,
+          ease: "power3.inOut",
+        },
+        0.5
+      )
+      .to(
+        ".linefoliowhite",
+
+        {
+          width: "100%",
+
+          stagger: 0.13,
+          duration: 1.6,
+          ease: "power3.inOut",
         },
         0
       );

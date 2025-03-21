@@ -135,7 +135,7 @@ export const worksData = {
     ],
   },
   LeChantDesOiseaux: {
-    name: "LCDO",
+    name: "LCDO FESTIVAL",
     imgs: [
       "/lcdo/l3.mp4",
       "/lcdo/screenlcdo1.webp",
