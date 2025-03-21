@@ -237,7 +237,12 @@ export default function WorksPage() {
               </p>
             </div>
             {descriptions.map((desc, index) => (
-              <div key={index} className="overflow-hidden ">
+              <div
+                key={index}
+                className={`overflow-hidden ${
+                  index === 0 ? "translate-x-[6vw]" : ""
+                }`}
+              >
                 <p
                   ref={descriptionsRef[index]}
                   className="will-change-transform [transform-origin:center] [backface-visibility:hidden] translate-y-full"
