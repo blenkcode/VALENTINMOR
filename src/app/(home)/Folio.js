@@ -74,11 +74,11 @@ const Folio = () => {
         : project === "2"
         ? "4vw"
         : project === "3"
-        ? "8vw"
+        ? "7.96vw"
         : project === "4"
-        ? "12vw"
+        ? "11.95vw"
         : project === "5"
-        ? "16vw"
+        ? "15.94vw"
         : project === "6"
         ? "20vw"
         : "";
@@ -114,7 +114,7 @@ const Folio = () => {
   }, [project]);
   return (
     <div className={` h-auto w-full  z-10  folio  `}>
-      <div className="md:absolute fixed md:top-[8vw] top-[17svh] w-full">
+      <div className=" fixed md:top-[1vw] top-[12svh] w-full">
         {" "}
         <FolioTitle jap={jap} number={number} arrow={arrow}></FolioTitle>
       </div>

@@ -39,7 +39,7 @@ const Landing = () => {
       <Folio></Folio>
 
       {isMobile ? (
-        <div className="w-full absolute top-1/2 -translate-y-1/2 flex justify-between px-[2vw] pointer-events-auto z-[1000]">
+        <div className="w-full absolute top-1/2 -translate-y-1/2 flex justify-between px-[2vw] pointer-events-auto z-[1000] all">
           <button
             className="pointer-events-auto cursor-pointer w-[18vw] flex items-center justify-center aspect-square  z-[1000] relative"
             onClick={handleprev}

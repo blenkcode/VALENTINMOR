@@ -33,12 +33,14 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
           y: 0,
           paddingLeft: "2vw",
           paddingRight: "2vw",
+          paddingBottom: "2vw",
         },
 
         {
           y: "3vw",
           paddingLeft: "4.5vw",
           paddingRight: "4.5vw",
+          paddingBottom: "7.5vw",
           duration: 1,
           ease: "power4.inOut",
         },
@@ -122,40 +124,19 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
         ".titlework",
 
         {
-          x: "2vw",
-          y: "2vw",
+          x: "3vw",
+          y: "3vw",
           duration: 1,
           ease: "power4.inOut",
         },
         0
       )
+
       .to(
         ".smalls",
 
         {
           x: "-2vw",
-
-          duration: 1,
-          ease: "power4.inOut",
-        },
-        0
-      )
-      .to(
-        ".carre",
-
-        {
-          height: "32vw",
-
-          duration: 1,
-          ease: "power4.inOut",
-        },
-        0
-      )
-      .to(
-        ".carre2",
-
-        {
-          y: "2vw",
 
           duration: 1,
           ease: "power4.inOut",

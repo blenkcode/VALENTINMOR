@@ -158,6 +158,7 @@ export const createEnterWorks = ({
       {
         y: 0,
         paddingLeft: "2vw",
+        paddingBottom: "2vw",
         paddingRight: "2vw",
         duration: 0.95,
         ease: "power3.inOut",
