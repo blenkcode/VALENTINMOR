@@ -8,7 +8,7 @@ const FolioTitle = ({ jap, number, date, arrow }) => {
         perspective: "1000px",
         perspectiveOrigin: "center bottom",
       }}
-      className="w-full flex items-center all md:justify-start  md:pl-0 justify-center folio titlework pt-[0svh] md:pt-0"
+      className="w-full flex items-center all md:justify-start  md:pl-0 justify-start folio pl-[2vw] titlework pt-[0svh] md:pt-0"
     >
       {" "}
       <div className="md:w-[6vw] md:text-[2vw] text-[6vw]  Med pt-[vw] overflow-hidden md:pl-[2vw] md:pr-0 pr-[2vw]">

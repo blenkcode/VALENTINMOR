@@ -8,12 +8,24 @@ const Scene = dynamic(
     ssr: false,
   }
 );
-const Carrousel = ({ lastpProject, project }) => {
+const Carrousel = ({
+  container1,
+  container2,
+  container3,
+  container4,
+  container5,
+}) => {
   return (
     <div className="w-full h-full z-20 pointer-events-none ">
       {" "}
       <Canvas style={{ pointerEvents: "none" }}>
-        <Scene lastpProject={lastpProject} project={project} />
+        <Scene
+          container1={container1}
+          container2={container2}
+          container3={container3}
+          container4={container4}
+          container5={container5}
+        />
       </Canvas>
     </div>
   );

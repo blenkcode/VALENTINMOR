@@ -1,152 +1,25 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { fragment, vertex } from "./ShaderCircularCaroussel2";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
 import { useProject } from "@/app/Context/ProjectContext";
 import { useTransition } from "@/app/Context/TransitionContext";
 import { useMobile } from "@/app/Context/isMobileContext";
-gsap.registerPlugin(ScrollTrigger);
 
-// Hook personnalisé pour le défilement virtuel
-const useVirtualScroll = (onScroll, options = {}) => {
-  const { sensitivity = 30, damping = 0.9 } = options;
-
-  // Références pour le virtual scroll - correctement à l'intérieur du hook
-  const virtualScrollY = React.useRef(0);
-  const prevVirtualScrollY = React.useRef(0);
-  const scrollVelocityRef = React.useRef(0);
-  const scrollDirectionRef = React.useRef(0);
-  const lastScrollTimeRef = React.useRef(Date.now());
-  const isScrollingRef = React.useRef(false);
-  const rafIdRef = React.useRef(null);
-
-  // Setup event handlers
-  useEffect(() => {
-    // Fonction pour gérer l'événement de wheel
-    const handleWheel = (e) => {
-      e.preventDefault();
-
-      // Mettre à jour la position du virtual scroll
-      virtualScrollY.current += e.deltaY;
-
-      // Calculer la vélocité et la direction
-      const scrollDelta = Math.abs(
-        virtualScrollY.current - prevVirtualScrollY.current
-      );
-      const direction =
-        virtualScrollY.current > prevVirtualScrollY.current ? 1 : -1;
-
-      // Normaliser la vélocité
-      const normalizedVelocity = Math.min(scrollDelta / sensitivity, 1);
-
-      // Mettre à jour les références
-      scrollVelocityRef.current = normalizedVelocity;
-      scrollDirectionRef.current = direction;
-      lastScrollTimeRef.current = Date.now();
-      isScrollingRef.current = true;
-
-      // Appeler le callback
-      if (onScroll && scrollDelta > 0.1) {
-        onScroll({
-          virtualScrollY: virtualScrollY.current,
-          scrollDelta,
-          direction,
-          normalizedVelocity,
-        });
-      }
-
-      prevVirtualScrollY.current = virtualScrollY.current;
-    };
-
-    // Fonction pour gérer les événements tactiles
-    let touchStartY = 0;
-
-    const handleTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e) => {
-      const touchY = e.touches[0].clientY;
-      const deltaY = (touchStartY - touchY) * 2; // Multiplicateur pour rendre le touch plus sensible
-      touchStartY = touchY;
-
-      // Simuler un événement wheel
-      handleWheel({ preventDefault: () => {}, deltaY });
-    };
-
-    // Ajouter les écouteurs d'événements
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-
-    // Animation loop pour le damping
-    const animateScroll = () => {
-      if (isScrollingRef.current) {
-        // Appliquer le damping à la vélocité
-        scrollVelocityRef.current *= damping;
-
-        // Si la vélocité est très faible, arrêter l'animation
-        if (scrollVelocityRef.current < 0.01) {
-          isScrollingRef.current = false;
-          scrollVelocityRef.current = 0;
-        }
-
-        // Appeler le callback avec les valeurs actuelles
-        if (onScroll) {
-          onScroll({
-            virtualScrollY: virtualScrollY.current,
-            scrollDelta: 0,
-            direction: scrollDirectionRef.current,
-            normalizedVelocity: scrollVelocityRef.current,
-          });
-        }
-      }
-
-      rafIdRef.current = requestAnimationFrame(animateScroll);
-    };
-
-    // Démarrer l'animation loop
-    rafIdRef.current = requestAnimationFrame(animateScroll);
-
-    return () => {
-      // Nettoyer les écouteurs d'événements
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-
-      // Arrêter l'animation loop
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current);
-      }
-    };
-  }, [onScroll, sensitivity, damping]);
-
-  return {
-    scrollVelocity: scrollVelocityRef.current,
-    scrollDirection: scrollDirectionRef.current,
-    virtualScrollY: virtualScrollY.current,
-  };
-};
-
-const CircularCarouselScene = () => {
-  const { isMobile } = useMobile();
+const CircularCarouselScene = ({
+  container1,
+  container2,
+  container3,
+  container4,
+  container5,
+}) => {
   const { project, setProject } = useProject();
-  const [scrollVelocity, setScrollVelocity] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState(0);
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(
-    parseInt(project) || 1
-  );
+  const { isMobile } = useMobile();
   const { setTransition, transition } = useTransition();
-
   const textures = useTexture([
     "/reel4.png",
     "/reel3.png",
@@ -156,7 +29,6 @@ const CircularCarouselScene = () => {
   ]);
 
   useEffect(() => {
-    // Vérifier que toutes les textures sont chargées correctement
     textures.forEach((texture, index) => {
       if (!texture.image) {
         console.warn(`La texture ${index} n'a pas d'image`);
@@ -164,10 +36,8 @@ const CircularCarouselScene = () => {
     });
   }, [textures]);
 
-  // Convertir chaque texture en tableau pour éviter les problèmes de référence
   const textureArray = Array.isArray(textures) ? textures : [textures];
 
-  // Créer les contrôles pour chaque texture
   const controls = useRef(
     textureArray.map((_, index) => ({
       amplitude: { value: 1.3, min: -3.5, max: 3.5, step: 0.05 },
@@ -176,14 +46,19 @@ const CircularCarouselScene = () => {
       textureIndex: index,
     }))
   );
+  const projectYValues = {
+    1: -2.51,
+    2: -1.254,
+    3: 0.002,
+    4: 1.258,
+    5: 2.514,
+    6: 2.514,
+  };
 
-  // Référence pour un contrôle global qui affecte toutes les textures
   const globalControls = useRef({
     distortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
-    amplitude: { value: 1.3, min: -3.5, max: 3.5, step: 0.05 },
   });
 
-  // Références pour l'animation
   const groupRef = useRef();
   const meshRefs = useRef(
     Array(textureArray.length)
@@ -191,30 +66,25 @@ const CircularCarouselScene = () => {
       .map(() => React.createRef())
   );
 
-  // Paramètres de l'éventail
-  const radius = 2.7; // Distance du centre
-  const totalAngle = Math.PI * 1.6; // Angle total de l'éventail (environ 108 degrés)
-  const startAngle = -totalAngle / 2; // Angle de départ
+  const radius = 2.7;
+  const totalAngle = Math.PI * 1.6;
+  const startAngle = -totalAngle / 2;
 
-  // Calculer les positions et rotations des planes
   const planePositions = useMemo(() => {
     return textureArray.map((_, index) => {
       const count = textureArray.length;
-      // Répartir les angles uniformément dans l'éventail
+
       const angle = startAngle + (totalAngle / (count - 1)) * index;
 
-      // Calculer la position sur le cercle
       const x = Math.sin(angle) * radius;
       const z = Math.cos(angle) * radius;
 
-      // Rotation pour que le côté droit pointe vers le centre
       const rotation = angle + Math.PI / 2;
 
       return { position: [x, 0, z], rotation: [0, rotation, 0] };
     });
   }, [textureArray.length]);
 
-  // Créer un tableau d'objets uniforms (un pour chaque mesh)
   const uniformsArrayRef = useRef(
     textureArray.map((texture, index) => ({
       uTexture: { value: texture },
@@ -225,26 +95,8 @@ const CircularCarouselScene = () => {
     }))
   );
 
-  // Projet Y values pour animations
-  const projectYValues = {
-    1: -2.51,
-    2: -1.254,
-    3: 0.002,
-    4: 1.258,
-    5: 2.514,
-    6: 2.514,
-  };
-
-  // Mettre à jour l'index du projet quand le projet change
-  useEffect(() => {
-    if (project) {
-      setCurrentProjectIndex(parseInt(project) || 1);
-    }
-  }, [project]);
-
   useEffect(() => {
     if (groupRef.current) {
-      // Définir la rotation initiale (en radians)
       groupRef.current.rotation.x = -1.5;
       groupRef.current.rotation.y = 0;
       groupRef.current.rotation.z = 1.57;
@@ -252,40 +104,39 @@ const CircularCarouselScene = () => {
   }, []);
 
   useEffect(() => {
-    if (groupRef.current) {
-      // Obtenir la valeur Y cible pour la rotation
-      const targetY = projectYValues[project] || -2.51;
+    if (groupRef.current && !isMobile) {
+      const targetY =
+        project === "1"
+          ? -2.51
+          : project === "2"
+          ? -1.254
+          : project === "3"
+          ? 0.002
+          : project === "4"
+          ? 1.258
+          : project === "5"
+          ? 2.514
+          : project === "6"
+          ? 2.514
+          : -2.51;
 
-      // Animation avec GSAP pour une transition fluide
       gsap.to(groupRef.current.rotation, {
         x: targetY,
         duration: 1.3,
         ease: "power3.out",
       });
-
-      // Réinitialiser toutes les amplitudes à la valeur par défaut
-      controls.current.forEach((control, index) => {
-        gsap.to(control.amplitude, {
-          value: 1.3,
-          duration: 1.3,
-          ease: "power3.out",
-        });
-      });
-
-      // Animation des amplitudes spécifiques selon le projet
     }
   }, [project]);
 
   useEffect(() => {
     if (transition) {
       const tl = gsap.timeline();
-      // Animation avec GSAP pour une transition fluide - affecte tous les meshes
+
       tl.to(globalControls.current.distortion, {
         value: 0.005,
         duration: 1.2,
         ease: "power3.inOut",
         onUpdate: () => {
-          // Mettre à jour tous les contrôles de distortion individuels
           controls.current.forEach((control, idx) => {
             control.distortion.value = globalControls.current.distortion.value;
           });
@@ -301,13 +152,12 @@ const CircularCarouselScene = () => {
       );
     } else {
       const tl = gsap.timeline();
-      // Animation avec GSAP pour une transition fluide
+
       tl.to(globalControls.current.distortion, {
         value: 0.0,
         duration: 1.2,
         ease: "power3.out",
         onUpdate: () => {
-          // Mettre à jour tous les contrôles de distortion individuels
           controls.current.forEach((control, idx) => {
             control.distortion.value = globalControls.current.distortion.value;
           });
@@ -324,142 +174,97 @@ const CircularCarouselScene = () => {
     }
   }, [transition]);
 
-  const handleVirtualScroll = useCallback(
-    ({ direction, normalizedVelocity }) => {
-      if (normalizedVelocity > 0.01) {
-        setScrollDirection(direction);
-        setScrollVelocity(normalizedVelocity);
-
-        // Calculer le nouvel index de projet
-        let newIndex = currentProjectIndex + direction;
-
-        newIndex = Math.max(1, Math.min(5, newIndex));
-
-        if (newIndex === currentProjectIndex) return;
-
-        // Mettre à jour le projet actuel
-        setCurrentProjectIndex(newIndex);
-        setProject(newIndex.toString());
-      }
-    },
-    [currentProjectIndex, setProject]
-  );
-
   useEffect(() => {
-    if (isMobile) {
-      let cleanup = () => {};
+    if (!isMobile || !groupRef.current) return;
 
-      const virtualScrollY = { current: 0 };
-      const prevVirtualScrollY = { current: 0 };
-      const scrollVelocityRef = { current: 0 };
-      const scrollDirectionRef = { current: 0 };
-      const isScrollingRef = { current: false };
-      let rafId = null;
+    gsap.registerPlugin(ScrollTrigger);
 
-      const handleWheel = (e) => {
-        e.preventDefault();
+    const containers = [
+      container1,
+      container2,
+      container3,
+      container4,
+      container5,
+    ];
 
-        virtualScrollY.current += e.deltaY;
+    const projectYValues = {
+      1: -2.51,
+      2: -1.254,
+      3: 0.002,
+      4: 1.258,
+      5: 2.514,
+    };
 
-        const scrollDelta = Math.abs(
-          virtualScrollY.current - prevVirtualScrollY.current
-        );
-        const direction =
-          virtualScrollY.current > prevVirtualScrollY.current ? 1 : -1;
+    // Ajouter un snap global au défilement de la page
+    ScrollTrigger.create({
+      snap: {
+        snapTo: 1 / 5, // Divise l'écran en sections égales
+        duration: 0.9, // Durée de l'animation de snap
+        delay: 0.1, // Léger délai avant le snap
+        ease: "power1.inOut", // Type d'easing pour le snap
+      },
+    });
 
-        const normalizedVelocity = Math.min(scrollDelta / 30, 1);
+    // Créer des ScrollTriggers pour chaque container
+    containers.forEach((container, index) => {
+      if (!container || !container.current) return;
 
-        scrollVelocityRef.current = normalizedVelocity;
-        scrollDirectionRef.current = direction;
-        isScrollingRef.current = true;
+      const projectIndex = index + 1;
+      const finalRotation = projectYValues[projectIndex]; // Rotation finale
 
-        if (scrollDelta > 0.1) {
-          handleVirtualScroll({
-            direction,
-            normalizedVelocity,
-          });
-        }
+      // Pour la rotation de départ, utiliser soit la rotation précédente, soit la première
+      const prevRotation =
+        index > 0 ? projectYValues[projectIndex - 1] : projectYValues[1];
 
-        prevVirtualScrollY.current = virtualScrollY.current;
-      };
+      ScrollTrigger.create({
+        trigger: container.current,
+        start: "top top", // Démarrer quand le haut du container atteint le bas de la fenêtre
+        end: "bottom top", // Terminer quand le bas du container atteint le haut de la fenêtre
+        scrub: true, // Lier la progression au défilement
+        pin: false, // Pas besoin de pin ici puisque nous utilisons snap
+        onUpdate: (self) => {
+          // Interpoler la rotation entre la valeur précédente et la valeur finale
+          // en fonction de la progression du défilement
+          const rotationX = gsap.utils.interpolate(
+            prevRotation,
+            finalRotation,
+            self.progress
+          );
 
-      let touchStartY = 0;
+          // Appliquer directement la rotation
+          groupRef.current.rotation.x = rotationX;
 
-      const handleTouchStart = (e) => {
-        touchStartY = e.touches[0].clientY;
-      };
-
-      const handleTouchMove = (e) => {
-        const touchY = e.touches[0].clientY;
-        const deltaY = touchStartY - touchY;
-        touchStartY = touchY;
-
-        handleWheel({ preventDefault: () => {}, deltaY });
-      };
-
-      // Ajouter les écouteurs d'événements
-      window.addEventListener("wheel", handleWheel, { passive: false });
-      window.addEventListener("touchstart", handleTouchStart, {
-        passive: true,
-      });
-      window.addEventListener("touchmove", handleTouchMove, { passive: true });
-
-      // Animation loop pour le damping
-      const animateScroll = () => {
-        if (isScrollingRef.current) {
-          // Appliquer le damping à la vélocité
-          scrollVelocityRef.current *= 0.95;
-
-          // Si la vélocité est très faible, arrêter l'animation
-          if (scrollVelocityRef.current < 0.01) {
-            isScrollingRef.current = false;
-            scrollVelocityRef.current = 0;
+          // Mettre à jour le projet actif lorsque la progression est supérieure à 0.5
+          if (self.progress > 0.5 && setProject) {
+            setProject(projectIndex.toString());
           }
+        },
+      });
+    });
 
-          // Appeler le callback avec les valeurs actuelles
-          handleVirtualScroll({
-            direction: scrollDirectionRef.current,
-            normalizedVelocity: scrollVelocityRef.current,
-          });
-        }
+    return () => {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
+  }, [
+    isMobile,
+    container1,
+    container2,
+    container3,
+    container4,
+    container5,
+    setProject,
+  ]);
 
-        rafId = requestAnimationFrame(animateScroll);
-      };
-
-      // Démarrer l'animation loop
-      rafId = requestAnimationFrame(animateScroll);
-
-      // Retourner la fonction de nettoyage
-      cleanup = () => {
-        // Nettoyer les écouteurs d'événements
-        window.removeEventListener("wheel", handleWheel);
-        window.removeEventListener("touchstart", handleTouchStart);
-        window.removeEventListener("touchmove", handleTouchMove);
-
-        // Arrêter l'animation loop
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-        }
-      };
-
-      return cleanup;
-    }
-  }, [isMobile, handleVirtualScroll]);
-
-  // Animation de rotation
   useFrame((state, delta) => {
-    // Mettre à jour les uniformes et ajuster la rotation de chaque mesh
     meshRefs.current.forEach((meshRef, index) => {
       if (meshRef.current) {
         const baseRotation = planePositions[index].rotation[1];
         uniformsArrayRef.current[index].uTime.value += 0.004;
 
-        // Mettre à jour la distortion depuis le contrôle individuel
         uniformsArrayRef.current[index].uDistortion.value =
           controls.current[index].distortion.value;
         uniformsArrayRef.current[index].uAmplitude.value =
           controls.current[index].amplitude.value;
-
         const RotateDelta = -1.58;
         meshRef.current.rotation.y = baseRotation + RotateDelta;
       }
@@ -471,7 +276,6 @@ const CircularCarouselScene = () => {
       {textureArray.map((texture, index) => {
         const { position, rotation } = planePositions[index];
 
-        // Calculer l'aspect ratio basé sur l'image de texture
         let aspectRatio = 1;
         if (texture.image) {
           aspectRatio = texture.image.width / texture.image.height;
