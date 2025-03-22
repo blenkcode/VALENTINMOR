@@ -142,7 +142,7 @@ const page = () => {
           </div>
         </div>
       )}
-      <div className=" flex md:flex-row flex-col-reverse  md:mt-[8vw] mt-0 all leftitem items-end md:items-start">
+      <div className=" flex md:flex-row flex-col-reverse  md:mt-[8vw] mt-[8vw] all leftitem items-end md:items-start">
         <div
           ref={mesh}
           style={{
