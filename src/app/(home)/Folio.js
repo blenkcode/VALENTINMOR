@@ -48,6 +48,7 @@ const Folio = () => {
       arrow,
       frame,
       setTransition,
+      isMobile,
     });
     setTimeout(() => {
       setEvents(false);

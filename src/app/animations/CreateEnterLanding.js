@@ -120,7 +120,7 @@ export const createEnterLanding = ({
         ".frametop",
 
         {
-          y: "-3vw",
+          y: "-100%",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -131,7 +131,7 @@ export const createEnterLanding = ({
         ".framebottom",
 
         {
-          y: "3vw",
+          y: "100%",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -141,7 +141,7 @@ export const createEnterLanding = ({
         ".frameleft",
 
         {
-          x: "-3vw",
+          x: "-100%",
           duration: 0.95,
           ease: "power3.inOut",
         },
@@ -151,7 +151,7 @@ export const createEnterLanding = ({
         ".frameright",
 
         {
-          x: "3vw",
+          x: "100%",
           duration: 0.95,
           ease: "power3.inOut",
         },

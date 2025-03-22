@@ -198,7 +198,7 @@ export default function WorksPage() {
               {" "}
               <h1
                 ref={title}
-                className="Med md:text-[2vw] text-[7vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between text-nowrap   w-1/2 md:w-[22.5vw]"
+                className="Med md:text-[2vw] text-[7vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex md:justify-between text-nowrap  md:w-[22.5vw]"
               >
                 <div className="md:text-[0.7vw] text-[4vw] opacity-50 md:visible invisible md:w-auto w-0 ">
                   NAME{" "}

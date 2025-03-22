@@ -35,7 +35,7 @@ export const createEnterAbout = ({ mesh }) => {
       ".frametop",
 
       {
-        y: "-3vw",
+        y: "-100%",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -46,7 +46,7 @@ export const createEnterAbout = ({ mesh }) => {
       ".framebottom",
 
       {
-        y: "3vw",
+        y: "100%",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -56,7 +56,7 @@ export const createEnterAbout = ({ mesh }) => {
       ".frameleft",
 
       {
-        x: "-3vw",
+        x: "-100%",
         duration: 0.95,
         ease: "power3.inOut",
       },
@@ -66,7 +66,7 @@ export const createEnterAbout = ({ mesh }) => {
       ".frameright",
 
       {
-        x: "3vw",
+        x: "100%",
         duration: 0.95,
         ease: "power3.inOut",
       },

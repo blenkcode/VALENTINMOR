@@ -163,7 +163,7 @@ const CircularCarouselScene = ({}) => {
 
       tl.to(globalControls.current.distortion, {
         value: 0.0,
-        duration: 1.2,
+        duration: 1.6,
         ease: "power3.out",
         onUpdate: () => {
           controls.current.forEach((control, idx) => {
@@ -174,7 +174,7 @@ const CircularCarouselScene = ({}) => {
         groupRef.current.position,
         {
           z: 0,
-          duration: 1.45,
+          duration: 1.25,
           ease: "power2.inOut",
         },
         "<"
