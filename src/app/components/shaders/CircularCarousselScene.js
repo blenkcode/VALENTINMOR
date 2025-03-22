@@ -10,13 +10,7 @@ import { useProject } from "@/app/Context/ProjectContext";
 import { useTransition } from "@/app/Context/TransitionContext";
 import { useMobile } from "@/app/Context/isMobileContext";
 
-const CircularCarouselScene = ({
-  container1,
-  container2,
-  container3,
-  container4,
-  container5,
-}) => {
+const CircularCarouselScene = ({}) => {
   const { project, setProject } = useProject();
   const { isMobile } = useMobile();
   const { setTransition, transition } = useTransition();
@@ -57,6 +51,7 @@ const CircularCarouselScene = ({
 
   const globalControls = useRef({
     distortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
+    amplitude: { value: 1.3, min: -3.5, max: 3.5, step: 0.05 },
   });
 
   const groupRef = useRef();
@@ -88,7 +83,7 @@ const CircularCarouselScene = ({
   const uniformsArrayRef = useRef(
     textureArray.map((texture, index) => ({
       uTexture: { value: texture },
-      uAmplitude: { value: controls.current[index].amplitude.value },
+      uAmplitude: { value: globalControls.current.amplitude.value },
       uWaveLength: { value: controls.current[index].waveLength.value },
       uTime: { value: 0 },
       uDistortion: { value: controls.current[index].distortion.value },
@@ -104,7 +99,20 @@ const CircularCarouselScene = ({
   }, []);
 
   useEffect(() => {
-    if (groupRef.current && !isMobile) {
+    if (groupRef.current) {
+      if (isMobile) {
+        gsap.to(globalControls.current.amplitude, {
+          value: 0,
+          duration: 0.3,
+          ease: "power3.out",
+        });
+      } else {
+        gsap.to(globalControls.current.amplitude, {
+          value: 1.3,
+          duration: 0.3,
+          ease: "power3.out",
+        });
+      }
       const targetY =
         project === "1"
           ? -2.51
@@ -126,7 +134,7 @@ const CircularCarouselScene = ({
         ease: "power3.out",
       });
     }
-  }, [project]);
+  }, [project, isMobile]);
 
   useEffect(() => {
     if (transition) {
@@ -174,87 +182,6 @@ const CircularCarouselScene = ({
     }
   }, [transition]);
 
-  useEffect(() => {
-    if (!isMobile || !groupRef.current) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const containers = [
-      container1,
-      container2,
-      container3,
-      container4,
-      container5,
-    ];
-
-    const projectYValues = {
-      1: -2.51,
-      2: -1.254,
-      3: 0.002,
-      4: 1.258,
-      5: 2.514,
-    };
-
-    // Ajouter un snap global au défilement de la page
-    ScrollTrigger.create({
-      snap: {
-        snapTo: 1 / 5, // Divise l'écran en sections égales
-        duration: 0.9, // Durée de l'animation de snap
-        delay: 0.1, // Léger délai avant le snap
-        ease: "power1.inOut", // Type d'easing pour le snap
-      },
-    });
-
-    // Créer des ScrollTriggers pour chaque container
-    containers.forEach((container, index) => {
-      if (!container || !container.current) return;
-
-      const projectIndex = index + 1;
-      const finalRotation = projectYValues[projectIndex]; // Rotation finale
-
-      // Pour la rotation de départ, utiliser soit la rotation précédente, soit la première
-      const prevRotation =
-        index > 0 ? projectYValues[projectIndex - 1] : projectYValues[1];
-
-      ScrollTrigger.create({
-        trigger: container.current,
-        start: "top top", // Démarrer quand le haut du container atteint le bas de la fenêtre
-        end: "bottom top", // Terminer quand le bas du container atteint le haut de la fenêtre
-        scrub: true, // Lier la progression au défilement
-        pin: false, // Pas besoin de pin ici puisque nous utilisons snap
-        onUpdate: (self) => {
-          // Interpoler la rotation entre la valeur précédente et la valeur finale
-          // en fonction de la progression du défilement
-          const rotationX = gsap.utils.interpolate(
-            prevRotation,
-            finalRotation,
-            self.progress
-          );
-
-          // Appliquer directement la rotation
-          groupRef.current.rotation.x = rotationX;
-
-          // Mettre à jour le projet actif lorsque la progression est supérieure à 0.5
-          if (self.progress > 0.5 && setProject) {
-            setProject(projectIndex.toString());
-          }
-        },
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-    };
-  }, [
-    isMobile,
-    container1,
-    container2,
-    container3,
-    container4,
-    container5,
-    setProject,
-  ]);
-
   useFrame((state, delta) => {
     meshRefs.current.forEach((meshRef, index) => {
       if (meshRef.current) {
@@ -264,7 +191,7 @@ const CircularCarouselScene = ({
         uniformsArrayRef.current[index].uDistortion.value =
           controls.current[index].distortion.value;
         uniformsArrayRef.current[index].uAmplitude.value =
-          controls.current[index].amplitude.value;
+          globalControls.current.amplitude.value;
         const RotateDelta = -1.58;
         meshRef.current.rotation.y = baseRotation + RotateDelta;
       }

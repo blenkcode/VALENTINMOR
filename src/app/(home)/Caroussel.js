@@ -1,13 +1,16 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Carrousel from "./Carrousel";
 import { useProject } from "../Context/ProjectContext";
-import { useModal } from "../Context/ModalContext";
+
+import TransitionLink from "../utils/TransitionLink";
 const Caroussel = () => {
   const { project, setProject, lastpProject, setLastProject } = useProject();
   const pr = useRef(null);
   const number = useRef(null);
+  const [href, setHref] = useState("/Works/Fertile");
+
   useEffect(() => {
     if (project === "0" || project === "6") {
       const tl = gsap.timeline();
@@ -65,54 +68,45 @@ const Caroussel = () => {
     }
   }, [project]);
 
-  const container1 = useRef(null);
-  const container2 = useRef(null);
-  const container3 = useRef(null);
-  const container4 = useRef(null);
-  const container5 = useRef(null);
+  useEffect(() => {
+    if (project === "1") {
+      setHref("/Works/Fertile");
+    } else if (project === "2") {
+      setHref("/Works/CamilleJutel");
+    } else if (project === "3") {
+      setHref("/Works/MarineBenabou");
+    } else if (project === "4") {
+      setHref("/Works/Amouratroi");
+    } else if (project === "5") {
+      setHref("/Works/LeChantDesOiseaux");
+    }
+  }, [project]);
+
   return (
-    <>
-      {" "}
-      <div className="md:w-[30.5vw] w-[90vw] carrou opacity-0 aspect-square fixed  z-[20] pointer-events-none top-1/2 -translate-y-[49.7%] right-1/2 translate-x-1/2 flex items-center justify-center ">
-        <div className="absolute md:bottom-[-5vw] bottom-[-10vw] Med md:text-[1vw] text-[5vw] overflow-hidden">
+    <div className="md:w-[30.5vw] w-[90vw] carrou opacity-0 aspect-square fixed  z-[20] pointer-events-none top-1/2 -translate-y-[49.7%] right-1/2 translate-x-1/2 flex items-center justify-center ">
+      <div className="absolute md:bottom-[-5vw] bottom-[-12vw] Med md:text-[1vw] text-[5vw] overflow-hidden">
+        <TransitionLink
+          href={href}
+          ref={pr}
+          className="-translate-y-full flex overflow-hidden relative md:pr-[0.6vw] pr-[3vw] will-change-transform pointer-events-auto"
+        >
+          OPEN PR.0
           <div
-            ref={pr}
-            className="-translate-y-full flex overflow-hidden relative md:pr-[0.6vw] pr-[3vw] will-change-transform"
+            ref={number}
+            className="flex flex-col absolute will-change-transform right-[0vw]"
           >
-            OPEN PR.0
-            <div
-              ref={number}
-              className="flex flex-col absolute will-change-transform right-[0vw]"
-            >
-              <span>1</span>
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>
-            </div>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
           </div>
-        </div>
-        <div className="relative w-full h-full   pointer-events-none">
-          <Carrousel
-            project={project}
-            lastpProject={lastpProject}
-            container1={container1}
-            container2={container2}
-            container3={container3}
-            container4={container4}
-            container5={container5}
-          />
-        </div>
+        </TransitionLink>
       </div>
-      <div className="md:h-0 h-[500svh] relative">
-        {" "}
-        <div ref={container1} className="h-[100svh] md:h-0 "></div>
-        <div ref={container2} className="h-[100svh] md:h-0 "></div>
-        <div ref={container3} className="h-[100svh] md:h-0 "></div>
-        <div ref={container4} className="h-[100svh] md:h-0 "></div>
-        <div ref={container5} className="h-[100svh] md:h-0 "></div>
+      <div className="relative w-full h-full   pointer-events-none">
+        <Carrousel project={project} lastpProject={lastpProject} />
       </div>
-    </>
+    </div>
   );
 };
 
