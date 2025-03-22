@@ -121,14 +121,14 @@ export const createEnterWorks = ({
     )
     .fromTo(
       title.current,
-      { y: "100%", rotateX: "120deg" },
+      { y: "100%" },
       {
         y: 0,
         rotateX: 0,
-        duration: 1.22,
-        ease: "power2.out",
+        duration: 2,
+        ease: "expo.out",
       },
-      0.15
+      0.4
     )
     .fromTo(
       arrow.current,

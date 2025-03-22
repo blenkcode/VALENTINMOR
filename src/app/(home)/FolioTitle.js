@@ -26,7 +26,7 @@ const FolioTitle = ({ jap, number, date, arrow }) => {
       <div className="w-1/6 flex -translate-x-[1.2vw]">
         <div className="overflow-hidden">
           {" "}
-          <h3 className="Med text-[2vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
+          <h3 className="Med text-[2.5vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
             <div
               style={{
                 transform: "rotateX(120deg) ",

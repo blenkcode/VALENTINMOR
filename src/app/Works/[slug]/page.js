@@ -183,24 +183,18 @@ export default function WorksPage() {
     <div ref={containerMain} className="main w-screen min-h-[100svh] all">
       <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center">
         <div className="flex flex-col h-[29vw] justify-between">
-          <div
-            style={{
-              transformOrigin: "center bottom",
-              perspective: "1000px",
-              perspectiveOrigin: "center bottom",
-            }}
-            className="overflow-hidden  leading-[1.5vw]"
-          >
-            <h1
-              ref={title}
-              style={{
-                transform: "rotateX(120deg)",
-              }}
-              className="Med text-[1.5vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
-            >
-              <div className="text-[0.7vw] opacity-50">NAME // </div>
-              {works.name}
-            </h1>
+          <div className="overflow-hidden  leading-[2vw] ">
+            <div className="overflow-hidden">
+              {" "}
+              <h1
+                ref={title}
+                className="Med text-[2vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+              >
+                <div className="text-[0.7vw] opacity-50">NAME // </div>
+                {works.name}
+              </h1>
+            </div>
+
             <div>
               <div className="overflow-hidden mt-[1vw]">
                 {" "}

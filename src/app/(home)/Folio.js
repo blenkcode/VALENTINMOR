@@ -161,13 +161,10 @@ const Folio = () => {
           <div className="absolute w-full h-full top-0 left-0 flex">
             {" "}
             <div className="w-1/3 flex justify-center items-center">
-              <img src="/chevron.svg"></img>
+              <img className="w-[2vw]" src="/chevron.svg"></img>
             </div>
             <div className="w-1/3"></div>
-            <div className="w-1/3 flex justify-center items-center">
-              {" "}
-              <img src="/chevron.svg" className="rotate-180"></img>
-            </div>
+            <div className="w-1/3 flex justify-center items-center"> </div>
           </div>
         </div>
         <div

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import TransitionLink from "../utils/TransitionLink";
 import { useModal } from "../Context/ModalContext";
@@ -18,28 +18,73 @@ const ProjectFolio = ({
   const background1 = useRef(null);
   const background2 = useRef(null);
   const background3 = useRef(null);
-
+  const [needsReset, setNeedsReset] = useState(true);
   const { setIsHoverLink } = useModal();
+
+  // Fonction pour réinitialiser les positions de tous les éléments
+  const resetPositions = () => {
+    if (projectIndex < project) {
+      // Les projets au-dessus du projet actuel
+      gsap.set(background1.current, { y: 0, rotateX: 0 });
+      gsap.set(background2.current, { y: "-103%", rotateX: 0 });
+      gsap.set(background3.current, { y: "-103%", rotateX: 0 });
+    }
+
+    setNeedsReset(false);
+  };
+
+  // Initialisation des positions au premier rendu
   useEffect(() => {
+    resetPositions();
+  }, []);
+
+  // Gérer les changements de projet et les animations
+  useEffect(() => {
+    // Détecter les sauts non adjacents (plus d'un projet à la fois)
+    const isNonAdjacentChange =
+      lastpProject !== null && Math.abs(project - lastpProject) > 1;
+
+    if (isNonAdjacentChange) {
+      console.log("Saut non adjacent détecté, réinitialisation des positions");
+      resetPositions();
+      const tl = gsap.timeline();
+
+      tl.to(background1.current, {
+        y: "103%",
+        rotateX: -0,
+        duration: 0.95,
+        ease: "expo.out",
+        onComplete: () => {
+          gsap.set(background1.current, { rotateX: 0 });
+        },
+      }).to(
+        background2.current,
+        {
+          y: 0,
+          rotateX: 0,
+          duration: 0.95,
+          ease: "expo.out",
+        },
+        "<"
+      );
+      return;
+    }
+
+    // Logique d'animation existante pour les mouvements adjacents
     if (project > lastpProject) {
       if (project === projectIndex && lastpProject < project) {
         const tl = gsap.timeline();
 
-        tl.to(
-          background1.current,
-
-          {
-            y: "103%",
-            rotateX: -0,
-            duration: 0.95,
-            ease: "expo.out",
-            onComplete: () => {
-              gsap.set(background1.current, { rotateX: 0 });
-            },
-          }
-        ).to(
+        tl.to(background1.current, {
+          y: "103%",
+          rotateX: -0,
+          duration: 0.95,
+          ease: "expo.out",
+          onComplete: () => {
+            gsap.set(background1.current, { rotateX: 0 });
+          },
+        }).to(
           background2.current,
-
           {
             y: 0,
             rotateX: 0,
@@ -54,21 +99,16 @@ const ProjectFolio = ({
       ) {
         const tl = gsap.timeline();
         gsap.set(background1.current, { y: "103%" });
-        tl.to(
-          background2.current,
-
-          {
-            y: "103%",
-            rotateX: 0,
-            onComplete: () => {
-              gsap.set(background2.current, { rotateX: 0 });
-            },
-            duration: 0.95,
-            ease: "expo.out",
-          }
-        ).to(
+        tl.to(background2.current, {
+          y: "103%",
+          rotateX: 0,
+          onComplete: () => {
+            gsap.set(background2.current, { rotateX: 0 });
+          },
+          duration: 0.95,
+          ease: "expo.out",
+        }).to(
           background3.current,
-
           { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
@@ -77,21 +117,16 @@ const ProjectFolio = ({
       if (project === projectIndex && lastpProject > project) {
         const tl = gsap.timeline();
 
-        tl.to(
-          background3.current,
-
-          {
-            rotateX: 0,
-            onComplete: () => {
-              gsap.set(background3.current, { rotateX: 0 });
-            },
-            y: "-103%",
-            duration: 0.95,
-            ease: "expo.out",
-          }
-        ).to(
+        tl.to(background3.current, {
+          rotateX: 0,
+          onComplete: () => {
+            gsap.set(background3.current, { rotateX: 0 });
+          },
+          y: "-103%",
+          duration: 0.95,
+          ease: "expo.out",
+        }).to(
           background2.current,
-
           { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
@@ -102,18 +137,31 @@ const ProjectFolio = ({
         const tl = gsap.timeline();
         gsap.set(background1.current, { y: "103%" });
         gsap.set(background3.current, { y: "-103%" });
-        tl.to(
-          background2.current,
-
-          { rotateX: -0, y: "-103%", duration: 0.95, ease: "expo.out" }
-        ).to(
+        tl.to(background2.current, {
+          rotateX: -0,
+          y: "-103%",
+          duration: 0.95,
+          ease: "expo.out",
+        }).to(
           background1.current,
-
           { rotateX: 0, y: 0, duration: 0.95, ease: "expo.out" },
           "<"
         );
       }
     }
+  }, [project, lastpProject, projectIndex]);
+
+  // Gérer l'entrée de la souris avec réinitialisation si nécessaire
+  const handleMouseEnter = () => {
+    if (needsReset) {
+      resetPositions();
+    }
+    setIsHoverLink(true);
+  };
+
+  // Lorsque le projet change, indiquer qu'une réinitialisation pourrait être nécessaire
+  useEffect(() => {
+    setNeedsReset(true);
   }, [project]);
 
   const handleMouseIn = () => {
@@ -143,7 +191,7 @@ const ProjectFolio = ({
           <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
         <div className="w-[33vw]"></div>
-        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
@@ -159,14 +207,14 @@ const ProjectFolio = ({
         style={{
           transform: "rotateX(0deg)",
         }}
-        className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform `}
+        className={`flex w-full h-full absolute top-0  -translate-y-[103%] px-[2vw] overflow-hidden [backface-visibility:hidden] will-change-transform  `}
       >
         <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
           {number}{" "}
           <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
         <div className="w-[33vw]"></div>
-        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
@@ -190,7 +238,7 @@ const ProjectFolio = ({
           <div className="flex h-full items-center justify-end"> {type} </div>
         </div>
         <div className="w-[33vw]"></div>
-        <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
+        <div className="w-1/6 Med text-[2.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
           {" "}
           {title}
         </div>
