@@ -7,7 +7,7 @@ const Frame = () => {
   return (
     <div
       className={`fixed w-screen top-0 left-0  z-[10000] pointer-events-none ${
-        transiton ? "h-[100svh]" : "h-lvh"
+        transiton ? "h-[100svh]" : "h-[100svh]"
       }`}
     >
       <div className="h-full absolute md:w-[3vw] w-[6vw] bg-black left-0 top-0 frameleft md:-translate-x-[3vw] -translate-x-[6vw]"></div>
