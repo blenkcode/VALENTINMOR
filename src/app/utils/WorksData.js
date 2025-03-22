@@ -1,6 +1,6 @@
 export const worksData = {
   Fertile: {
-    name: "FERTILE",
+    name: "Fertile",
     imgs: [
       "/mockup1.webp",
       "/mockup1.webp",
@@ -23,8 +23,8 @@ export const worksData = {
       "/Amour/littles/A51.webp",
       "/Amour/littles/A4.webp",
     ],
-    type: "ARTISTIC AGENCY",
-    date: "MARCH 2025 / STILL IN THE MAKING",
+    type: "Artistic agency",
+    date: "March 2025",
     description: [
       "Fertile Agency is born from a profound belief in   ",
       " the boundless creative potential that resides within every artist.",
@@ -36,7 +36,7 @@ export const worksData = {
 
   CamilleJutel: {
     pr: "3",
-    name: "CAMILLE JUTEL",
+    name: "Camille Jutel",
     imgs: [
       "/Juliette/demo2.mp4",
       "/Juliette/juliette1.webp",
@@ -60,8 +60,8 @@ export const worksData = {
       "/Amour/littles/A51.webp",
       "/Amour/littles/A4.webp",
     ],
-    type: "PHOTOGRAPHIC PORTFOLIO",
-    date: "MARCH 2025",
+    type: "Photographic folio",
+    date: "March 2025",
 
     description: [
       "A captivating portfolio showcasing my front-end ",
@@ -73,7 +73,7 @@ export const worksData = {
   },
   MarineBenabou: {
     pr: "4",
-    name: "MARINE BENABOU",
+    name: "Marine Benabou",
     imgs: [
       "/Marine/mbok.mp4",
       "/Marine/m1.webp",
@@ -97,8 +97,8 @@ export const worksData = {
       "/Amour/littles/A51.webp",
       "/Amour/littles/A4.webp",
     ],
-    type: "MASTERING ENGEENIER",
-    date: "FEBRUARY 2025",
+    type: "Mastering engenieer",
+    date: "February 2025",
     description: "  ",
 
     description: [
@@ -111,7 +111,7 @@ export const worksData = {
   },
   Amouratroi: {
     pr: "5",
-    name: "AMOURATROI",
+    name: "Amouratroi",
     imgs: [
       "/Amour/tomfinal1.mp4",
       "/Amour/1.webp",
@@ -134,8 +134,8 @@ export const worksData = {
       "/Amour/littles/A51.webp",
       "/Amour/littles/A4.webp",
     ],
-    type: "PHOTOGRAPHIC PORTFOLIO",
-    date: "DECEMBER 2024 ",
+    type: "Photographic folio",
+    date: "December 2024 ",
     description: [
       "In this portfolio project, I collaborated with friend",
       "& photographer Tom Petit to create a digital experience that  ",
@@ -148,7 +148,7 @@ export const worksData = {
   },
   LeChantDesOiseaux: {
     pr: "1",
-    name: "LCDO FESTIVAL",
+    name: "LCDO Festival",
     imgs: [
       "/lcdo/l3.mp4",
       "/lcdo/screenlcdo1.webp",
@@ -171,8 +171,8 @@ export const worksData = {
       "/Amour/littles/A51.webp",
       "/Amour/littles/A4.webp",
     ],
-    type: "MUSIC FESTIVAL",
-    date: "NOVEMBER 2024 ",
+    type: "Music festival",
+    date: "November 2024 ",
     href: "/Works/Fertile",
     mockup: "/FERTILEC.png",
     description: [

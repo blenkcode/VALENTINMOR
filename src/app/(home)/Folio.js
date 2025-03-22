@@ -49,7 +49,7 @@ const Folio = () => {
     });
     setTimeout(() => {
       setEvents(false);
-    }, 1500);
+    }, 1000);
 
     setProject("0");
   }, []);
@@ -106,12 +106,8 @@ const Folio = () => {
     );
   }, [project]);
   return (
-    <div
-      className={` h-auto w-full  z-10  folio  ${
-        events ? "pointer-events-none" : ""
-      }`}
-    >
-      <div className="absolute top-[8vw] w-full">
+    <div className={` h-auto w-full  z-10  folio  `}>
+      <div className="absolute md:top-[8vw] top-[2vw] w-full">
         {" "}
         <FolioTitle jap={jap} number={number} arrow={arrow}></FolioTitle>
       </div>
@@ -119,58 +115,29 @@ const Folio = () => {
       <div
         onMouseEnter={handleMouseIn}
         onMouseLeave={handleMouseOut}
-        className="w-full h-[2vw]"
+        className="w-full h-[15vw] md:visible md:pointer-events-auto pointer-events-none invisible"
       ></div>
       <div
         onClick={handlereset}
-        className="w-full foliolines relative overflow-hidden"
+        className="w-full foliolines relative overflow-hidden md:visible md:pointer-events-auto pointer-events-none invisible"
       >
         <div
           ref={neutral}
-          className="w-full h-[4vw] bg-neutral-200  absolute top-0 -translate-y-[4vw] neutral1 opacity-0 flex all px-[2vw] pointer-events-none"
+          className="w-full h-[4vw] bg-neutral-200  absolute top-0 -translate-y-[4vw] neutral1 opacity-0 flex all px-[2vw]  pointer-events-none"
         >
-          {/* <div className="w-[31vw] text-[0.7vw] Med flex  items-center justify-between h-full foliol">
-            <div className="overflow-hidden relative">
-              <div>
-                {" "}
-                <div>PR.01</div>
-              </div>
-            </div>
-            <div className="flex h-full items-center justify-end">
-              {" "}
-              <div className="overflow-hidden relative">
-                <div>ARTISTIC AGENCY</div>
-              </div>{" "}
-            </div>
-          </div>
-          <div className="w-[33vw]"></div>
-          <div className="w-1/6 Med text-[1.5vw] flex items-center text-nowrap  will-change-transform duration-[400ms] ease-in-out [transform-origin:center] translate-x-[0.2vw] [backface-visibility:hidden] relative">
-            {" "}
-            <div className="overflow-hidden relative">
-              <div>FERTILE</div>
-            </div>{" "}
-          </div>
-          <div className="w-1/6">
-            {" "}
-            <div className=" text-[0.7vw] h-full flex items-center justify-end Med  folior">
-              <div className="overflow-hidden relative">
-                <div>MARS 25</div>
-              </div>{" "}
-            </div>
-          </div> */}
-          <div className="absolute w-full h-full top-0 left-0 flex">
+          <div className="absolute w-full h-full top-0 left-0 flex  px-[2vw]">
             {" "}
             <div className="w-1/3 flex justify-center items-center">
-              <img className="w-[2vw]" src="/chevron.svg"></img>
+              <img className="w-[1vw]" src="/chevron.svg"></img>
             </div>
-            <div className="w-1/3"></div>
-            <div className="w-1/3 flex justify-center items-center"> </div>
           </div>
         </div>
         <div
           onMouseEnter={() => setProject("1")}
           onMouseLeave={() => setLastProject("1")}
-          className="w-full flex  overflow-hidden all"
+          className={`w-full flex  overflow-hidden all   ${
+            events ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <ProjectFolio
             title="FERTILE "
@@ -189,7 +156,9 @@ const Folio = () => {
         <div
           onMouseEnter={() => setProject("2")}
           onMouseLeave={() => setLastProject("2")}
-          className="w-full flex overflow-hidden all"
+          className={`w-full flex  overflow-hidden all   ${
+            events ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <ProjectFolio
             title="CAMILLE JUTEL"
@@ -207,7 +176,9 @@ const Folio = () => {
         <div
           onMouseEnter={() => setProject("3")}
           onMouseLeave={() => setLastProject("3")}
-          className="w-full flex overflow-hidden all"
+          className={`w-full flex  overflow-hidden all   ${
+            events ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <ProjectFolio
             title="MARINE BENABOU "
@@ -225,7 +196,9 @@ const Folio = () => {
         <div
           onMouseEnter={() => setProject("4")}
           onMouseLeave={() => setLastProject("4")}
-          className="w-full flex overflow-hidden all"
+          className={`w-full flex  overflow-hidden all   ${
+            events ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <ProjectFolio
             title="AMOURATROI"
@@ -243,7 +216,9 @@ const Folio = () => {
         <div
           onMouseEnter={() => setProject("5")}
           onMouseLeave={() => setLastProject("5")}
-          className="w-full flex overflow-hidden  all"
+          className={`w-full flex  overflow-hidden all   ${
+            events ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <ProjectFolio
             title="LCDO FESTIVAL "
@@ -262,7 +237,7 @@ const Folio = () => {
       <div
         onMouseEnter={() => setProject("6")}
         onMouseLeave={() => setLastProject("6")}
-        className="w-full h-[2vw] relative"
+        className="w-full h-[15vw] relative md:visible md:pointer-events-auto pointer-events-none invisible"
       >
         <div className="w-0 h-[1px] absolute top-0 linefoliowhite bg-neutral-200 all"></div>
       </div>

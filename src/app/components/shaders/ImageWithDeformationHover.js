@@ -14,7 +14,7 @@ const ImageWithDeformation = ({ src }) => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full pointer-events-none  "
+      className="absolute  w-full h-full pointer-events-none  "
     >
       <Canvas style={{ pointerEvents: "none" }}>
         <CombinedScene src={src} />

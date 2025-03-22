@@ -65,11 +65,11 @@ const Caroussel = () => {
     }
   }, [project]);
   return (
-    <div className="w-[30.5vw] carrou opacity-0 aspect-square fixed  z-[20] pointer-events-none top-1/2 -translate-y-[49.7%] right-1/2 translate-x-1/2 flex items-center justify-center ">
-      <div className="absolute bottom-[-5vw] Med text-[1vw] overflow-hidden">
+    <div className="md:w-[30.5vw] w-full carrou opacity-0 aspect-square fixed  z-[20] pointer-events-none top-1/2 -translate-y-[49.7%] right-1/2 translate-x-1/2 flex items-center justify-center ">
+      <div className="absolute md:bottom-[-5vw] bottom-[-10vw] Med md:text-[1vw] text-[5vw] overflow-hidden">
         <div
           ref={pr}
-          className="-translate-y-full flex overflow-hidden relative pr-[0.6vw] will-change-transform"
+          className="-translate-y-full flex overflow-hidden relative md:pr-[0.6vw] pr-[3vw] will-change-transform"
         >
           OPEN PR.0
           <div

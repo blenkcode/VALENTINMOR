@@ -24,7 +24,7 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
           });
         },
       },
-      0
+      0.1
     )
 
       .fromTo(
@@ -51,10 +51,10 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
         {
           opacity: 0,
 
-          duration: 0.8,
+          duration: 0.9,
           ease: "power4.inOut",
         },
-        0
+        0.1
       )
       .to(
         ".foliol",
@@ -124,6 +124,39 @@ export const createExitTimeline = (router, href, transition, setTransition) => {
         {
           x: "2vw",
           y: "2vw",
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".smalls",
+
+        {
+          x: "-2vw",
+
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".carre",
+
+        {
+          height: "32vw",
+
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        0
+      )
+      .to(
+        ".carre2",
+
+        {
+          y: "2vw",
+
           duration: 1,
           ease: "power4.inOut",
         },

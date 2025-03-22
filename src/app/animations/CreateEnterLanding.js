@@ -167,7 +167,7 @@ export const createEnterLanding = ({
           duration: 1.2,
           ease: "power3.inOut",
         },
-        0.4
+        0
       )
       .to(
         ".neutral1",
@@ -186,11 +186,11 @@ export const createEnterLanding = ({
         {
           width: "100%",
 
-          stagger: 0.13,
+          stagger: 0.09,
           duration: 1.6,
           ease: "power3.inOut",
         },
-        0.3
+        0.2
       );
   });
 };

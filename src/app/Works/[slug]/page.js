@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState, useRef, createRef } from "react";
 import { worksData } from "@/app/utils/WorksData";
 import Image from "next/image";
-import Link from "next/link";
+import { useProject } from "@/app/Context/ProjectContext";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 import Button from "@/app/components/Button";
@@ -14,6 +14,7 @@ import TransitionLink from "@/app/utils/TransitionLink";
 export default function WorksPage() {
   const params = useParams();
   const { slug } = params;
+  const { setProject } = useProject();
   const [works, setWorks] = useState(null);
   const [images, setImages] = useState([]);
   const [descriptions, setDescriptions] = useState([]);
@@ -52,6 +53,7 @@ export default function WorksPage() {
   }, [slug]);
 
   useEffect(() => {
+    setProject("0");
     gsap.registerPlugin(ScrollTrigger);
 
     if (
@@ -181,8 +183,8 @@ export default function WorksPage() {
 
   return (
     <div ref={containerMain} className="main w-screen min-h-[100svh] all">
-      <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center">
-        <div className="flex flex-col h-[29vw] justify-between">
+      <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center carre2">
+        <div className="flex flex-col h-[33.5vw] justify-between carre">
           <div className="overflow-hidden  leading-[2vw] ">
             <div className="overflow-hidden">
               {" "}
@@ -190,7 +192,7 @@ export default function WorksPage() {
                 ref={title}
                 className="Med text-[2vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
               >
-                <div className="text-[0.7vw] opacity-50">NAME // </div>
+                <div className="text-[0.7vw] opacity-50 ">NAME </div>
                 {works.name}
               </h1>
             </div>
@@ -200,19 +202,20 @@ export default function WorksPage() {
                 {" "}
                 <p
                   ref={type}
-                  className="Med text-[0.7vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+                  className="Med text-[0.8vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
                 >
-                  <span className="opacity-50">TYPE // </span> {works.type}
+                  <span className="opacity-50 text-[0.7vw]">TYPE </span>{" "}
+                  {works.type}
                 </p>
               </div>
               <div className="overflow-hidden mt-[1vw]">
                 {" "}
                 <p
                   ref={date}
-                  className="Med text-[0.7vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+                  className="Med text-[0.8vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
                 >
                   {" "}
-                  <span className="opacity-50"> DATE // </span>
+                  <span className="opacity-50 text-[0.7vw] "> DATE </span>
                   {works.date}
                 </p>
               </div>
@@ -227,7 +230,7 @@ export default function WorksPage() {
                 className="Med text-[0.7vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
               >
                 {" "}
-                <span className="opacity-50"> OVERVIEW // </span>
+                <span className="opacity-50"> OVERVIEW </span>
               </p>
             </div>
             {descriptions.map((desc, index) => (
@@ -245,7 +248,7 @@ export default function WorksPage() {
                 </p>
               </div>
             ))}
-            <div className=" mt-[2vw] Med text-[0.8vw] overflow-hidden">
+            <div className=" mt-[2vw] Med text-[0.7vw] overflow-hidden">
               <div
                 ref={visit}
                 className="translate-y-full gap-[0.5vw] relative w-fit group flex"
@@ -263,7 +266,7 @@ export default function WorksPage() {
             </div>
           </div>
         </div>
-        <div className="w-[3vw] gap-[1.5vw] flex flex-col   absolute top-1/2 -translate-y-1/2 right-[10vw]  ">
+        <div className="w-[3vw] gap-[1.5vw] flex flex-col   absolute top-1/2 -translate-y-1/2 right-[10vw]  smalls">
           <div
             ref={frame}
             className="w-[3.5vw] top-0 right-[-4vw] absolute h-full "
@@ -311,7 +314,7 @@ export default function WorksPage() {
       </div>{" "}
       <div ref={imgContainer} className="w-1/2 pt-[10vw] pb-[10vw] relative ">
         {" "}
-        <div className="Med text-[0.8vw] absolute top-[1.7vw] right-1/2 translate-x-1/2 pl-[5vw]">
+        <div className="Med text-[0.8vw] absolute top-[1.7vw] right-1/2 translate-x-1/2 ">
           <div className="overflow-hidden">
             {" "}
             <div ref={arrow} className=" text-[2vw] translate-y-full">
@@ -319,21 +322,21 @@ export default function WorksPage() {
             </div>
           </div>
         </div>{" "}
-        <div className="gap-[4vw]  pl-[5vw]  flex flex-col items-center">
+        <div className="gap-[4vw]    flex flex-col items-center">
           {images.map((image, index) => (
             <div
               key={index}
-              className={`w-[29vw] aspect-square flex items-center justify-center px-[2vw] relative  `}
+              className={`w-[29vw] h-[33vw] flex items-center justify-center px-[2vw] relative imgsframe will-change-auto  `}
             >
               <div
                 style={{
                   clipPath: "inset(50% 50% 50% 50%)",
                 }}
                 ref={frameRef[index]}
-                className={`w-full absolute inset-0 h-full ${
+                className={`w-full absolute inset-0  h-full ${
                   pathname === "/Works/Amouratroi"
                     ? "bg-black "
-                    : "bg-neutral-300 "
+                    : "bg-neutral-200 "
                 }`}
               ></div>
               {isVideo(image) ? (
@@ -367,7 +370,7 @@ export default function WorksPage() {
           ))}
         </div>
       </div>
-      <div className="w-1/2 pl-[5vw] flex items-center justify-center pb-[15vw] ">
+      <div className="w-1/2  flex items-center justify-center pb-[15vw] ">
         {" "}
         <TransitionLink
           href={works.href}
@@ -382,7 +385,7 @@ export default function WorksPage() {
               ref={nextRef}
               className="translate-y-full relative overflo-hidden will-change-transform "
             >
-              NEXT → PR.0{works.pr}
+              Next → PR.0{works.pr}
               <div className="absolute bottom-0 w-full h-[1px] bg-black -translate-x-full group-hover:translate-x-0 duration-500 ease-in-out will-change-transform "></div>
             </div>{" "}
           </div>
@@ -395,10 +398,7 @@ export default function WorksPage() {
             className=" w-full duration-[1000ms] ease-in-out will-change-transform "
           >
             {" "}
-            <img
-              className=" duration-500 group-hover:scale-90 will-change-transform  "
-              src={works.mockup}
-            ></img>
+            <img className=" scale-90  " src={works.mockup}></img>
           </div>
           <div className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-[50%]">
             {" "}

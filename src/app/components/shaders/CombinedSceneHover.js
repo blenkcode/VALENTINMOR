@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { fragment as fragment1, vertex as vertex1 } from "./Shader3";
+import { fragment as fragment1, vertex as vertex1 } from "./ShaderCard";
 
 import { useFrame } from "@react-three/fiber";
 import { useTexture, useAspect } from "@react-three/drei";
@@ -35,7 +35,7 @@ const CombinedScene = ({ src, isHovering, onTextureLoaded }) => {
   useEffect(() => {
     // Reculer le mesh sur l'axe Z quand aucun artiste n'est sélectionné
     gsap.to(controls.current, {
-      distortion: 0.2,
+      distortion: 8.22,
       duration: 0.5,
       ease: "cubic-bezier(0.27, 0.24, 0.62, 0.99)",
     });

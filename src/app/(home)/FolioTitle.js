@@ -8,10 +8,10 @@ const FolioTitle = ({ jap, number, date, arrow }) => {
         perspective: "1000px",
         perspectiveOrigin: "center bottom",
       }}
-      className="w-full flex items-center all folio titlework"
+      className="w-full flex items-center all md:justify-start  md:pl-0 justify-center folio titlework pt-[0svh] md:pt-0"
     >
       {" "}
-      <div className="w-[6vw] text-[2vw]  Med pt-[vw] overflow-hidden pl-[2vw]">
+      <div className="md:w-[6vw] md:text-[2vw] text-[6vw]  Med pt-[vw] overflow-hidden md:pl-[2vw] md:pr-0 pr-[2vw]">
         {" "}
         <div
           style={{
@@ -23,10 +23,10 @@ const FolioTitle = ({ jap, number, date, arrow }) => {
           →
         </div>
       </div>
-      <div className="w-1/6 flex -translate-x-[1.2vw]">
+      <div className="md:w-1/6 flex md:-translate-x-[1.2vw]">
         <div className="overflow-hidden">
           {" "}
-          <h3 className="Med text-[2.5vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
+          <h3 className="Med md:text-[2.5vw] text-[9vw] works2 [backface-visibility:hidden] [transform-origin:center] will-change-transform flex">
             <div
               style={{
                 transform: "rotateX(120deg) ",
@@ -76,14 +76,14 @@ const FolioTitle = ({ jap, number, date, arrow }) => {
               transform: "rotateX(120deg)",
             }}
             ref={number}
-            className="text-[0.8vw] translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
+            className="md:text-[0.8vw] text-[3vw] translate-y-full [backface-visibility:hidden] [transform-origin:center] will-change-transform"
           >
             (05)
           </div>
         </div>
       </div>
-      <div className="Med text-[4vw] w-1/6 overflow-hidden"></div>
-      <div className="Med text-[2vw] w-1/6 flex justify-end pr-[2vw] overflow-hidden pt-[1.8vw] ">
+      <div className="md:w-1/6 w-0 "></div>
+      <div className="Med md:text-[2vw] md:w-1/6 w-0 flex justify-end md:pr-[2vw] overflow-hidden pt-[1.8vw] ">
         <div
           style={{
             transform: "rotateX(120deg)",
