@@ -11,6 +11,7 @@ import Button from "@/app/components/Button";
 import { usePathname } from "next/navigation";
 import { createEnterWorks } from "@/app/animations/CreateEnterWorks";
 import TransitionLink from "@/app/utils/TransitionLink";
+import { useMobile } from "@/app/Context/isMobileContext";
 export default function WorksPage() {
   const params = useParams();
   const { slug } = params;
@@ -32,7 +33,7 @@ export default function WorksPage() {
   const arrow = useRef(null);
   const visit = useRef(null);
   const containerMain = useRef(null);
-  const next = useRef(null);
+  const { isMobile } = useMobile();
   const nextRef = useRef(null);
   const pathname = usePathname();
   const [bottom, setBottom] = useState(false);
@@ -53,7 +54,14 @@ export default function WorksPage() {
   }, [slug]);
 
   useEffect(() => {
-    setProject("0");
+    if (!isMobile) {
+      setProject("0");
+    } else if (isMobile) {
+      setProject("1");
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     if (
@@ -183,46 +191,53 @@ export default function WorksPage() {
 
   return (
     <div ref={containerMain} className="main w-screen min-h-[100svh] all">
-      <div className="fixed w-1/2 right-0 top-0 flex justify-between mt-[10vw] pr-[4vw] items-center carre2">
-        <div className="flex flex-col h-[33.5vw] justify-between carre">
-          <div className="overflow-hidden  leading-[2vw] ">
+      <div className="fixed md:w-1/2 w-full right-0 top-0 flex justify-between md:mt-[10vw] pr-[4vw] md:pt-0 pt-[3vw] md:pl-0 pl-[3vw] items-center carre2 bg-white z-[50] pb-[3vw] md:pb-0">
+        <div className="flex flex-col md:h-[33.5vw] h-[35svh] justify-between carre">
+          <div className="overflow-hidden  md:leading-[2vw] leading-[7vw] ">
             <div className="overflow-hidden">
               {" "}
               <h1
                 ref={title}
-                className="Med text-[2vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+                className="Med md:text-[2vw] text-[7vw] -translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between text-nowrap   w-1/2 md:w-[22.5vw]"
               >
-                <div className="text-[0.7vw] opacity-50 ">NAME </div>
+                <div className="md:text-[0.7vw] text-[4vw] opacity-50 md:visible invisible md:w-auto w-0 ">
+                  NAME{" "}
+                </div>
                 {works.name}
               </h1>
             </div>
 
             <div>
-              <div className="overflow-hidden mt-[1vw]">
+              <div className="overflow-hidden mt-[1vw] md:visible invisible md:w-auto w-0 ">
                 {" "}
                 <p
                   ref={type}
-                  className="Med text-[0.8vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+                  className="Med md:text-[0.8vw] text-[3vw] text-nowrap   translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex md:justify-between w-[22.5vw]"
                 >
-                  <span className="opacity-50 text-[0.7vw]">TYPE </span>{" "}
+                  <span className="opacity-50 text-[0.7vw]  md:visible invisible md:w-auto w-0 ">
+                    TYPE{" "}
+                  </span>{" "}
                   {works.type}
                 </p>
               </div>
-              <div className="overflow-hidden mt-[1vw]">
+              <div className="overflow-hidden mt-[1vw] md:visible invisible md:w-auto w-0 ">
                 {" "}
                 <p
                   ref={date}
-                  className="Med text-[0.8vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
+                  className="Med md:text-[0.8vw] text-[3vw] text-nowrap  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex md:justify-between w-[22.5vw]"
                 >
                   {" "}
-                  <span className="opacity-50 text-[0.7vw] "> DATE </span>
+                  <span className="opacity-50 text-[0.7vw]  md:visible invisible md:w-auto w-0 ">
+                    {" "}
+                    DATE{" "}
+                  </span>
                   {works.date}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className=" Med  text-[0.8vw]">
+          <div className=" Med  md:text-[0.8vw]  text-[3.2vw]">
             <div className="overflow-hidden mb-[1vw]">
               {" "}
               <p
@@ -230,13 +245,16 @@ export default function WorksPage() {
                 className="Med text-[0.7vw]  translate-y-full will-change-transform [transform-origin:center] [backface-visibility:hidden] flex justify-between w-[22.5vw]"
               >
                 {" "}
-                <span className="opacity-50"> OVERVIEW </span>
+                <span className="opacity-50 md:visible invisible md:w-auto w-0">
+                  {" "}
+                  OVERVIEW{" "}
+                </span>
               </p>
             </div>
             {descriptions.map((desc, index) => (
               <div
                 key={index}
-                className={`overflow-hidden ${
+                className={`overflow-hidden  text-nowrap   ${
                   index === 0 ? "translate-x-[6vw]" : ""
                 }`}
               >
@@ -248,7 +266,7 @@ export default function WorksPage() {
                 </p>
               </div>
             ))}
-            <div className=" mt-[2vw] Med text-[0.7vw] overflow-hidden">
+            <div className=" md:mt-[2vw] mt-[6vw] Med md:text-[0.7vw] text-[4vw] overflow-hidden">
               <div
                 ref={visit}
                 className="translate-y-full gap-[0.5vw] relative w-fit group flex"
@@ -266,10 +284,10 @@ export default function WorksPage() {
             </div>
           </div>
         </div>
-        <div className="w-[3vw] gap-[1.5vw] flex flex-col   absolute top-1/2 -translate-y-1/2 right-[10vw]  smalls">
+        <div className="md:w-[3vw] gap-[1.5vw] flex flex-col   absolute top-1/2 -translate-y-1/2 right-[10vw]  smalls md:visible invisible  w-0 ">
           <div
             ref={frame}
-            className="w-[3.5vw] top-0 right-[-4vw] absolute h-full "
+            className="w-[3.5vw] top-0 right-[-4vw] absolute h-full md:visible invisible "
           >
             <div className="relative h-full">
               <div className="absolute top-[0.2vw]">
@@ -312,7 +330,10 @@ export default function WorksPage() {
           ))}
         </div>
       </div>{" "}
-      <div ref={imgContainer} className="w-1/2 pt-[10vw] pb-[10vw] relative ">
+      <div
+        ref={imgContainer}
+        className="md:w-1/2 md:pt-[10vw] pt-[40svh] pb-[10vw] relative "
+      >
         {" "}
         <div className="Med text-[0.8vw] absolute top-[1.7vw] right-1/2 translate-x-1/2 ">
           <div className="overflow-hidden">
@@ -326,14 +347,14 @@ export default function WorksPage() {
           {images.map((image, index) => (
             <div
               key={index}
-              className={`w-[29vw] h-[33vw] flex items-center justify-center px-[2vw] relative imgsframe will-change-auto  `}
+              className={`md:w-[29vw] w-[96vw] md:h-[33vw] h-[65vw] flex items-center justify-center md:px-[2vw] relative imgsframe will-change-auto  `}
             >
               <div
                 style={{
                   clipPath: "inset(50% 50% 50% 50%)",
                 }}
                 ref={frameRef[index]}
-                className={`w-full absolute inset-0  h-full ${
+                className={`md:w-full absolute inset-0  md:h-full h-0 w-0 ${
                   pathname === "/Works/Amouratroi"
                     ? "bg-black "
                     : "bg-neutral-200 "
@@ -350,7 +371,11 @@ export default function WorksPage() {
                   loop
                   muted
                   playsInline
-                  className="w-full  "
+                  className={`w-full ${
+                    pathname === "/Works/CamilleJutel"
+                      ? "border-[1px] border-neutral-500 shadow-xl"
+                      : ""
+                  }`}
                 />
               ) : (
                 <Image
@@ -363,7 +388,11 @@ export default function WorksPage() {
                   loading="lazy"
                   height={500}
                   alt={`${works.name} image ${index + 1}`}
-                  className="w-full "
+                  className={`w-full ${
+                    pathname === "/Works/CamilleJutel"
+                      ? "border-[1px] border-neutral-500"
+                      : ""
+                  }`}
                 />
               )}
             </div>

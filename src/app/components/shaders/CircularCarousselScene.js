@@ -100,19 +100,19 @@ const CircularCarouselScene = ({}) => {
 
   useEffect(() => {
     if (groupRef.current) {
-      if (isMobile) {
-        gsap.to(globalControls.current.amplitude, {
-          value: 0,
-          duration: 0.3,
-          ease: "power3.out",
-        });
-      } else {
-        gsap.to(globalControls.current.amplitude, {
-          value: 1.3,
-          duration: 0.3,
-          ease: "power3.out",
-        });
-      }
+      // if (isMobile) {
+      //   gsap.to(globalControls.current.amplitude, {
+      //     value: 0,
+      //     duration: 0.3,
+      //     ease: "power3.out",
+      //   });
+      // } else {
+      //   gsap.to(globalControls.current.amplitude, {
+      //     value: 1.3,
+      //     duration: 0.3,
+      //     ease: "power3.out",
+      //   });
+      // }
       const targetY =
         project === "1"
           ? -2.51

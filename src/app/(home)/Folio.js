@@ -7,6 +7,7 @@ import { createEnterLanding } from "../animations/CreateEnterLanding";
 import { useTransition } from "../Context/TransitionContext";
 import { useProject } from "../Context/ProjectContext";
 import FolioTitle from "./FolioTitle";
+import { useMobile } from "../Context/isMobileContext";
 import gsap from "gsap";
 const Folio = () => {
   const { setIsHoverLink } = useModal();
@@ -16,6 +17,7 @@ const Folio = () => {
   const jap = useRef(null);
   const date = useRef(null);
   const arrow = useRef(null);
+  const { isMobile } = useMobile();
   const frame = useRef(null);
   const neutral = useRef(null);
   const [events, setEvents] = useState(true);
@@ -51,7 +53,11 @@ const Folio = () => {
       setEvents(false);
     }, 1000);
 
-    setProject("0");
+    if (!isMobile) {
+      setProject("0");
+    } else if (isMobile) {
+      setProject("1");
+    }
   }, []);
 
   const handlereset = () => {
@@ -107,7 +113,7 @@ const Folio = () => {
   }, [project]);
   return (
     <div className={` h-auto w-full  z-10  folio  `}>
-      <div className="md:absolute fixed md:top-[8vw] top-[2vw] w-full">
+      <div className="md:absolute fixed md:top-[8vw] top-[17svh] w-full">
         {" "}
         <FolioTitle jap={jap} number={number} arrow={arrow}></FolioTitle>
       </div>
