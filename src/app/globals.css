@@ -63,7 +63,28 @@ body {
     transform: rotate(540deg) translateX(250px) rotate(-540deg);
   }
 }
+@keyframes clignotte {
+  0% {
+    opacity: 100%;
+  }
+  10% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 10%;
+  }
+  80% {
+    opacity: 100%;
+  }
 
+  100% {
+    opacity: 100%;
+  }
+}
+
+.live {
+  animation: clignotte 2s ease-in-out infinite;
+}
 .element {
   animation: orbit 4s linear infinite;
 }

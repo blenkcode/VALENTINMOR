@@ -2,89 +2,26 @@
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
 
-export const createEnterWorks = ({
-  imageRefs,
-  smallImageRefs,
-  descriptionsRef,
-  date,
-  type,
-  title,
-  arrow,
-  frameRef,
-  visit,
-  overview,
-}) => {
+export const createEnterWorks = ({ descriptionsRef, visit }) => {
   gsap.registerPlugin(CustomEase);
 
   CustomEase.create("customEasing", "M0,0 C0.89,0 0.48,0.98 1,1");
   const tl = gsap.timeline();
 
-  // Make sure we have refs to work with
-  if (
-    !imageRefs ||
-    (imageRefs.length === 0 && !smallImageRefs) ||
-    smallImageRefs.length === 0
-  ) {
-    console.error("Image refs are missing");
-    return Promise.resolve();
-  }
-
   // Animate each image ref with stagger
-  tl.fromTo(
-    imageRefs.map((ref) => ref.current).filter(Boolean), // Filter out any null refs
-    { clipPath: "inset(50% 50% 50% 50%)" },
+  tl.to(
+    ".header",
+
     {
-      clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.2,
-      ease: "power3.out",
-      stagger: {
-        amount: 0.2,
-        from: "end",
-        ease: "customEasing",
-      },
+      y: 0,
+      paddingLeft: "2vw",
+      paddingBottom: "2vw",
+      paddingRight: "2vw",
+      duration: 0.95,
+      ease: "power3.inOut",
     },
-    0.11
+    0
   )
-    .fromTo(
-      frameRef.map((ref) => ref.current).filter(Boolean), // Filter out any null refs
-      { clipPath: "inset(50% 50% 50% 50%)" },
-      {
-        clipPath: "inset(0% 0% 0% 0%)",
-        duration: 1.1,
-        ease: "power3.out",
-        stagger: {
-          amount: 0.2,
-          from: "end",
-          ease: "customEasing",
-        },
-      },
-      0.11
-    )
-    .fromTo(
-      smallImageRefs.map((ref) => ref.current).filter(Boolean),
-      { clipPath: "inset(50% 50% 50% 50%)" },
-      {
-        clipPath: "inset(0% 0% 0% 0%)",
-        duration: 2.2,
-        ease: "expo.out",
-        stagger: {
-          amount: 0.4,
-          from: "left",
-          ease: "customEasing",
-        },
-      },
-      0.2
-    )
-    .fromTo(
-      overview.current,
-      { y: "100%" },
-      {
-        y: 0,
-        duration: 2.2,
-        ease: "expo.out",
-      },
-      0.3
-    )
     .fromTo(
       descriptionsRef.map((ref) => ref.current).filter(Boolean),
       { y: "100%" },
@@ -97,73 +34,20 @@ export const createEnterWorks = ({
           from: "end",
         },
       },
-      0.3
+      0.7
     )
     .fromTo(
-      date.current,
-      { y: "100%" },
-      {
-        y: 0,
-        duration: 2.2,
-        ease: "expo.out",
-      },
-      0.35
-    )
-    .fromTo(
-      type.current,
-      { y: "100%" },
-      {
-        y: 0,
-        duration: 2.2,
-        ease: "expo.out",
-      },
-      0.35
-    )
-    .fromTo(
-      title.current,
-      { y: "100%" },
-      {
-        y: 0,
-        rotateX: 0,
-        duration: 2.2,
-        ease: "expo.out",
-      },
-      0.4
-    )
-    .fromTo(
-      arrow.current,
-      { y: "100%", rotateX: "-120deg" },
-      {
-        y: 0,
-        rotateX: 0,
-        duration: 2.2,
-        ease: "expo.out",
-      },
-      0.5
-    )
-    .fromTo(
-      visit.current,
-      { y: "100%", rotateX: "-120deg" },
-      {
-        y: 0,
-        rotateX: 0,
-        duration: 1.95,
-        ease: "expo.out",
-      },
-      0.5
-    )
-    .to(
-      ".header",
+      ".works",
+      { y: "100%", rotateX: "120deg" },
 
       {
         y: 0,
-        paddingLeft: "2vw",
-        paddingBottom: "2vw",
-        paddingRight: "2vw",
-        duration: 0.95,
-        ease: "power3.inOut",
+        rotateX: 0,
+        stagger: 0.02,
+        duration: 1.7,
+        ease: "expo.out",
       },
-      0
+      0.4
     )
     .to(
       ".frametop",
@@ -206,15 +90,16 @@ export const createEnterWorks = ({
       },
       0
     )
-    .to(
-      ".smallimgs",
-
+    .fromTo(
+      visit.current,
+      { y: "100%", rotateX: "-120deg" },
       {
-        x: 0,
-        duration: 0.95,
-        ease: "power3.inOut",
+        y: 0,
+        rotateX: 0,
+        duration: 1.95,
+        ease: "expo.out",
       },
-      0
+      0.5
     );
 
   return new Promise((resolve) => {

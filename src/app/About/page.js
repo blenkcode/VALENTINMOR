@@ -20,7 +20,7 @@ const page = () => {
           perspective: "1000px",
           perspectiveOrigin: "center bottom",
         }}
-        className="w-full flex items-center all md:justify-start absolute top-[1vw] left-0  md:pl-[2vw] justify-center folio md:titlework pt-[0svh] md:pt-0 md:visible invisible md:h-auto h-0"
+        className="w-full flex items-center all md:justify-start absolute top-[1.5vw] left-0  md:pl-[2vw] justify-center folio md:titlework pt-[0svh] md:pt-0 md:visible invisible md:h-auto h-0"
       >
         {" "}
         <div className="overflow-hidden">
