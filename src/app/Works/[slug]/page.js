@@ -23,39 +23,26 @@ export default function WorksPage() {
   const { slug } = params;
   const { setProject } = useProject();
   const [works, setWorks] = useState(null);
+  const [progress, setProgress] = useState([]);
   const [images, setImages] = useState([]);
   const [descriptions, setDescriptions] = useState([]);
-  const imgContainer = useRef(null);
-  const frame = useRef(null);
-  const [imageRefs, setImageRefs] = useState([]);
-  const [frameRef, setFrameRef] = useState([]);
-  const [smallImages, setSmallImages] = useState([]);
+
   const [descriptionsRef, setDescriptionsRef] = useState([]);
-  const [smallImageRefs, setSmallImageRefs] = useState([]);
-  const date = useRef(null);
-  const title = useRef(null);
-  const type = useRef(null);
-  const overview = useRef(null);
-  const arrow = useRef(null);
+
   const visit = useRef(null);
   const containerMain = useRef(null);
   const { isMobile } = useMobile();
-  const nextRef = useRef(null);
-  const pathname = usePathname();
-  const [bottom, setBottom] = useState(false);
+
   const [name, setName] = useState([]);
   useEffect(() => {
     if (slug && worksData[slug]) {
       setWorks(worksData[slug]);
       const imagesData = worksData[slug].imgs;
       setImages(imagesData);
-      const smallImagesData = worksData[slug].smallsImgs;
-      setSmallImages(smallImagesData);
+
       const descriptionsData = worksData[slug].description;
       setDescriptions(descriptionsData);
-      setImageRefs(imagesData.map(() => createRef()));
-      setFrameRef(imagesData.map(() => createRef()));
-      setSmallImageRefs(imagesData.map(() => createRef()));
+
       setDescriptionsRef(descriptionsData.map(() => createRef()));
       const letters = Array.from(worksData[slug].name || "");
       setName(letters);
@@ -76,27 +63,51 @@ export default function WorksPage() {
     }
   }, [works]);
 
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth > 800 && containerMain) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      let ctx = gsap.context(() => {
+        const scrollTrigger = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerMain.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            onUpdate: (self) => {
+              setProgress(self.progress);
+            },
+          },
+        });
+
+        return () => ctx.revert();
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [containerMain]);
+
   if (!works) {
     return <div></div>;
   }
 
   return (
-    <div
-      ref={containerMain}
-      className="main w-screen min-h-[100svh] all relative"
-    >
-      <div className="w-screen h-lvh relative">
+    <div ref={containerMain} className="main w-screen h-[400svh] all relative">
+      <div className="w-screen h-lvh fixed">
         <Canvas style={{ pointerEvents: "none" }}>
-          <Scene images={images} />
+          <Scene progress={progress} images={images} />
         </Canvas>
       </div>
-      <div className=" md:mt-[2vw] mt-[6vw] Med md:text-[1.5vw] text-[4vw] overflow-hidden fixed bottom-[2vw] left-[2vw]">
+      <div className=" md:mt-[2vw] mt-[6vw] Med md:text-[1vw] text-[4vw] overflow-hidden fixed bottom-[2vw] left-[2vw]">
         <div
           ref={visit}
           className="translate-y-full gap-[0.5vw] relative w-fit items-center group flex"
         >
           <Button href="/" text=" VISIT SITE"></Button>
-          <div className="relative overflow-hidden rotate-45 text-[1.7vw]">
+          <div className="relative overflow-hidden rotate-45 ">
             <div className="  duration-300 group-hover:-translate-y-full -rotate-90">
               →
             </div>
@@ -112,7 +123,7 @@ export default function WorksPage() {
           perspective: "1000px",
           perspectiveOrigin: "center bottom",
         }}
-        className="w-full flex items-start all md:justify-start absolute top-[1.5vw] left-0  md:pl-[2vw] justify-center folio pt-[0svh] md:pt-0 md:visible invisible md:h-auto h-0 text-black"
+        className="w-full flex items-start leading-[2.5vw] all md:justify-start fixed bottom-[2vw] left-[14vw]  md:pl-[2vw] justify-center folio pt-[0svh] md:pt-0 md:visible invisible md:h-auto h-0 text-black"
       >
         {" "}
         <div className="overflow-hidden">
@@ -136,13 +147,23 @@ export default function WorksPage() {
             )}
           </h3>
         </div>
-        <div className="mt-[0.7vw] ml-[5vw] text-[0.8vw]">
+      </div>
+      <div
+        style={{
+          transformOrigin: "center bottom",
+          perspective: "1000px",
+          perspectiveOrigin: "center bottom",
+        }}
+        className="w-full flex items-start all md:justify-start fixed top-[1.5vw] left-0  md:pl-[2vw] justify-center folio pt-[0svh] md:pt-0 md:visible invisible md:h-auto h-0 text-black"
+      >
+        {" "}
+        <div className="mt-[0.7vw] text-[1vw]">
           {" "}
           {descriptions.map((desc, index) => (
             <div
               key={index}
               className={`overflow-hidden  text-nowrap Med  ${
-                index === 0 ? "translate-x-[6vw]" : ""
+                index === 0 ? "" : ""
               }`}
             >
               <p

@@ -14,7 +14,7 @@ const page = () => {
   }, []);
   return (
     <main className="w-screen  flex flex-col justify-between pt-[2vw] md:px-[2vw] h-[100svh] px-[3vw] [backface-visibility:hidden] [transform-origin:center] text-[0.7vw] Med pl-[2vw] relative pb-[2vw]">
-      <div
+      {/* <div
         style={{
           transformOrigin: "center bottom",
           perspective: "1000px",
@@ -68,7 +68,7 @@ const page = () => {
             </div>
           </h3>
         </div>
-      </div>
+      </div> */}
       {isMobile ? (
         <div className="md:text-[1.4vw] text-[3.5vw] md:w-[65.5vw] w-[75vw] all md:mt-[6vw] titlework2 mt-[0vw] ">
           <div className="overflow-hidden">
@@ -106,7 +106,7 @@ const page = () => {
           </div>
         </div>
       ) : (
-        <div className="md:text-[1.4vw] text-[3vw] md:w-[65.5vw] w-[75vw] all md:mt-[6vw] titlework2 mt-[2vw]">
+        <div className="md:text-[1vw] text-[3vw] md:w-[65.5vw] w-[75vw] all md:mt-[0vw] titlework2 mt-[2vw]">
           <div className="overflow-hidden">
             <div className="bio translate-y-full will-change-transform">
               {" "}

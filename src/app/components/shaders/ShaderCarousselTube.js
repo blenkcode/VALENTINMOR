@@ -6,10 +6,10 @@ uniform float uRotation;
 float PI = 3.141592;
 varying float vZPosition;
 
-vec3 rotateX(vec3 pos, float angle) {
+vec3 rotateY(vec3 pos, float angle) {
     float c = cos(angle);
     float s = sin(angle);
-    return vec3(pos.x, pos.y * c - pos.z * s, pos.y * s + pos.z * c);
+    return vec3(pos.x * c + pos.z * s, pos.y, -pos.x * s + pos.z * c);
 }
 
 void main() {
@@ -24,8 +24,8 @@ void main() {
     vPosition = vWorldPosition;
     
     // Définir les limites de la zone centrale (à ajuster selon vos besoins)
-    float centerStart = 10.0;
-    float centerEnd = 10.0;
+    float centerStart = 15.0;
+    float centerEnd = 15.0;
     float transitionWidth = 10.0; // Largeur de la transition
     
     // Calcul du facteur d'atténuation pour la zone centrale
@@ -37,11 +37,11 @@ void main() {
     float distortionFactor = min(leftEdge + rightEdge, 1.0);
     
     // Calculer l'angle de rotation basé sur la position X
-    float rotationAngle = cos(smoothstep(-5.0, 5.0, vWorldPosition.x) * PI);
+    float rotationAngle = cos(smoothstep(-8.0, 8.0, vWorldPosition.x) * 4.0);
     
     // Appliquer la rotation sur l'axe X à la position mondiale
     // Multiplier par le facteur de distorsion pour préserver la zone centrale
-    vWorldPosition = rotateX(vWorldPosition, rotationAngle * uRotation * distortionFactor);
+    vWorldPosition = rotateY(vWorldPosition, rotationAngle * uRotation * distortionFactor);
     
     vZPosition = smoothstep(-2.6, -2.5, vWorldPosition.z);
     

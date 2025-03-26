@@ -12,12 +12,11 @@ import { useTexture } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useProject } from "@/app/Context/ProjectContext";
-// Enregistrer le plugin ScrollTrigger
+
 gsap.registerPlugin(ScrollTrigger);
 const useVirtualScroll = (onScroll, options = {}) => {
   const { sensitivity = 30, damping = 0.9 } = options;
 
-  // Références pour le virtual scroll
   const virtualScrollY = useRef(0);
   const prevVirtualScrollY = useRef(0);
   const scrollVelocityRef = useRef(0);
@@ -26,16 +25,12 @@ const useVirtualScroll = (onScroll, options = {}) => {
   const isScrollingRef = useRef(false);
   const rafIdRef = useRef(null);
 
-  // Setup event handlers
   useEffect(() => {
-    // Fonction pour gérer l'événement de wheel
     const handleWheel = (e) => {
       e.preventDefault();
 
-      // Mettre à jour la position du virtual scroll
       virtualScrollY.current += e.deltaY;
 
-      // Calculer la vélocité et la direction
       const scrollDelta = Math.abs(
         virtualScrollY.current - prevVirtualScrollY.current
       );
@@ -64,7 +59,6 @@ const useVirtualScroll = (onScroll, options = {}) => {
       prevVirtualScrollY.current = virtualScrollY.current;
     };
 
-    // Fonction pour gérer les événements tactiles
     let touchStartY = 0;
 
     const handleTouchStart = (e) => {
@@ -73,31 +67,25 @@ const useVirtualScroll = (onScroll, options = {}) => {
 
     const handleTouchMove = (e) => {
       const touchY = e.touches[0].clientY;
-      const deltaY = (touchStartY - touchY) * 2; // Multiplicateur pour rendre le touch plus sensible
+      const deltaY = (touchStartY - touchY) * 2;
       touchStartY = touchY;
 
-      // Simuler un événement wheel
       handleWheel({ preventDefault: () => {}, deltaY });
     };
 
-    // Ajouter les écouteurs d'événements
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
-    // Animation loop pour le damping
     const animateScroll = () => {
       if (isScrollingRef.current) {
-        // Appliquer le damping à la vélocité
         scrollVelocityRef.current *= damping;
 
-        // Si la vélocité est très faible, arrêter l'animation
         if (scrollVelocityRef.current < 0.01) {
           isScrollingRef.current = false;
           scrollVelocityRef.current = 0;
         }
 
-        // Appeler le callback avec les valeurs actuelles
         if (onScroll) {
           onScroll({
             virtualScrollY: virtualScrollY.current,
@@ -133,18 +121,18 @@ const useVirtualScroll = (onScroll, options = {}) => {
     virtualScrollY: virtualScrollY.current,
   };
 };
-const VerticalCarouselScene = ({ images }) => {
+const VerticalCarouselScene = ({ images, progress }) => {
   const { project } = useProject();
   const [isAnimating, setIsAnimating] = useState(false);
   const texture = useTexture("/VAL.png");
   const [scrollVelocity, setScrollVelocity] = useState(0);
   const [scrollDirection, setScrollDirection] = useState(0);
-  const [progress, setProgress] = useState(0);
+
   const textures = useTexture(images);
   const controls = useRef({
     amplitude: { value: 5.6 },
     distortion: { value: 0.0 },
-    rotation: { value: 2.0 },
+    rotation: { value: -1.0 },
   });
   useEffect(() => {
     // Vérifier que toutes les textures sont chargées correctement
@@ -168,34 +156,16 @@ const VerticalCarouselScene = ({ images }) => {
       if (normalizedVelocity > 0.01) {
         setScrollDirection(direction);
         setScrollVelocity(normalizedVelocity);
-        setProgress((prevProgress) => {
-          // Calculer la nouvelle valeur
-          const step = normalizedVelocity * 0.18; // Ajuster cette valeur selon votre besoin
-          const newProgress = prevProgress + direction * step;
 
-          // Limiter entre 0 et 1
-          return Math.max(0, Math.min(100, newProgress));
-        });
-
-        // Valeur de base de l'amplitude: 0.25
-        // Valeur max: -1.7
         const baseAmplitude = 0;
         const maxAmplitude = 3.0;
 
-        // Calculer la valeur d'amplitude en fonction de la direction et de la vélocité
         const amplitudeValue =
           direction > 0
             ? baseAmplitude +
               (maxAmplitude - baseAmplitude) * normalizedVelocity
             : -baseAmplitude -
               (maxAmplitude - baseAmplitude) * normalizedVelocity;
-
-        // Appliquer la nouvelle valeur avec GSAP
-        // gsap.to(controls.current.rotation, {
-        //   value: amplitudeValue,
-        //   duration: 0.9,
-        //   ease: "power1.out",
-        // });
       }
     },
     []
@@ -228,10 +198,10 @@ const VerticalCarouselScene = ({ images }) => {
     // S'assurer que le groupe existe
     if (groupRef.current) {
       // Positionner initialement le groupe à x=3
-      groupRef.current.position.x = 6.5;
+      groupRef.current.position.x = 9.5;
       // Animer vers x=0
       gsap.to(groupRef.current.position, {
-        x: -1.1,
+        x: 2.58,
         duration: 3,
         ease: "expo.inOut",
       });
@@ -239,16 +209,8 @@ const VerticalCarouselScene = ({ images }) => {
   }, []); // Déclencher une seule fois au montage du composant
 
   useFrame((delta) => {
-    // if (groupRef.current) {
-    //   groupRef.current.position.x =
-    //     delta * scrollDirection > 0
-    //       ? 0.1 * scrollVelocity
-    //       : -0.1 * scrollVelocity;
-    // }
     meshRefs.current.forEach((meshRef, index) => {
-      // Obtenir la valeur d'amplitude actuelle depuis les uniformes
-
-      uniformsArrayRef.current[index].uProgress.value = progress;
+      uniformsArrayRef.current[index].uProgress.value = 34.55 * progress;
       uniformsArrayRef.current[index].uTime.value += 0.004;
 
       uniformsArrayRef.current[index].uAmplitude.value =
@@ -257,46 +219,27 @@ const VerticalCarouselScene = ({ images }) => {
         controls.current.distortion.value;
       uniformsArrayRef.current[index].uRotation.value =
         controls.current.rotation.value;
-      // if (meshRef.current) {
-      //   // Récupérer la rotation de base du mesh depuis planePositions
-      //   const baseRotation = planePositions[index].rotation[1];
-
-      //   const RotateDelta = -0.2;
-      //   meshRef.current.rotation.y =
-      //     baseRotation + currentAmplitude * RotateDelta;
-      // }
     });
   });
 
   const planePositions = useMemo(() => {
-    return textureArray.map((_, index) => {
-      // Positionnement vertical avec espacement de 8 unités par mesh
-      const x = 3.5 * index; // Négatif pour descendre verticalement
+    // Vous pouvez modifier cette valeur pour augmenter l'écart sans problème maintenant
+    const spacing = 4.05; // Exemple: augmenté à 8 pour plus d'écart
+
+    const positions = textureArray.map((_, index) => {
+      const x = spacing * index;
       const y = 0;
       const z = 0;
       const rotation = [0, 0, 0];
 
       return { position: [x, y, z], rotation: rotation };
     });
-  }, [textureArray.length]);
 
-  // useEffect(() => {
-  //   const tl = gsap.timeline();
-  //   if (project === 0 && lastpProject === 0) return;
-  //   tl.to(
-  //     controls.current.rotation,
-  //     {
-  //       value: 0.5,
-  //       duration: 0.5,
-  //       ease: "expo.out",
-  //     },
-  //     0
-  //   ).to(controls.current.rotation, {
-  //     value: 0.0,
-  //     duration: 1.7,
-  //     ease: "expo.out",
-  //   });
-  // }, [project]);
+    const maxX =
+      positions.length > 0 ? positions[positions.length - 1].position[0] : 0;
+
+    return { positions, maxX, spacing };
+  }, [textureArray.length]);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -314,17 +257,24 @@ const VerticalCarouselScene = ({ images }) => {
   return (
     <group ref={groupRef}>
       {textureArray.map((texture, index) => {
-        const { position, rotation } = planePositions[index];
+        const { position, rotation } = planePositions.positions[index];
         let aspectRatio = 1;
         if (texture.image) {
           aspectRatio = texture.image.width / texture.image.height;
         }
-        const width = 5;
+        const width = 6;
         const height = width / aspectRatio;
+
         return (
           <mesh
             key={index}
-            ref={meshRefs.current[index]}
+            ref={(el) => {
+              meshRefs.current[index] = el;
+              // Désactiver le frustum culling
+              if (el) {
+                el.frustumCulled = false;
+              }
+            }}
             position={new THREE.Vector3(...position)}
             rotation={new THREE.Euler(...rotation)}
           >

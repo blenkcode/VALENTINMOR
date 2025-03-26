@@ -114,7 +114,7 @@ const Folio = () => {
   }, [project]);
   return (
     <div className={` h-auto w-full  z-10  folio  `}>
-      <div className=" fixed md:top-[1vw] top-[12svh] w-full">
+      <div className=" fixed md:top-[1vw] top-[1svh] w-full">
         {" "}
         <FolioTitle jap={jap} number={number} arrow={arrow}></FolioTitle>
       </div>
